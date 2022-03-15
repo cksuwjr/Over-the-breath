@@ -27,5 +27,10 @@ public class Move : MonoBehaviour
             sr.flipX = false;
 
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(new Vector2(0, 2) * 5, ForceMode2D.Impulse);
+        }
     }
 }
