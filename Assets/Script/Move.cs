@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     SpriteRenderer sr;
 
     Status stat;
+    bool isJumping;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +29,22 @@ public class Move : MonoBehaviour
         {
             rb.velocity = new Vector2(stat.MoveSpeed, rb.velocity.y);
             sr.flipX = false;
-
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            rb.AddForce(new Vector2(0, 2) * stat.JumpPower, ForceMode2D.Impulse);
+            if(isJumping == false)
+            {
+                isJumping = true;
+                rb.AddForce(new Vector2(0, 2) * stat.JumpPower, ForceMode2D.Impulse);
+            }
+        }
+    }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.transform.name == "Tilemap")
+        {
+            isJumping = false;
         }
     }
 }
