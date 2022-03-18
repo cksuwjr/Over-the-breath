@@ -9,6 +9,7 @@ public class Move : MonoBehaviour
 
     Status stat;
     bool isJumping;
+    int JumpCount = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,21 +31,33 @@ public class Move : MonoBehaviour
             rb.velocity = new Vector2(stat.MoveSpeed, rb.velocity.y);
             sr.flipX = false;
         }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(isJumping == false)
+            if(JumpCount > 0)
             {
-                isJumping = true;
+                rb.velocity = new Vector2(0, 0);
                 rb.AddForce(new Vector2(0, 2) * stat.JumpPower, ForceMode2D.Impulse);
+                JumpCount--;
+                Debug.Log(JumpCount);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            transform.position = new Vector2(0, 0);
         }
     }
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.transform.name == "Tilemap")
         {
-            isJumping = false;
+            if (JumpCount != 2)
+                JumpCount = 2;
         }
     }
 }
