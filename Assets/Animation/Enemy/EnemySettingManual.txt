@@ -1,0 +1,14 @@
+Slime                  Anim
+Enemy_slime_Hitted 0.7
+Enemy_slime_Hitted 0.42
+Enemy_slime_Hitted 0.8
+
+Warrior               Anim
+Enemy_slime_Hitted 0.5
+Enemy_slime_Hitted 0.3
+Enemy_slime_Hitted 0.5
+
+
+          Scale
+Slime     0.7
+Warrior  1
