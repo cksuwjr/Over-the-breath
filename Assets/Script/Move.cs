@@ -12,7 +12,7 @@ public class Move : MonoBehaviour
     bool isJumping;
     int JumpCount = 2;
 
-    GameObject Fire;
+    public GameObject Fire;
 
 
 
@@ -25,7 +25,8 @@ public class Move : MonoBehaviour
         anim = GetComponent<Animator>();
         stat = GetComponent<Status>();
 
-        Fire = Resources.Load("Prefab/Fire") as GameObject;
+        if(Fire == null)
+            Fire = Resources.Load("Prefab/Fire") as GameObject;
 
     }
 
@@ -65,7 +66,6 @@ public class Move : MonoBehaviour
                 rb.AddForce(new Vector2(0, 2) * stat.JumpPower, ForceMode2D.Impulse);
                 anim.SetBool("Jump", true);
                 JumpCount--;
-                Debug.Log(JumpCount);
             }
         }
 
