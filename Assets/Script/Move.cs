@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    Transform tr;
     Rigidbody2D rb;
     SpriteRenderer sr;
     Animator anim;
@@ -11,21 +12,28 @@ public class Move : MonoBehaviour
     bool isJumping;
     int JumpCount = 2;
 
+    GameObject Fire;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         stat = GetComponent<Status>();
+
+        Fire = Resources.Load("Prefab/Fire") as GameObject;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        // 키보드 입력!1
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rb.velocity = new Vector2(-stat.MoveSpeed, rb.velocity.y);
@@ -47,6 +55,8 @@ public class Move : MonoBehaviour
             anim.SetBool("Walk", false);
         }
 
+
+        // 점프!!
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if(JumpCount > 0)
@@ -59,9 +69,23 @@ public class Move : MonoBehaviour
             }
         }
 
+        // 제자리!!
         if (Input.GetKeyDown(KeyCode.Space))
         {
             transform.position = new Vector2(0, 0);
+        }
+
+        // 불덩이 발사!
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            anim.SetTrigger("BasicAttack");
+            Vector3 SpawnPosition;
+            if (sr.flipX)
+                SpawnPosition = tr.position + new Vector3(-1f, 0);
+            else
+                SpawnPosition = tr.position + new Vector3(1f, 0);
+
+            Instantiate(Fire, SpawnPosition, Quaternion.identity);
         }
     }
     void OnCollisionEnter2D(Collision2D col)
