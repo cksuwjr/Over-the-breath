@@ -22,9 +22,6 @@ public class Fire : MonoBehaviour
             sr.flipX = false;
             direction = 1;
         }
-
-        Debug.Log(direction);
-
         Destroy(gameObject, 0.3f);
     }
     void Update()
