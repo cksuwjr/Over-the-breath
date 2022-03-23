@@ -67,9 +67,6 @@ public class Warrior : MonoBehaviour
         };
 
         rb.velocity = moveVelocity * moveSpeed;        //    Vector(+-1, 0) * 1f * (프레임으로 나눠진 실제시간별 계산)/ 즉 플레이어 실제 움직임
-        Debug.Log(rb.velocity);
-        Debug.Log(moveVelocity);
-        Debug.Log(moveSpeed);
 
     }
 
