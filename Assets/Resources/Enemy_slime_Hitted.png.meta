@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6396e48574ff67a4297418a1fdf70160
+guid: 9ed9239ae5461524289571eb6074350e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2922976504865721974
-    second: Enemy_slime__Hitted_0
+      213: 7209863290399158609
+    second: Enemy_slime_Hitted_0
   - first:
-      213: -1960764257014274429
-    second: Enemy_slime__Hitted_1
+      213: -969490461031009987
+    second: Enemy_slime_Hitted_1
   - first:
-      213: -5477831641122106131
-    second: Enemy_slime__Hitted_2
+      213: 95863051109368317
+    second: Enemy_slime_Hitted_2
   - first:
-      213: -504167938348799322
-    second: Enemy_slime__Hitted_3
+      213: 6991973824772224562
+    second: Enemy_slime_Hitted_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_slime__Hitted_0
+      name: Enemy_slime_Hitted_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +117,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a817aacfa508f67d0800000000000000
-      internalID: -2922976504865721974
+      spriteID: 151fe5f86749e0460800000000000000
+      internalID: 7209863290399158609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_slime__Hitted_1
+      name: Enemy_slime_Hitted_1
       rect:
         serializedVersion: 2
         x: 112
@@ -138,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 386a16cfb47f9c4e0800000000000000
-      internalID: -1960764257014274429
+      spriteID: d31fd11ff8dab82f0800000000000000
+      internalID: -969490461031009987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_slime__Hitted_2
+      name: Enemy_slime_Hitted_2
       rect:
         serializedVersion: 2
         x: 224
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de4958b2525daf3b0800000000000000
-      internalID: -5477831641122106131
+      spriteID: df18574efe2945100800000000000000
+      internalID: 95863051109368317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_slime__Hitted_3
+      name: Enemy_slime_Hitted_3
       rect:
         serializedVersion: 2
         x: 336
@@ -180,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6aa24976ee5d009f0800000000000000
-      internalID: -504167938348799322
+      spriteID: 236b068062b780160800000000000000
+      internalID: 6991973824772224562
       vertices: []
       indices: 
       edges: []
