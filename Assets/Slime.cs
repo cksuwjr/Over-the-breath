@@ -58,16 +58,21 @@ public class Slime : MonoBehaviour
         // 본인보다 높은지형이면 점프하기 위한 레이저 체크
         int layerMask = 1 << LayerMask.NameToLayer("Ground");  // Ground 레이어만 충돌 체크함
         RaycastHit2D rayFrontGroundCheck;
-        rayFrontGroundCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0) * 1.4f, 1f, layerMask);
+        rayFrontGroundCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 1f, layerMask);
 
         // 레이저가 무언가 발견했을때 + 슬라임이 앞에 땅에 있다면
         if (isGround && rayFrontGroundCheck.collider != null)
             rb.velocity = new Vector2(MoveSpeed * 2f * Direction, 7f);
 
+        // 레이저로 앞쪽 벽 체크
+        RaycastHit2D rayFrontWallCheck;
+        rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("Wall"));
+        if(isGround && rayFrontWallCheck.collider != null)
+            sr.flipX = (sr.flipX) ? false : true;
+        
         // 레이저로 바닥 체크
         RaycastHit2D rayUnderGroundCheck;
         rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0), 0.5f, layerMask);
-
         isGround = (rayUnderGroundCheck.collider == null) ? false : true;
 
             // 공격 대상이 없다면
@@ -115,7 +120,7 @@ public class Slime : MonoBehaviour
                     // 방향 전환
                     case State.SeeO:
                         sr.flipX = (bool)(Random.value > 0.5f); // flipX를 랜덤으로 true false 부여
-                        SetAction();
+                        SetAction(1, StateCount - 1);
                         break;
                 }
 
@@ -159,10 +164,10 @@ public class Slime : MonoBehaviour
     }
 
     // 상태 랜덤 부여  
-    void SetAction()
+    void SetAction(int f = 0, int s = StateCount)
     {
         if(isGround)
-            switch (Random.Range(0, StateCount))
+            switch (Random.Range(0, s))
             {
                 case 0:
                     state = State.Idle;
