@@ -22,11 +22,24 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
-        _hp = 500f;
-        _attackpower = 50;
-        _maxhp = 500f;
-        _movespeed = 5f;
-        _jumppower = 5f;
+        if(_hp == 0)
+            _hp = 500f;
+        if (_attackpower == 0)
+            _attackpower = 50;
+        if (_maxhp == 0)
+            _maxhp = 500f;
+        if(_movespeed == 0)
+            _movespeed = 5f;
+        if(_jumppower == 0)
+            _jumppower = 5f;
 
+    }
+    public void StatInit(float hp, int power, float Maxhp, float Movespeed, float Jumppower)
+    {
+        _hp = hp;
+        _attackpower = power;
+        _maxhp = Maxhp;
+        _movespeed = Movespeed;
+        _jumppower = Jumppower;
     }
 }
