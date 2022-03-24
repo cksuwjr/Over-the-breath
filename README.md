@@ -1,2 +1,20 @@
 # over-the-breath
 잃어버린 종족의 숨결을 찾아 떠나는 용의 모험
+
+
+## 진행된 부분 
+
+
+<h4>☆기본 움직임 </h4><br>
+
+방향키 : ←  →  <br>
+점프 : ↑   <br>
+
+<h4>☆플레이어 기본 공격</h4><br>
+  
+Q : 불덩이 발사 <br>
+  
+
+<h4>☆몬스터 기본 AI 구현</h4>
+
+![play](https://user-images.githubusercontent.com/63836325/159894667-ae98f061-ad63-4642-b10e-6370284673da.gif)
