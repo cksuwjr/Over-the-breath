@@ -13,7 +13,10 @@
 
 <h4>☆플레이어 기본 공격</h4><br>
   
-Q : 불덩이 발사 <br><
+Q : 불덩이 발사 <br>
+적중시 적을 약간 밀어내고 피해를 입힙니다. <br>
+
+
 ![play2](https://user-images.githubusercontent.com/63836325/159896440-4964f471-c4c8-4e0c-b32a-3215ba1d8c7e.gif)
 
 
