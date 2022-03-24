@@ -10,7 +10,7 @@
 방향키 : ←  →  <br>
 점프 : ↑   <br>
 
-<h2>☆플레이어 기본 공격</h4><br>
+<h2>플레이어 기본 공격</h4><br>
   
 Q : 불덩이 발사 <br>
 적중시 적을 약간 밀어내고 피해를 입힙니다. <br><br>
@@ -19,7 +19,7 @@ Q : 불덩이 발사 <br>
 ![play2](https://user-images.githubusercontent.com/63836325/159896440-4964f471-c4c8-4e0c-b32a-3215ba1d8c7e.gif)
 <br><br><br>
 
-<h2>☆적 유닛(Enemy) 기본 AI 구현</h4><br>
+<h2>적 유닛(Enemy) 기본 AI 구현</h4><br>
 
 기본적으로 랜덤확률에 따라 이동, 점프 합니다.<br>
 <br>
