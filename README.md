@@ -17,9 +17,9 @@ Q : 불덩이 발사 <br>
 
 
 ![play2](https://user-images.githubusercontent.com/63836325/159896440-4964f471-c4c8-4e0c-b32a-3215ba1d8c7e.gif)
+<br><br><br>
 
-
-<h2>☆적 유닛(Enemy) 기본 AI 구현</h4>
+<h2>☆적 유닛(Enemy) 기본 AI 구현</h4><br>
 
 기본적으로 랜덤확률에 따라 이동, 점프 합니다.<br>
 <br>
@@ -28,3 +28,4 @@ Q : 불덩이 발사 <br>
 다만, 플레이어의 공격에 피격당할 시 플레이어를 향해 이동하며<br>
 플레이어에 근접했을 때 플레이어가 자신보다 높은 곳에 위치하면 점프합니다.<br>
 ![play](https://user-images.githubusercontent.com/63836325/159894667-ae98f061-ad63-4642-b10e-6370284673da.gif)
+<br><br><br>
