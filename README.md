@@ -13,8 +13,9 @@
 
 <h4>☆플레이어 기본 공격</h4><br>
   
-Q : 불덩이 발사 <br>
-  
+Q : 불덩이 발사 <br><
+![play2](https://user-images.githubusercontent.com/63836325/159896440-4964f471-c4c8-4e0c-b32a-3215ba1d8c7e.gif)
+
 
 <h4>☆몬스터 기본 AI 구현</h4>
 
