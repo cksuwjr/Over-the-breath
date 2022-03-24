@@ -236,11 +236,25 @@ public class EnemyAI : MonoBehaviour
         {
             AttackTarget.GetComponent<Status>().MaxHp++;
             Debug.Log("체력증가! : " + AttackTarget.GetComponent<Status>().MaxHp);
-            Destroy(gameObject);
+            StartCoroutine("Die");
         }
     }
 
-  
+    // 죽음
+    IEnumerator Die()
+    {
+        anim.SetTrigger("Hitted");
+        stat.MoveSpeed = 0f;
+        Color color = sr.color;
+        while(color.a >= 0f) 
+        {
+            color.a -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+            sr.color = color;
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
 
 
     // Trigger 시작시
