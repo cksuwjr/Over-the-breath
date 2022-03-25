@@ -32,10 +32,11 @@ public class EnemyAI : MonoBehaviour
         Idle,
         Move,
         Jump,
-        SeeO
+        Change
     }
 
     State state;
+    const int StateCount = 4;
 
     bool isGround;
     int Direction = 1;
@@ -43,7 +44,6 @@ public class EnemyAI : MonoBehaviour
 
     const float MinActionTime = 1f;
     const float MaxActionTime = 3f;
-    const int StateCount = 4;
 
 
     void Start()
@@ -61,9 +61,6 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-
-    void Update()
-    {
     //    //레이저 시각효과 활성화
     //    //앞
     //Debug.DrawRay(transform.position, new Vector3(1.4f * Direction, 0, 0), new Color(0, 1, 0));
@@ -71,108 +68,102 @@ public class EnemyAI : MonoBehaviour
     //Debug.DrawRay(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0) * ((cc.size.y / 2) + 0.15f), new Color(0, 1, 0));
 
 
-
+    void Update()
+    {
+        ChangeDirection();
+        CheckingTopography();
+        MovingPattern();
+    }
+    void ChangeDirection()
+    {
         // flipX에 따른 방향 설정(1/-1)
-        Direction = sr.flipX ? -1 : 1; 
+        Direction = sr.flipX ? -1 : 1;
+    }
+    void CheckingTopography()
+    {
+        // 본인기준 주변 지형파악 위한 레이저 체크
+        RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck;
 
+        rayFrontGroundCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 1f, 1 << LayerMask.NameToLayer("Ground"));
+        rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("Wall"));
+        rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
 
-        // 본인보다 높은지형이면 점프하기 위한 레이저 체크
-        int layerMask = 1 << LayerMask.NameToLayer("Ground");  // Ground 레이어만 충돌 체크함
-        RaycastHit2D rayFrontGroundCheck;
-        rayFrontGroundCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 1f, layerMask);
-
-        // 레이저가 무언가 발견했을때 + 슬라임이 앞에 땅에 있다면
+        // 앞에 땅이 있다면 점프로 도약
         if (isGround && rayFrontGroundCheck.collider != null)
             rb.velocity = new Vector2(stat.MoveSpeed * 2f * Direction, stat.JumpPower);
 
-        // 레이저로 앞쪽 벽 체크
-        RaycastHit2D rayFrontWallCheck;
-        rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("Wall"));
-        if(isGround && rayFrontWallCheck.collider != null)
+        // 앞에 벽이 있다면 방향전환
+        if (isGround && rayFrontWallCheck.collider != null)
             sr.flipX = (sr.flipX) ? false : true;
-        
-        // 레이저로 바닥 체크
-        RaycastHit2D rayUnderGroundCheck;
-        rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, layerMask);
+
+        // 바닥 체크후 isGround 전환
         isGround = (rayUnderGroundCheck.collider == null) ? false : true;
+    }
+    void MovingPattern()
+    {
 
-            // 공격 대상이 없다면
-            if (AttackTarget == null)
-                switch (state)
-                {
-                    // 멈춤
-                    case State.Idle:
-                        rb.velocity = new Vector2(0, rb.velocity.y);
-
-                        anim.SetBool("Idle", true);
-                        anim.SetBool("Walk", false);
-
-                        rb.velocity = new Vector2(0, rb.velocity.y);
-                        
-                        if (!isActing)
-                            SetAction();
-                        break;
-
-                    // 움직임
-                    case State.Move:
-                        rb.velocity = new Vector2(0, rb.velocity.y);
-
-                        anim.SetBool("Idle", false);
-                        anim.SetBool("Walk", true);
-
-                        rb.velocity = new Vector2(stat.MoveSpeed * Direction, rb.velocity.y);
-
-                        if (!isActing)
-                            SetAction();
-                    break;
-                    // 점프
-                    case State.Jump:
-                        if (isGround)
-                            rb.velocity = new Vector2(rb.velocity.x, stat.JumpPower);
-                        SetAction();
-                        break;
-                    // 방향 전환
-                    case State.SeeO:
-                        sr.flipX = (bool)(Random.value > 0.5f); // flipX를 랜덤으로 true false 부여
-                        SetAction(1, StateCount - 2);
-                        break;
-                }
-
-
-            // 공격 대상이 있다면
-            else
+        // 공격 대상이 없다면
+        if (AttackTarget == null)
+        {
+            if (!isActing)
+                SetAction();
+            switch (state)
             {
-                if (!isHitStunned)
-                { // 피격시간 끝나면
-                    sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
+                // 멈춤
+                case State.Idle:
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+
+                    anim.SetBool("Idle", true);
+                    anim.SetBool("Walk", false);
+
+                    break;
+
+                // 움직임
+                case State.Move:
+
+                    rb.velocity = new Vector2(stat.MoveSpeed * Direction, rb.velocity.y);
 
                     anim.SetBool("Idle", false);
                     anim.SetBool("Walk", true);
 
-                    rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
-                }
-
-                if(!isHitStunned && Mathf.Abs(transform.position.x - AttackTarget.transform.position.x ) < 2f)
-                {
-                    float dinstanceGap = transform.position.y - AttackTarget.transform.position.y;
-                    if(Mathf.Abs(dinstanceGap) > 0.5f && dinstanceGap < 0 && isGround)
-                        rb.velocity = new Vector2(rb.velocity.x, 7);
-
-                }
-
-
-                if (!isActing)
-                    AttackTarget = null;
+                    break;
+                // 점프
+                case State.Jump:
+                    if (isGround)
+                        rb.velocity = new Vector2(rb.velocity.x, stat.JumpPower);
+                    SetAction();
+                    break;
+                // 방향 전환
+                case State.Change:
+                    sr.flipX = (bool)(Random.value > 0.5f); // flipX를 랜덤으로 true false 부여
+                    SetAction(1, StateCount - 2);
+                    break;
             }
-    }
+        }
+        else  // 공격 대상이 있다면
+        {
+            if (!isHitStunned && isGround) // 피격시간 끝나면
+            {
+                sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
 
-    IEnumerator SetActingTrue(float time)
-    {
-        isActing = true;
-        yield return new WaitForSeconds(time);
-        isActing = false;
-    }
+                anim.SetBool("Idle", false);
+                anim.SetBool("Walk", true);
 
+                rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
+            }
+
+            if (!isHitStunned && Mathf.Abs(transform.position.x - AttackTarget.transform.position.x) < 2f) // 가까울때 적이 나보다 높이 위치하면 점프
+            {
+                float dinstanceGap = transform.position.y - AttackTarget.transform.position.y;
+                if (Mathf.Abs(dinstanceGap) > 0.5f && dinstanceGap < 0 && isGround)
+                    rb.velocity = new Vector2(rb.velocity.x, 7);
+            }
+
+
+            if (!isActing)
+                AttackTarget = null;
+        }
+    }
 
     // 상태 랜덤 부여  
     void SetAction(int f = 0, int s = StateCount, float FixedTime = 0)
@@ -193,10 +184,20 @@ public class EnemyAI : MonoBehaviour
                     state = State.Jump;
                     break;
                 case 3:
-                    state = State.SeeO;
+                    state = State.Change;
                     break;
             }
     }
+
+    IEnumerator SetActingTrue(float time)
+    {
+        isActing = true;
+        yield return new WaitForSeconds(time);
+        isActing = false;
+    }
+
+
+
 
     // 체력바 활성화 후 6초뒤 비활성
     IEnumerator AppearHPUI()
@@ -230,7 +231,7 @@ public class EnemyAI : MonoBehaviour
 
         if (HittedCoroutine != null)
             StopCoroutine(HittedCoroutine);
-        HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
+        HittedCoroutine = StartCoroutine("GetHittedStun", 0.3f);
 
         if (stat.HP < 0)
         {
@@ -246,7 +247,11 @@ public class EnemyAI : MonoBehaviour
         anim.SetTrigger("Hitted");
         stat.MoveSpeed = 0f;
         Color color = sr.color;
-        while(color.a >= 0f) 
+
+        color.a = sr.color.a / 2;
+        sr.color = color;
+
+        while (color.a >= 0f) 
         {
             color.a -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
             sr.color = color;
@@ -260,7 +265,7 @@ public class EnemyAI : MonoBehaviour
     // Trigger 시작시
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "PlayerAttack")
+        if (col.gameObject.tag == "PlayerAttack" && stat.MoveSpeed != 0)
         {
             rb.velocity = Vector2.zero;
 
@@ -268,7 +273,10 @@ public class EnemyAI : MonoBehaviour
 
             AttackTarget = GameObject.FindGameObjectWithTag("Player");
 
-            SetAction(0, 1, 10f);
+            if (ProceedingCoroutine != null)
+                StopCoroutine(ProceedingCoroutine);
+            ProceedingCoroutine = StartCoroutine("SetActingTrue", 10f);
+
             GetDamaged(AttackTarget.GetComponent<Status>().AttackPower);
 
         }
