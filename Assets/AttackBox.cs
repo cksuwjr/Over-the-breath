@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AttackBox : MonoBehaviour
+{
+    List<GameObject> Monsters = new List<GameObject>();
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+            Monsters.Add(collision.gameObject);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+            if (Monsters.Contains(collision.gameObject))
+                Monsters.Remove(collision.gameObject);
+    }
+    public List<GameObject> GetAttackableTargets()
+    {
+        return Monsters;
+    }
+}
