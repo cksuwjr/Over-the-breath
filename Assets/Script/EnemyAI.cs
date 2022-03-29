@@ -90,7 +90,7 @@ public class EnemyAI : MonoBehaviour
 
         // 앞에 땅이 있다면 점프로 도약
         if (isGround && rayFrontGroundCheck.collider != null)
-            rb.velocity = new Vector2(stat.MoveSpeed * 2f * Direction, stat.JumpPower);
+            rb.velocity = new Vector2(stat.MoveSpeed * Direction, stat.JumpPower);
 
         // 앞에 벽이 있다면 방향전환
         if (isGround && rayFrontWallCheck.collider != null)
@@ -98,6 +98,9 @@ public class EnemyAI : MonoBehaviour
 
         // 바닥 체크후 isGround 전환
         isGround = (rayUnderGroundCheck.collider == null) ? false : true;
+
+
+
     }
     void MovingPattern()
     {
@@ -214,8 +217,13 @@ public class EnemyAI : MonoBehaviour
         isHitStunned = false;
     }
 
-    void GetDamaged(int damage)
+    public void GetDamaged(int damage, GameObject Fromwho)
     {
+        AttackTarget = Fromwho;
+        if (damage == 0)
+            damage = Fromwho.GetComponent<Status>().AttackPower;
+
+
         if (AppearHPCoroutine != null)
             StopCoroutine(AppearHPCoroutine);
         AppearHPCoroutine = StartCoroutine("AppearHPUI");
@@ -224,14 +232,19 @@ public class EnemyAI : MonoBehaviour
 
         // 맞은 방향 쳐다본후 뒤로 밀리기
         sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
-        rb.velocity = new Vector2(0.8f * -Direction, rb.velocity.y);
+        rb.velocity = new Vector2(1.3f * -Direction, rb.velocity.y);
 
         // 애니메이션
         anim.SetTrigger("Hitted");
 
         if (HittedCoroutine != null)
             StopCoroutine(HittedCoroutine);
-        HittedCoroutine = StartCoroutine("GetHittedStun", 0.3f);
+        HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
+
+        if (ProceedingCoroutine != null)
+            StopCoroutine(ProceedingCoroutine);
+        ProceedingCoroutine = StartCoroutine("SetActingTrue", 10f);
+
 
         if (stat.HP < 0)
         {
@@ -271,14 +284,9 @@ public class EnemyAI : MonoBehaviour
 
             Destroy(col.gameObject);
 
-            AttackTarget = GameObject.FindGameObjectWithTag("Player");
+            GetDamaged(0, GameObject.FindGameObjectWithTag("Player"));
 
-            if (ProceedingCoroutine != null)
-                StopCoroutine(ProceedingCoroutine);
-            ProceedingCoroutine = StartCoroutine("SetActingTrue", 10f);
-
-            GetDamaged(AttackTarget.GetComponent<Status>().AttackPower);
-
+            
         }
     }
     

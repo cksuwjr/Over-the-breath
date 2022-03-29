@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7020062274740241204}
   - component: {fileID: 7020062274740241207}
   - component: {fileID: 7020062274740241205}
-  - component: {fileID: 7020062274740241206}
+  - component: {fileID: 2327554882721988596}
   m_Layer: 6
   m_Name: Slime
   m_TagString: Enemy
@@ -280,7 +280,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7020062274740241201}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.93, y: -1.38, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
@@ -412,7 +412,7 @@ MonoBehaviour:
   _maxhp: 500
   _movespeed: 2
   _jumppower: 7
---- !u!114 &7020062274740241206
+--- !u!114 &2327554882721988596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
