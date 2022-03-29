@@ -17,6 +17,11 @@ public class Move : MonoBehaviour
     public GameObject Skill_iron_Effect;
     string ChangeMode;
 
+    bool isMumchit; // ¸ØÄ©
+
+
+    Coroutine ProcessingCoroutine;
+    
     GameObject PlayerAttackRange;
     BoxCollider2D boxsize;
     // Start is called before the first frame update
@@ -44,24 +49,24 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UnderComponentDirectionAsync();
-        PlayerKeyboardInput();
-
+        AttackBoxDirectionAsync();
+        if (!isMumchit)
+            PlayerKeyboardInput();
+        else
+            rb.velocity = new Vector2(0, rb.velocity.y);
     }
     void PlayerKeyboardInput()
     {
         // Å°º¸µå ÀÔ·Â!1
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(-stat.MoveSpeed, rb.velocity.y);
-            sr.flipX = true;
-            anim.SetBool("Idle", false);
-            anim.SetBool("Walk", true);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.velocity = new Vector2(stat.MoveSpeed, rb.velocity.y);
-            sr.flipX = false;
+            float direction = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * stat.MoveSpeed, rb.velocity.y);
+            if(direction == -1)
+                sr.flipX = true;
+            else if(direction == 1)
+                sr.flipX = false;
+                
             anim.SetBool("Idle", false);
             anim.SetBool("Walk", true);
         }
@@ -101,6 +106,7 @@ public class Move : MonoBehaviour
             switch (ChangeMode)
             {
                 case "default":
+                    StartCoroutine("GetMumchit", 0.3f);
                     Vector3 SpawnPosition;
                     if (sr.flipX)
                         SpawnPosition = tr.position + new Vector3(-1f, 0);
@@ -110,7 +116,8 @@ public class Move : MonoBehaviour
                     Instantiate(Fire, SpawnPosition, Quaternion.identity);
                     break;
                 case "iron":
-                    ChangeHitboxSize(0.7f);
+                    StartCoroutine("GetMumchit", 0.4f);
+                    ChangeHitbox("default");
                     DamageAllinHitBox(stat.AttackPower * 2);
                     break;
             }
@@ -120,11 +127,13 @@ public class Move : MonoBehaviour
             switch (ChangeMode)
             {
                 case "iron":
-                    ChangeHitboxSize(2.0f);
-                    DamageAllinHitBox(stat.AttackPower, Skill_iron_Effect);
+                    StartCoroutine("GetMumchit", 0.3f);
+                    ChangeHitbox("ironSkill1");
+                    DamageAllinHitBox(stat.AttackPower * 4, Skill_iron_Effect);
                     Instantiate(TeleportCalculator, tr.position, Quaternion.identity);
                     anim.SetTrigger("Skill1");
 
+                    StartCoroutine(Buff("Speed", 4, 3f));
                     break;
             }
         }
@@ -133,6 +142,7 @@ public class Move : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             ChangeDragon("iron");
+            transform.GetChild(3).GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -165,10 +175,16 @@ public class Move : MonoBehaviour
             anim.SetBool("Jump", false);
         }
     }
-    void ChangeHitboxSize(float size)
+    void ChangeHitbox(string attacktype)
     {
-        boxsize.offset = new Vector2(size, 0);
-        boxsize.size = new Vector2(size * 2, 1);
+        switch (attacktype) {
+            case "default":
+                PlayerAttackRange = transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
+                break;
+            case "ironSkill1":
+                PlayerAttackRange = transform.GetChild(3).GetChild(0).GetChild(1).gameObject;
+                break;
+        }
     }
     void ChangeDragon(string dragontype)
     {
@@ -184,21 +200,36 @@ public class Move : MonoBehaviour
                 break;
         }
     }
-    void UnderComponentDirectionAsync()
+    void AttackBoxDirectionAsync()
     {
         if (sr.flipX)
-        {
-            PlayerAttackRange.transform.localScale = new Vector2(-1 ,1);
-        }
+            transform.GetChild(3).GetComponentInChildren<Transform>().localScale = new Vector2(-1, 1);
         else
-        {
-            PlayerAttackRange.transform.localScale = new Vector2(1, 1);
-        }
+            transform.GetChild(3).GetComponentInChildren<Transform>().localScale = new Vector2(1, 1);
 
 
     }
     public void TeleportByCalcul(Vector2 pos)
     {
         rb.position = pos;
+    }
+    IEnumerator GetMumchit(float time)
+    {
+        isMumchit = true;
+        yield return new WaitForSeconds(time);
+        isMumchit = false;
+    }
+
+    IEnumerator Buff(string what, float how, float time)
+    {
+        Debug.Log("ÄÚ·çÆ¾");
+        switch (what)
+        {
+            case "Speed":
+                stat.MoveSpeed += how;
+                break;
+        }
+        yield return new WaitForSeconds(time);
+        stat.MoveSpeed -= how;
     }
 }
