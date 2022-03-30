@@ -29,5 +29,13 @@ public class Fire : MonoBehaviour
         rb.velocity = new Vector2(direction * 15, 0);
     }
 
-
+    // Trigger Ω√¿€Ω√
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy" && col.GetComponent<Status>().MoveSpeed != 0)
+        {
+            col.GetComponent<EnemyAI>().GetDamaged(0, GameObject.FindGameObjectWithTag("Player"));
+            Destroy(gameObject);
+        }
+    }
 }

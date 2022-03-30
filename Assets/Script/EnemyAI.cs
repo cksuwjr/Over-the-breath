@@ -106,7 +106,7 @@ public class EnemyAI : MonoBehaviour
     {
 
         // 공격 대상이 없다면
-        if (AttackTarget == null)
+        if (AttackTarget == null && !isHitStunned)
         {
             if (!isActing)
                 SetAction();
@@ -253,6 +253,12 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine("Die");
         }
     }
+    public void GetAirborne(Vector2 force)
+    {
+        rb.velocity = new Vector2(0, 0);
+        rb.AddForce(force, ForceMode2D.Impulse);
+    }
+
 
     // 죽음
     IEnumerator Die()
@@ -275,19 +281,6 @@ public class EnemyAI : MonoBehaviour
 
 
 
-    // Trigger 시작시
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "PlayerAttack" && stat.MoveSpeed != 0)
-        {
-            rb.velocity = Vector2.zero;
-
-            Destroy(col.gameObject);
-
-            GetDamaged(0, GameObject.FindGameObjectWithTag("Player"));
-
-            
-        }
-    }
+    
     
 }
