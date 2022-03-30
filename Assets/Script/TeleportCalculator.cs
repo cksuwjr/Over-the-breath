@@ -5,26 +5,36 @@ using UnityEngine;
 public class TeleportCalculator : MonoBehaviour
 {
     GameObject Player;
+    GameObject Effect;
     Rigidbody2D rb;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.Find("Player").gameObject;
         StartCoroutine("Move", Player.GetComponent<SpriteRenderer>().flipX);
+        Effect = Resources.Load("Prefab/Player_iron_Skill1Effect") as GameObject;
+        StartCoroutine("MakeShadowEffect");
+
     }
 
     IEnumerator Move(bool dir)
     {
         if (dir)
         {
-            rb.velocity = new Vector2(-40, 0);
+            rb.velocity = new Vector2(-30, 0);
         }
         else
         {
-            rb.velocity = new Vector2(40, 0);
+            rb.velocity = new Vector2(30, 0);
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         Player.GetComponent<Move>().TeleportByCalcul(transform.localPosition);
         Destroy(gameObject);
+    }
+    IEnumerator MakeShadowEffect()
+    {
+        Instantiate(Effect, transform.localPosition, Quaternion.identity);
+        yield return new WaitForSeconds(0.0425f);
+        StartCoroutine("MakeShadowEffect");
     }
 }

@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
 {
     const float Term = 10f;
     const float MinXRange = 0f;
-    const float MaxXRange = 40f;
+    const float MaxXRange = 52f;
 
     List<GameObject> Enemys = new List<GameObject>();
     void Start()
@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator Spawn(GameObject Enemy, float Term)
     {
-        Instantiate(Enemy, new Vector2(Random.Range(MinXRange, MaxXRange), 3), Quaternion.identity);
+        Instantiate(Enemy, new Vector2(Random.Range(MinXRange, MaxXRange), 0), Quaternion.identity);
         yield return new WaitForSeconds(Term);
         StartCoroutine(Spawn(Enemy, Term));
     }

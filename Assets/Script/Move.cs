@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Move : MonoBehaviour
 {
     Transform tr;
@@ -16,14 +16,20 @@ public class Move : MonoBehaviour
     public GameObject TeleportCalculator;
     public GameObject Skill_iron_Effect;
     string ChangeMode;
-
     bool isMumchit; // ¸ØÄ©
 
+    int basicAttackSequence = 0;
 
     Coroutine ProcessingCoroutine;
     
     GameObject PlayerAttackRange;
     BoxCollider2D boxsize;
+
+
+
+    Image HPbar;
+    Color originColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +41,9 @@ public class Move : MonoBehaviour
 
         PlayerAttackRange = gameObject.transform.GetChild(3).gameObject;
         boxsize = PlayerAttackRange.GetComponent<BoxCollider2D>();
+
+        HPbar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        originColor = sr.color;
 
         if (Fire == null)
             Fire = Resources.Load("Prefab/Fire") as GameObject;
@@ -112,13 +121,24 @@ public class Move : MonoBehaviour
                         SpawnPosition = tr.position + new Vector3(-1f, 0);
                     else
                         SpawnPosition = tr.position + new Vector3(1f, 0);
-
+                    anim.SetTrigger("BasicAttack");
                     Instantiate(Fire, SpawnPosition, Quaternion.identity);
                     break;
                 case "iron":
-                    StartCoroutine("GetMumchit", 0.4f);
+                    StartCoroutine("GetMumchit", 0.4f + 0.05 * basicAttackSequence);
                     ChangeHitbox("default");
-                    DamageAllinHitBox(stat.AttackPower * 2);
+                    //DamageAllinHitBox(stat.AttackPower * 2);
+                    anim.SetInteger("Iron_BasicSequence", basicAttackSequence);
+                    if (basicAttackSequence < 2)
+                    {
+                        StartCoroutine(DamageDelay(stat.AttackPower * (1 + basicAttackSequence), 0.04f));
+                        basicAttackSequence++;
+                    }
+                    else // ¸¶Áö¸·Å¸°Ý
+                    {
+                        StartCoroutine(DamageDelay(stat.AttackPower * 3, 0.04f, null, "Airborne"));
+                        basicAttackSequence = 0;
+                    }
                     break;
             }
         }
@@ -132,7 +152,8 @@ public class Move : MonoBehaviour
                     DamageAllinHitBox(stat.AttackPower * 4, Skill_iron_Effect);
                     Instantiate(TeleportCalculator, tr.position, Quaternion.identity);
                     anim.SetTrigger("Skill1");
-
+                    if (basicAttackSequence == 0)
+                        basicAttackSequence = 1;
                     StartCoroutine(Buff("Speed", 4, 3f));
                     break;
             }
@@ -146,7 +167,7 @@ public class Move : MonoBehaviour
         }
     }
 
-    private void DamageAllinHitBox(int damage, GameObject effect = null)
+    private void DamageAllinHitBox(int damage, GameObject effect = null, string CCtype = null)
     {
         List<GameObject> Enemys = PlayerAttackRange.GetComponent<AttackBox>().GetAttackableTargets();
         for (int i = 0; i < Enemys.Count; i++)
@@ -162,6 +183,15 @@ public class Move : MonoBehaviour
                 EnemyAI ai = Enemys[i].GetComponent<EnemyAI>();
                 if (ai != null)
                     ai.GetDamaged(damage, gameObject);
+
+                if (CCtype != null)
+                    switch (CCtype)
+                    {
+                        case "Airborne":
+                            int dir = sr.flipX ? -1 : 1;
+                            ai.GetAirborne(new Vector2(dir * 5f, 10f));
+                            break;
+                    }
             }
 
     }
@@ -202,12 +232,7 @@ public class Move : MonoBehaviour
     }
     void AttackBoxDirectionAsync()
     {
-        if (sr.flipX)
-            transform.GetChild(3).GetComponentInChildren<Transform>().localScale = new Vector2(-1, 1);
-        else
-            transform.GetChild(3).GetComponentInChildren<Transform>().localScale = new Vector2(1, 1);
-
-
+        transform.GetChild(3).GetComponentInChildren<Transform>().localScale = sr.flipX ? new Vector2(-1, 1) : new Vector2(1, 1);
     }
     public void TeleportByCalcul(Vector2 pos)
     {
@@ -231,5 +256,43 @@ public class Move : MonoBehaviour
         }
         yield return new WaitForSeconds(time);
         stat.MoveSpeed -= how;
+    }
+
+    IEnumerator DamageDelay(int damage, float time, GameObject Effect = null, string CCtype = null)
+    {
+
+        yield return new WaitForSeconds(time);
+        DamageAllinHitBox(damage, Effect, CCtype);
+    }
+
+    public void GetDamage(int damage)
+    {
+        stat.HP -= damage;
+        HPbar.fillAmount = stat.HP / stat.MaxHp;
+        StartCoroutine("BeShadowing");
+    }
+
+    IEnumerator BeShadowing()
+    {
+        Color color = sr.color;
+        
+        color.a = sr.color.a / 2;
+        sr.color = color;
+        for (int i = 0; i < 3; i++)
+        {
+            while (color.a >= 0.2f)
+            {
+                color.a -= (Time.deltaTime / 0.5f); // 0.5ÃÊ¿¡ °ÉÃÄ »ç¶óÁü
+                sr.color = color;
+                yield return null;
+            }
+            while (color.a <= 0.8f)
+            {
+                color.a += (Time.deltaTime / 0.5f);
+                sr.color = color;
+                yield return null;
+            }
+        }
+        sr.color = originColor;
     }
 }
