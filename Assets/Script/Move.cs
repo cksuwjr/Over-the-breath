@@ -54,7 +54,7 @@ public class Move : MonoBehaviour
         if (Skill_iron_Effect == null)
             Skill_iron_Effect = Resources.Load("Prefab/Player_iron_Skill1Effect") as GameObject;
         if (DamageText == null)
-            DamageText = Resources.Load("Prefab/DamageUi") as GameObject;
+            DamageText = Resources.Load("Prefab/DamageUip") as GameObject;
 
         ChangeDragon("default");
 
