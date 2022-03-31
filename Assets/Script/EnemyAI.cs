@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour
 
     GameObject HPUI;
     Image HPbar;
-
+    public GameObject DamageText;
 
     Coroutine AppearHPCoroutine;
     Coroutine ProceedingCoroutine;
@@ -56,6 +56,10 @@ public class EnemyAI : MonoBehaviour
 
         HPUI = transform.GetChild(0).gameObject;
         HPbar = HPUI.transform.GetChild(1).gameObject.GetComponent<Image>();
+
+        if (DamageText == null)
+            DamageText = Resources.Load("Prefab/DamageUim") as GameObject;
+
 
         state = State.Idle;
 
@@ -245,6 +249,7 @@ public class EnemyAI : MonoBehaviour
             StopCoroutine(ProceedingCoroutine);
         ProceedingCoroutine = StartCoroutine("SetActingTrue", 10f);
 
+        PopUpDamageText(damage);
 
         if (stat.HP < 0)
         {
@@ -257,6 +262,12 @@ public class EnemyAI : MonoBehaviour
     {
         rb.velocity = new Vector2(0, 0);
         rb.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    void PopUpDamageText(int damage)
+    {
+        GameObject DamageUI = Instantiate(DamageText, transform.localPosition, Quaternion.identity);
+        DamageUI.GetComponentInChildren<DamageUI>().Spawn(damage, gameObject);
     }
 
 

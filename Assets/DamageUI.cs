@@ -27,6 +27,6 @@ public class DamageUI : MonoBehaviour
 
             yield return null;
         }
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }
