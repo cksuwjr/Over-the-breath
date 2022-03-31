@@ -14,7 +14,7 @@ public class TeleportCalculator : MonoBehaviour
         StartCoroutine("Move", Player.GetComponent<SpriteRenderer>().flipX);
         Effect = Resources.Load("Prefab/Player_iron_Skill1Effect") as GameObject;
         StartCoroutine("MakeShadowEffect");
-
+        
     }
 
     IEnumerator Move(bool dir)

@@ -15,16 +15,18 @@ public class Move : MonoBehaviour
     public GameObject Fire;
     public GameObject TeleportCalculator;
     public GameObject Skill_iron_Effect;
+    public GameObject DamageText;
     string ChangeMode;
     bool isMumchit; // 멈칫
 
     int basicAttackSequence = 0;
 
+    string KeyReservation;
+
     Coroutine ProcessingCoroutine;
     
     GameObject PlayerAttackRange;
     BoxCollider2D boxsize;
-
 
 
     Image HPbar;
@@ -51,6 +53,9 @@ public class Move : MonoBehaviour
             TeleportCalculator = Resources.Load("Prefab/TeleportCalculator") as GameObject;
         if (Skill_iron_Effect == null)
             Skill_iron_Effect = Resources.Load("Prefab/Player_iron_Skill1Effect") as GameObject;
+        if (DamageText == null)
+            DamageText = Resources.Load("Prefab/DamageUi") as GameObject;
+
         ChangeDragon("default");
 
     }
@@ -62,7 +67,14 @@ public class Move : MonoBehaviour
         if (!isMumchit)
             PlayerKeyboardInput();
         else
+        {
+            if (Input.inputString != "")
+            {
+                KeyReservation = Input.inputString;
+                Debug.Log(KeyReservation);
+            }
             rb.velocity = new Vector2(0, rb.velocity.y);
+        }
     }
     void PlayerKeyboardInput()
     {
@@ -81,7 +93,7 @@ public class Move : MonoBehaviour
         }
         else
         {
-            if (Mathf.Abs(rb.velocity.x) <= stat.MoveSpeed)
+            if (Mathf.Abs(rb.velocity.x) <= stat.MoveSpeed || !isMumchit)
             {
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 anim.SetBool("Idle", true);
@@ -109,8 +121,10 @@ public class Move : MonoBehaviour
         }
 
         // 기본공격(불덩이 발사 OR 펀치)!
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) || (KeyReservation == "q" || KeyReservation == "Q"))
         {
+            if (KeyReservation != null)
+                KeyReservation = null;
             anim.SetTrigger("BasicAttack");
             switch (ChangeMode)
             {
@@ -125,7 +139,14 @@ public class Move : MonoBehaviour
                     Instantiate(Fire, SpawnPosition, Quaternion.identity);
                     break;
                 case "iron":
-                    StartCoroutine("GetMumchit", 0.4f + 0.05 * basicAttackSequence);
+                    if (sr.flipX)
+                        rb.transform.Translate(new Vector3(-0.3f, 0));
+                    else
+                        rb.transform.Translate(new Vector3(0.3f, 0));
+                    if (KeyReservation != null)
+                        StartCoroutine("GetMumchit", 0.4f + 0.05 * basicAttackSequence);
+                    else
+                        StartCoroutine("GetMumchit", 0.2f + 0.15 * basicAttackSequence);
                     ChangeHitbox("default");
                     //DamageAllinHitBox(stat.AttackPower * 2);
                     anim.SetInteger("Iron_BasicSequence", basicAttackSequence);
@@ -142,11 +163,16 @@ public class Move : MonoBehaviour
                     break;
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || (KeyReservation == "e" || KeyReservation == "E"))
         {
+            if (KeyReservation != null)
+                KeyReservation = null;
             switch (ChangeMode)
             {
                 case "iron":
+                    Color None = originColor;
+                    None.a = 0;
+                    sr.color = None;
                     StartCoroutine("GetMumchit", 0.3f);
                     ChangeHitbox("ironSkill1");
                     DamageAllinHitBox(stat.AttackPower * 4, Skill_iron_Effect);
@@ -237,6 +263,7 @@ public class Move : MonoBehaviour
     public void TeleportByCalcul(Vector2 pos)
     {
         rb.position = pos;
+        sr.color = originColor;
     }
     IEnumerator GetMumchit(float time)
     {
@@ -270,25 +297,39 @@ public class Move : MonoBehaviour
         stat.HP -= damage;
         HPbar.fillAmount = stat.HP / stat.MaxHp;
         StartCoroutine("BeShadowing");
+        PopUpDamageText(damage);
     }
+    void PopUpDamageText(int damage)
+    {
+        GameObject DamageUI = Instantiate(DamageText, tr.localPosition, Quaternion.identity);
+        DamageUI.GetComponentInChildren<DamageUI>().Spawn(damage, gameObject);
+    }
+
 
     IEnumerator BeShadowing()
     {
+        if(!isMumchit)
+            anim.SetTrigger("Hitted");
         Color color = sr.color;
         
-        color.a = sr.color.a / 2;
         sr.color = color;
         for (int i = 0; i < 3; i++)
         {
-            while (color.a >= 0.2f)
+            while (color.r >= 0.5f)
             {
-                color.a -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+                color.r  -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+                color.g  -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+                color.b  -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+                color.a = sr.color.a;
                 sr.color = color;
                 yield return null;
             }
-            while (color.a <= 0.8f)
+            while (color.r <= 1f)
             {
-                color.a += (Time.deltaTime / 0.5f);
+                color.r += (Time.deltaTime / 0.5f);
+                color.g += (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+                color.b += (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
+                color.a = sr.color.a;
                 sr.color = color;
                 yield return null;
             }
