@@ -14,8 +14,6 @@ public class PlayerHitbox : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        Debug.Log("충돌!");
         if (collision.tag == "Enemy")
         {
             Monsters.Add(collision.gameObject);
@@ -31,7 +29,6 @@ public class PlayerHitbox : MonoBehaviour
     }
     IEnumerator GetHurtPlayer(int Damage)
     {
-        Debug.Log("아야!");
         isDamagedRecent = true;
         Player.GetDamage(Damage);
         yield return new WaitForSeconds(2.0f);
