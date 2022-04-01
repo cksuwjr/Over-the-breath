@@ -69,10 +69,7 @@ public class Move : MonoBehaviour
         else
         {
             if (Input.inputString != "")
-            {
                 KeyReservation = Input.inputString;
-                Debug.Log(KeyReservation);
-            }
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
@@ -129,7 +126,10 @@ public class Move : MonoBehaviour
             switch (ChangeMode)
             {
                 case "default":
-                    StartCoroutine("GetMumchit", 0.3f);
+                    if (KeyReservation != null)
+                        StartCoroutine("GetMumchit", 0.3f);
+                    else
+                        StartCoroutine("GetMumchit", 0.17f);
                     Vector3 SpawnPosition;
                     if (sr.flipX)
                         SpawnPosition = tr.position + new Vector3(-1f, 0);
@@ -152,12 +152,12 @@ public class Move : MonoBehaviour
                     anim.SetInteger("Iron_BasicSequence", basicAttackSequence);
                     if (basicAttackSequence < 2)
                     {
-                        StartCoroutine(DamageDelay(stat.AttackPower * (1 + basicAttackSequence), 0.04f));
+                        StartCoroutine(DamageDelay(GetRandomDamageValue(stat.AttackPower * (1 + basicAttackSequence), 0.8f, 1.2f), 0.04f));
                         basicAttackSequence++;
                     }
                     else // 마지막타격
                     {
-                        StartCoroutine(DamageDelay(stat.AttackPower * 3, 0.04f, null, "Airborne"));
+                        StartCoroutine(DamageDelay(GetRandomDamageValue(stat.AttackPower * 3, 0.9f, 1.3f), 0.04f, null, "Airborne"));
                         basicAttackSequence = 0;
                     }
                     break;
@@ -175,7 +175,7 @@ public class Move : MonoBehaviour
                     sr.color = None;
                     StartCoroutine("GetMumchit", 0.3f);
                     ChangeHitbox("ironSkill1");
-                    DamageAllinHitBox(stat.AttackPower * 4, Skill_iron_Effect);
+                    DamageAllinHitBox(GetRandomDamageValue(stat.AttackPower * 4, 1.0f, 1.5f), Skill_iron_Effect);
                     Instantiate(TeleportCalculator, tr.position, Quaternion.identity);
                     anim.SetTrigger("Skill1");
                     if (basicAttackSequence == 0)
@@ -184,15 +184,13 @@ public class Move : MonoBehaviour
                     break;
             }
         }
-
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ChangeDragon("iron");
-            transform.GetChild(3).GetChild(0).gameObject.SetActive(true);
-        }
     }
-
+    int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
+    {
+        int Damage;
+        Damage = (int) (OriginDamage * UnityEngine.Random.Range(minX, maxX));
+        return Damage;
+    }
     private void DamageAllinHitBox(int damage, GameObject effect = null, string CCtype = null)
     {
         List<GameObject> Enemys = PlayerAttackRange.GetComponent<AttackBox>().GetAttackableTargets();
@@ -274,7 +272,6 @@ public class Move : MonoBehaviour
 
     IEnumerator Buff(string what, float how, float time)
     {
-        Debug.Log("코루틴");
         switch (what)
         {
             case "Speed":
@@ -284,6 +281,50 @@ public class Move : MonoBehaviour
         yield return new WaitForSeconds(time);
         stat.MoveSpeed -= how;
     }
+
+    public void PlayerStatChange(Dictionary<string, float> statu)
+    {
+        foreach(string Plus_stat in statu.Keys)
+        {
+            float value = statu[Plus_stat];
+            switch (Plus_stat)
+            {
+                case "Hp":
+                    stat.HP += value;
+                    break;
+                case "AttackPower":
+                    stat.AttackPower += (int)value;
+                    break;
+                case "MaxHp":
+                    stat.MaxHp += value;
+                    break;
+                case "MoveSpeed":
+                    stat.MoveSpeed += value;
+                    break;
+                case "JumpPower":
+                    stat.JumpPower += value;
+                    break;
+            }
+        }
+        HPbar.fillAmount = stat.HP / stat.MaxHp;
+
+
+        CheckEvent();
+    }
+
+    void CheckEvent()
+    {
+        if(stat.AttackPower >= 80 && ChangeMode == "default")
+        {
+            if (ChangeMode != "iron")
+            {
+                ChangeDragon("iron");
+                transform.GetChild(3).GetChild(0).gameObject.SetActive(true);
+            }
+        }
+
+    }
+
 
     IEnumerator DamageDelay(int damage, float time, GameObject Effect = null, string CCtype = null)
     {

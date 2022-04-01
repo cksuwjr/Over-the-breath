@@ -34,8 +34,15 @@ public class Fire : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy" && col.GetComponent<Status>().MoveSpeed != 0)
         {
-            col.GetComponent<EnemyAI>().GetDamaged(0, GameObject.FindGameObjectWithTag("Player"));
+            col.GetComponent<EnemyAI>().GetDamaged(GetRandomDamageValue(GameObject.Find("Player").GetComponent<Status>().AttackPower, 0.8f, 1.2f), GameObject.FindGameObjectWithTag("Player"));
             Destroy(gameObject);
         }
+    }
+
+    int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
+    {
+        int Damage;
+        Damage = (int)(OriginDamage * UnityEngine.Random.Range(minX, maxX));
+        return Damage;
     }
 }

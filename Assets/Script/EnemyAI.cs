@@ -25,7 +25,10 @@ public class EnemyAI : MonoBehaviour
     bool isActing;
     bool isHitStunned;
 
-
+    [SerializeField]
+    public List<string> plus_stat;
+    [SerializeField]
+    public List<float> plus_value;
 
     enum State
     {
@@ -59,7 +62,6 @@ public class EnemyAI : MonoBehaviour
 
         if (DamageText == null)
             DamageText = Resources.Load("Prefab/DamageUim") as GameObject;
-
 
         state = State.Idle;
 
@@ -225,7 +227,7 @@ public class EnemyAI : MonoBehaviour
     {
         AttackTarget = Fromwho;
         if (damage == 0)
-            damage = Fromwho.GetComponent<Status>().AttackPower;
+            damage = AttackTarget.GetComponent<Status>().AttackPower;
 
 
         if (AppearHPCoroutine != null)
@@ -253,11 +255,20 @@ public class EnemyAI : MonoBehaviour
 
         if (stat.HP < 0)
         {
-            AttackTarget.GetComponent<Status>().MaxHp++;
-            Debug.Log("체력증가! : " + AttackTarget.GetComponent<Status>().MaxHp);
+            if (AttackTarget.tag == "Player")
+            {
+                Dictionary<string, float> statyouearn = new Dictionary<string, float>();
+                for (int i = 0; i < plus_stat.Count; i++)
+                {
+                    statyouearn.Add(plus_stat[i], plus_value[i]);
+                    
+                }
+                AttackTarget.GetComponent<Move>().PlayerStatChange(statyouearn);
+            }
             StartCoroutine("Die");
         }
     }
+
     public void GetAirborne(Vector2 force)
     {
         rb.velocity = new Vector2(0, 0);
@@ -289,9 +300,4 @@ public class EnemyAI : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-
-
-    
-    
 }
