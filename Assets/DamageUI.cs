@@ -18,7 +18,6 @@ public class DamageUI : MonoBehaviour
     }
     IEnumerator GoUp()
     {
-        Debug.Log("ÀÌµ¿");
         float distance = 0.2f;
         while (distance > 0)
         {
