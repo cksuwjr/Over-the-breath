@@ -30,11 +30,18 @@ public class PlayerHitbox : MonoBehaviour
     IEnumerator GetHurtPlayer(int Damage)
     {
         isDamagedRecent = true;
-        Player.GetDamage(Damage);
-        yield return new WaitForSeconds(2.0f);
+        Player.GetDamage(GetRandomDamageValue(Damage, 0.8f, 1.2f));
+        yield return new WaitForSeconds(1.7f);
         if(Monsters.Count > 0)
             StartCoroutine("GetHurtPlayer", Monsters[0].transform.GetComponent<Status>().AttackPower);
         else
             isDamagedRecent = false;
+    }
+
+    int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
+    {
+        int Damage;
+        Damage = (int)(OriginDamage * UnityEngine.Random.Range(minX, maxX));
+        return Damage;
     }
 }

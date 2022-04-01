@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    const float Term = 10f;
+    const float Term = 5f;
     const float MinXRange = 0f;
     const float MaxXRange = 52f;
 

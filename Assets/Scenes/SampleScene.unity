@@ -13185,8 +13185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fire: {fileID: 2599182941268024355, guid: 8d23cf977e836a648ad28b94ae318dac, type: 3}
   TeleportCalculator: {fileID: 7708248963307439561, guid: 9bd13b7a6805e764face2827c1ba1bcf, type: 3}
-  Skill_iron_Effect: {fileID: 0}
-  DamageText: {fileID: 0}
+  Skill_iron_Effect: {fileID: 7988841275075281166, guid: 0505828e56c26764ca3404c129b9831f, type: 3}
+  DamageText: {fileID: 9061938819924549295, guid: b79831c3b4744624bb83245149a4d728, type: 3}
 --- !u!1 &2098205075941191506
 GameObject:
   m_ObjectHideFlags: 0
