@@ -266,8 +266,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -28, y: 28}
-        - {x: -28, y: 18.175438}
-        - {x: 28, y: 18.175438}
+        - {x: -28, y: 26}
+        - {x: 28, y: 26}
         - {x: 28, y: 28}
       tessellationDetail: 0
       bones: []

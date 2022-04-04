@@ -67,12 +67,6 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    //    //레이저 시각효과 활성화
-    //    //앞
-    //Debug.DrawRay(transform.position, new Vector3(1.4f * Direction, 0, 0), new Color(0, 1, 0));
-    //    //바닥
-    //Debug.DrawRay(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0) * ((cc.size.y / 2) + 0.15f), new Color(0, 1, 0));
-
 
     void Update()
     {
@@ -90,8 +84,14 @@ public class EnemyAI : MonoBehaviour
         // 본인기준 주변 지형파악 위한 레이저 체크
         RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck, rayFloorGroundCheck;
 
-        rayFrontGroundCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 1f, 1 << LayerMask.NameToLayer("Ground"));
-        rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("Wall"));
+        //    //레이저 시각효과 활성화
+        //    //앞
+        //Debug.DrawRay(transform.position + new Vector3(Direction, 0, 0), new Vector3(0, 1, 0), new Color(0, 1, 0));
+        //    //바닥
+        //Debug.DrawRay(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0) * ((cc.size.y / 2) + 0.15f), new Color(0, 1, 0));
+
+        rayFrontGroundCheck = Physics2D.Raycast(transform.position + new Vector3(Direction, 0, 0), Vector2.up, 1f, 1 << LayerMask.NameToLayer("Ground"));
+        rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("UnPassableWall"));
         rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
         rayFloorGroundCheck = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
         // 앞에 땅이 있다면 점프로 도약
@@ -110,7 +110,6 @@ public class EnemyAI : MonoBehaviour
     }
     void MovingPattern()
     {
-
         // 공격 대상이 없다면
         if (AttackTarget == null && !isHitStunned)
         {
@@ -196,6 +195,8 @@ public class EnemyAI : MonoBehaviour
                     state = State.Change;
                     break;
             }
+        //Debug.Log(state);
+        //Debug.Log(isActing);
     }
 
     IEnumerator SetActingTrue(float time)
