@@ -308,7 +308,6 @@ public class Move : MonoBehaviour
         }
         HPbar.fillAmount = stat.HP / stat.MaxHp;
 
-
         CheckEvent();
     }
 
