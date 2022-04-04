@@ -88,14 +88,14 @@ public class EnemyAI : MonoBehaviour
     void CheckingTopography()
     {
         // 본인기준 주변 지형파악 위한 레이저 체크
-        RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck;
+        RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck, rayFloorGroundCheck;
 
         rayFrontGroundCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 1f, 1 << LayerMask.NameToLayer("Ground"));
         rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("Wall"));
         rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
-
+        rayFloorGroundCheck = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
         // 앞에 땅이 있다면 점프로 도약
-        if (isGround && rayFrontGroundCheck.collider != null)
+        if (isGround && rayFrontGroundCheck.collider != null || (rayFloorGroundCheck.collider == null && isGround))
             rb.velocity = new Vector2(stat.MoveSpeed * Direction, stat.JumpPower);
 
         // 앞에 벽이 있다면 방향전환
