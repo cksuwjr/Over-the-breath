@@ -66,3 +66,10 @@ E
 
 
 <br><br><br>
+
+
+<hr>
+기능 구현에 도움받은 사이트 링크<br><br>
+
+
+<a href="https://unitybeginner.tistory.com/105"> 지면 관통 2D Platform Effector2D </a>
