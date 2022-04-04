@@ -6,10 +6,18 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    const float Term = 5f;
-    const float MinXRange = 0f;
-    const float MaxXRange = 52f;
+    const float RandTerm = 5f;
+    const float RandSpawnMinXRange = 0f;
+    const float RandSpawnMaxXRange = 52f;
 
+
+
+    const float FixTerm = 15f;
+    [SerializeField]
+    public List<float> Xpos;
+    [SerializeField]
+    public List<float> Ypos;
+    int FixSpawnSequence = 0;
     List<GameObject> Enemys = new List<GameObject>();
     void Start()
     {
@@ -17,14 +25,29 @@ public class Spawner : MonoBehaviour
             Enemys.Add(Resources.Load("Prefab/Slime") as GameObject);
             Enemys.Add(Resources.Load("Prefab/Warrior") as GameObject);
         }
+        // Random Spawn
+        //for (int i = 0; i < Enemys.Count; i++)
+        //    StartCoroutine(RandomSpawn(Enemys[i], RandTerm));
+
+        // Fixed Spawn
         for (int i = 0; i < Enemys.Count; i++)
-            StartCoroutine(Spawn(Enemys[i], Term));
+            StartCoroutine(FixedSpawn(Enemys[i], FixTerm));
+
     }
 
-    IEnumerator Spawn(GameObject Enemy, float Term)
+    IEnumerator RandomSpawn(GameObject Enemy, float Term)
     {
-        Instantiate(Enemy, new Vector2(Random.Range(MinXRange, MaxXRange), 0), Quaternion.identity);
+        Instantiate(Enemy, new Vector2(Random.Range(RandSpawnMinXRange, RandSpawnMaxXRange), 0), Quaternion.identity);
         yield return new WaitForSeconds(Term);
-        StartCoroutine(Spawn(Enemy, Term));
+        StartCoroutine(RandomSpawn(Enemy, Term));
+    }
+    IEnumerator FixedSpawn(GameObject Enemy, float Term)
+    {
+        Instantiate(Enemy, new Vector2(Xpos[FixSpawnSequence], Ypos[FixSpawnSequence]), Quaternion.identity);
+        yield return new WaitForSeconds(Term);
+        StartCoroutine(RandomSpawn(Enemy, Term));
+        FixSpawnSequence++;
+        if (FixSpawnSequence >= Xpos.Count)
+            FixSpawnSequence = 0;
     }
 }
