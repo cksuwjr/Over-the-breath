@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField]
+    public float PlayerSpawnPosX;
+    [SerializeField]
+    public float PlayerSpawnPosY;
+
+
+
     const float RandTerm = 5f;
     const float RandSpawnMinXRange = 0f;
     const float RandSpawnMaxXRange = 52f;
-
-
-
     const float FixTerm = 15f;
     [SerializeField]
     public List<float> Xpos;
@@ -21,6 +25,13 @@ public class Spawner : MonoBehaviour
     List<GameObject> Enemys = new List<GameObject>();
     void Start()
     {
+        // Player ==============================================
+
+
+
+        // Enemy  ==============================================
+
+
         if (Enemys.Count == 0) {
             Enemys.Add(Resources.Load("Prefab/Slime") as GameObject);
             Enemys.Add(Resources.Load("Prefab/Warrior") as GameObject);
@@ -50,4 +61,13 @@ public class Spawner : MonoBehaviour
         if (FixSpawnSequence >= Xpos.Count)
             FixSpawnSequence = 0;
     }
+    public void PlayerReSpawn(Status stat)
+    {
+        GameObject Player = Instantiate(Resources.Load("Prefab/Player") as GameObject, new Vector2(PlayerSpawnPosX, PlayerSpawnPosY), Quaternion.identity);
+        Player.GetComponent<Status>().StatInit(stat);
+        GameObject.Find("CAM").GetComponent <CinemachineVirtualCamera>().Follow = Player.transform;
+
+    }
+
+
 }
