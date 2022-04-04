@@ -14,9 +14,9 @@ public class Status : MonoBehaviour
     [SerializeField]
     protected float _jumppower;
 
+    public float MaxHp { get { return _maxhp; } set { _maxhp = value; } }
     public float HP { get { return _hp; } set { _hp = value; } }
     public int AttackPower { get { return _attackpower; } set { _attackpower = value; } }
-    public float MaxHp { get { return _maxhp; } set { _maxhp = value; } }
     public float MoveSpeed { get { return _movespeed; } set { _movespeed = value; } }
     public float JumpPower { get { return _jumppower; } set { _jumppower = value; } }
 
@@ -36,10 +36,18 @@ public class Status : MonoBehaviour
     }
     public void StatInit(float hp, int power, float Maxhp, float Movespeed, float Jumppower)
     {
+        _maxhp = Maxhp;
         _hp = hp;
         _attackpower = power;
-        _maxhp = Maxhp;
         _movespeed = Movespeed;
         _jumppower = Jumppower;
+    }
+    public void StatInit(Status stat)
+    {
+        _maxhp = stat.MaxHp;
+        _hp = stat.HP;
+        _attackpower = stat.AttackPower;
+        _movespeed = stat.MoveSpeed;
+        _jumppower = stat.JumpPower;
     }
 }
