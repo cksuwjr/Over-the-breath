@@ -44,7 +44,7 @@ public class Move : MonoBehaviour
         PlayerAttackRange = gameObject.transform.GetChild(3).gameObject;
         boxsize = PlayerAttackRange.GetComponent<BoxCollider2D>();
 
-        HPbar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        HPbar = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>();
         originColor = sr.color;
 
         if (Fire == null)
@@ -222,7 +222,7 @@ public class Move : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.transform.name == "Ground")
+        if (col.transform.tag == "Ground")
         {
             if (JumpCount != 2)
                 JumpCount = 2;
