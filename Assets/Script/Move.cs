@@ -21,6 +21,7 @@ public class Move : MonoBehaviour
 
     int basicAttackSequence = 0;
 
+
     string KeyReservation;
 
     Coroutine ProcessingCoroutine;
@@ -31,6 +32,7 @@ public class Move : MonoBehaviour
 
     Image HPbar;
     Color originColor;
+    GameObject UI;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +43,9 @@ public class Move : MonoBehaviour
         anim = GetComponent<Animator>();
         stat = GetComponent<Status>();
 
-        PlayerAttackRange = gameObject.transform.GetChild(3).gameObject;
+        UI = GameObject.Find("UI");
+            
+        PlayerAttackRange = gameObject.transform.GetChild(2).gameObject;
         boxsize = PlayerAttackRange.GetComponent<BoxCollider2D>();
 
         HPbar = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>();
@@ -256,7 +260,7 @@ public class Move : MonoBehaviour
     }
     void AttackBoxDirectionAsync()
     {
-        transform.GetChild(3).GetComponentInChildren<Transform>().localScale = sr.flipX ? new Vector2(-1, 1) : new Vector2(1, 1);
+        transform.GetChild(2).GetComponentInChildren<Transform>().localScale = sr.flipX ? new Vector2(-1, 1) : new Vector2(1, 1);
     }
     public void TeleportByCalcul(Vector2 pos)
     {
@@ -291,6 +295,8 @@ public class Move : MonoBehaviour
             {
                 case "Hp":
                     stat.HP += value;
+                    if (stat.HP > stat.MaxHp)
+                        stat.HP = stat.MaxHp;
                     break;
                 case "AttackPower":
                     stat.AttackPower += (int)value;
@@ -336,8 +342,13 @@ public class Move : MonoBehaviour
     {
         stat.HP -= damage;
         HPbar.fillAmount = stat.HP / stat.MaxHp;
+        if (stat.HP > stat.MaxHp)
+            stat.HP = stat.MaxHp;
         StartCoroutine("BeShadowing");
         PopUpDamageText(damage);
+
+        if (stat.HP <= 0)
+            Die();
     }
     void PopUpDamageText(int damage)
     {
@@ -375,5 +386,11 @@ public class Move : MonoBehaviour
             }
         }
         sr.color = originColor;
+    }
+    void Die()
+    {
+        stat.HP = stat.MaxHp;
+        UI.GetComponent<UIManager>().PlayerDie(stat);
+        Destroy(gameObject);
     }
 }
