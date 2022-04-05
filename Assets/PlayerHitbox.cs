@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerHitbox : MonoBehaviour
 {
     List<GameObject> Monsters = new List<GameObject>();
-    Move Player;
+    Player Player;
     bool isDamagedRecent = false;
 
     private void Start()
     {
-        Player = transform.parent.GetComponent<Move>();
+        Player = transform.parent.GetComponent<Player>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

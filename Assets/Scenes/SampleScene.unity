@@ -15292,9 +15292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dc5b31511d39d4fa1df5416dcce03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 2000
-  _attackpower: 250
-  _maxhp: 2000
+  _hp: 200000
+  _attackpower: 10000
+  _maxhp: 200000
   _movespeed: 5
   _jumppower: 7
 --- !u!1 &7020062274540021599
