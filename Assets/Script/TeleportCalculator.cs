@@ -10,7 +10,7 @@ public class TeleportCalculator : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Player = GameObject.Find("Player").gameObject;
+        Player = GameObject.FindGameObjectWithTag("Player").gameObject;
         StartCoroutine("Move", Player.GetComponent<SpriteRenderer>().flipX);
         Effect = Resources.Load("Prefab/Player_iron_Skill1Effect") as GameObject;
         StartCoroutine("MakeShadowEffect");
@@ -28,7 +28,7 @@ public class TeleportCalculator : MonoBehaviour
             rb.velocity = new Vector2(30, 0);
         }
         yield return new WaitForSeconds(0.15f);
-        Player.GetComponent<Move>().TeleportByCalcul(transform.localPosition);
+        Player.GetComponent<Skill>().TeleportByCalcul(transform.localPosition);
         Destroy(gameObject);
     }
     IEnumerator MakeShadowEffect()

@@ -12,7 +12,7 @@ public class Fire : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        if (GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX)
         {
             sr.flipX = true;
             direction = -1;
@@ -27,6 +27,7 @@ public class Fire : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(direction * 15, 0);
+
     }
 
     // Trigger Ω√¿€Ω√
@@ -34,7 +35,7 @@ public class Fire : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy" && col.GetComponent<Status>().MoveSpeed != 0)
         {
-            col.GetComponent<EnemyAI>().GetDamaged(GetRandomDamageValue(GameObject.Find("Player").GetComponent<Status>().AttackPower, 0.8f, 1.2f), GameObject.FindGameObjectWithTag("Player"));
+            col.GetComponent<EnemyAI>().GetDamaged(GetRandomDamageValue(GameObject.FindGameObjectWithTag("Player").GetComponent<Status>().AttackPower, 0.8f, 1.2f), GameObject.FindGameObjectWithTag("Player"));
             Destroy(gameObject);
         }
     }

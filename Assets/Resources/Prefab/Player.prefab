@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 380889350112436622}
   - component: {fileID: 380889350112436623}
   - component: {fileID: 380889350112436610}
+  - component: {fileID: 842082205}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: PlayerAttack
@@ -120,6 +121,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &842082205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380889350112436609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16399504969b75f4b8a6a49187429c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &380889350849214966
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,11 +310,12 @@ GameObject:
   - component: {fileID: 380889351831904455}
   - component: {fileID: 380889351831904312}
   - component: {fileID: 380889351831904453}
-  - component: {fileID: 380889351831904313}
   - component: {fileID: 380889351831904452}
   - component: {fileID: 380889351831904454}
   - component: {fileID: 380889351831904451}
   - component: {fileID: 380889351831904315}
+  - component: {fileID: 11505739}
+  - component: {fileID: 11505746}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -398,22 +412,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &380889351831904313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380889351831904314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1ad28b2920161145bdc705a5b244130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Fire: {fileID: 2599182941268024355, guid: 8d23cf977e836a648ad28b94ae318dac, type: 3}
-  TeleportCalculator: {fileID: 7708248963307439561, guid: 9bd13b7a6805e764face2827c1ba1bcf, type: 3}
-  Skill_iron_Effect: {fileID: 7988841275075281166, guid: 0505828e56c26764ca3404c129b9831f, type: 3}
-  DamageText: {fileID: 9061938819924549295, guid: b79831c3b4744624bb83245149a4d728, type: 3}
 --- !u!114 &380889351831904452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +474,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fire: {fileID: 0}
+  TeleportCalculator: {fileID: 0}
+  Skill_iron_Effect: {fileID: 0}
+  isMumchit: 0
+--- !u!114 &11505739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380889351831904314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ad28b2920161145bdc705a5b244130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangeMode: 
+  DamageText: {fileID: 0}
+  originColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &11505746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380889351831904314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45af1dee73658e40a0a7b9c0c164d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1753979150428589661
