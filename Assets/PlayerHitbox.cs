@@ -8,7 +8,7 @@ public class PlayerHitbox : MonoBehaviour
     Player Player;
     bool isDamagedRecent = false;
 
-    private void Start()
+    private void Awake()
     {
         Player = transform.parent.GetComponent<Player>();
     }

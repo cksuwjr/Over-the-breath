@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
 
     int JumpCount = 2; 
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();

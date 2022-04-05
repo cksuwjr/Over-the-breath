@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 842082205}
   m_Layer: 5
   m_Name: PlayerUI
-  m_TagString: PlayerAttack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -623,7 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753979151276083716}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +795,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753979152114163012}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PlayerAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

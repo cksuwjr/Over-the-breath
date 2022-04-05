@@ -10,11 +10,11 @@ public class UIManager : MonoBehaviour
     {
         DieCount = transform.GetChild(0).GetChild(2).GetComponent<Text>();
     }
-    public void PlayerDie(Status stat)
+    public void PlayerDie()
     {
-        StartCoroutine("CountingDieCount", stat);
+        StartCoroutine("CountingDieCount");
     }
-    IEnumerator CountingDieCount(Status stat)
+    IEnumerator CountingDieCount()
     {
         transform.GetChild(0).gameObject.SetActive(true);
         for (int second = 10; second > 0; second--)
@@ -23,6 +23,6 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         transform.GetChild(0).gameObject.SetActive(false);
-        GameObject.Find("Spawner").GetComponent<Spawner>().PlayerReSpawn(stat);
+        GameObject.Find("Spawner").GetComponent<Spawner>().PlayerReSpawn();
     }
 }

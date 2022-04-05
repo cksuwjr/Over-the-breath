@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     public float PlayerSpawnPosY;
 
-
+    GameObject player;
 
     const float RandTerm = 5f;
     const float RandSpawnMinXRange = 0f;
@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         // Player ==============================================
-
+        player = GameObject.FindGameObjectWithTag("Player");
 
 
         // Enemy  ==============================================
@@ -61,13 +61,16 @@ public class Spawner : MonoBehaviour
         if (FixSpawnSequence >= Xpos.Count)
             FixSpawnSequence = 0;
     }
-    public void PlayerReSpawn(Status stat)
+    public void PlayerReSpawn()
     {
-        GameObject Player = Instantiate(Resources.Load("Prefab/Player") as GameObject, new Vector2(PlayerSpawnPosX, PlayerSpawnPosY), Quaternion.identity);
-        Player.GetComponent<Status>().StatInit(stat);
-        Player.GetComponent<Player>().CheckEvent();
-        GameObject.Find("CAM").GetComponent <CinemachineVirtualCamera>().Follow = Player.transform;
+        GameObject newPlayer = Instantiate(Resources.Load("Prefab/Player"), new Vector2(PlayerSpawnPosX, PlayerSpawnPosY), Quaternion.identity) as GameObject;
 
+        newPlayer.GetComponent<Status>().StatInit(player.GetComponent<Status>());
+        newPlayer.GetComponent<Player>().ChangeDragon("");
+        Destroy(player);
+        player = newPlayer;
+
+        GameObject.Find("CAM").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
     }
 
 
