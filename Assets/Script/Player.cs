@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public Color originColor;                      // Skill
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -75,20 +75,19 @@ public class Player : MonoBehaviour
     // 드래곤 변화 조건 설정 및 변화시작 설정
     public void CheckEvent(string fixmode = null)
     {
-        if (fixmode == null)
-            if (ChangeMode == "default")
-            {
-                if (stat.AttackPower >= 80 && ChangeMode != "iron")
-                    ChangeDragon("iron");
-            }
-            else
-                ChangeDragon(fixmode);
+        if (ChangeMode == "default")
+        {
+            if (stat.AttackPower >= 80)
+                ChangeDragon("iron");
+        }
 
     }
 
     // 드래곤 외형 변화 및 히트박스 활성화
-    void ChangeDragon(string dragontype)
+    public void ChangeDragon(string dragontype)
     {
+        if (dragontype == "")
+            dragontype = ChangeMode;
         ChangeMode = dragontype;
         switch (dragontype)
         {
@@ -161,7 +160,8 @@ public class Player : MonoBehaviour
     void Die()
     {
         stat.HP = stat.MaxHp;
+        playerUI.PlayerUIUpdate();
         playerUI.PopupPlayerDieUI();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
