@@ -264,7 +264,7 @@ public class EnemyAI : MonoBehaviour
                     statyouearn.Add(plus_stat[i], plus_value[i]);
                     
                 }
-                AttackTarget.GetComponent<Move>().PlayerStatChange(statyouearn);
+                AttackTarget.GetComponent<Player>().PlayerStatChange(statyouearn);
             }
             StartCoroutine("Die");
         }

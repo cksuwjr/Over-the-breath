@@ -65,6 +65,7 @@ public class Spawner : MonoBehaviour
     {
         GameObject Player = Instantiate(Resources.Load("Prefab/Player") as GameObject, new Vector2(PlayerSpawnPosX, PlayerSpawnPosY), Quaternion.identity);
         Player.GetComponent<Status>().StatInit(stat);
+        Player.GetComponent<Player>().CheckEvent();
         GameObject.Find("CAM").GetComponent <CinemachineVirtualCamera>().Follow = Player.transform;
 
     }
