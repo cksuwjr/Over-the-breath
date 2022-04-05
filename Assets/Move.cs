@@ -25,13 +25,10 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        if (!skill.isMumchit)
-            PlayerKeyboardInput();
+        if (skill.isMumchit)
+            rb.velocity = new Vector2(0, rb.velocity.y);
         else
-        {
-            if (Input.inputString != "")
-                rb.velocity = new Vector2(0, rb.velocity.y);
-        }
+            PlayerKeyboardInput();
     }
 
     // Player 키보드 입력 (움직임)
@@ -77,6 +74,7 @@ public class Move : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             transform.position = new Vector2(0, 0);
+            Debug.Log("눌림");
         }
 
         if (Input.GetKeyDown(KeyCode.T))

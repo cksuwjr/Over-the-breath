@@ -411,6 +411,7 @@ MonoBehaviour:
   _attackpower: 30
   _maxhp: 500
   _movespeed: 2
+  _basicspeed: 2
   _jumppower: 7
 --- !u!114 &2327554882721988596
 MonoBehaviour:

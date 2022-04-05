@@ -86,10 +86,8 @@ public class Player : MonoBehaviour
     // 드래곤 외형 변화 및 히트박스 활성화
     public void ChangeDragon(string dragontype)
     {
-        if (dragontype == "")
-            dragontype = ChangeMode;
         ChangeMode = dragontype;
-        switch (dragontype)
+        switch (ChangeMode)
         {
             case "default":
                 anim.SetInteger("ChangeMode", 0);
@@ -164,4 +162,5 @@ public class Player : MonoBehaviour
         playerUI.PopupPlayerDieUI();
         gameObject.SetActive(false);
     }
+
 }
