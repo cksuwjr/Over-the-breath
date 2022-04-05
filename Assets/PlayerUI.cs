@@ -10,7 +10,7 @@ public class PlayerUI : MonoBehaviour
     Image HPbar;            // 체력바 HPbar UI          (체력UI 변경)             
     GameObject UI;          // Official Scene common UI (사망UI, 스토리 등등 띄우기)
 
-    void Start()
+    void Awake()
     {
         UI = GameObject.Find("UI");
         HPbar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
@@ -30,6 +30,6 @@ public class PlayerUI : MonoBehaviour
     // Player 사망시 공식 UI 띄우기
     public void PopupPlayerDieUI()
     {
-        UI.GetComponent<UIManager>().PlayerDie(PlayerStat);
+        UI.GetComponent<UIManager>().PlayerDie();
     }
 }
