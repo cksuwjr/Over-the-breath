@@ -7,13 +7,13 @@ public class PlayerUI : MonoBehaviour
 {
     Status PlayerStat;      // 플레이어 스탯 가져오기   (스탯 변경에 따른 UI변화)
 
-    Image HPbar;            // 체력바 HPbar UI          (체력UI 변경)             
+    GameObject HPUI;            // 체력바 HPbar UI          (체력UI 변경)             
     GameObject UI;          // Official Scene common UI (사망UI, 스토리 등등 띄우기)
 
     void Awake()
     {
         UI = GameObject.Find("UI");
-        HPbar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        HPUI = transform.GetChild(0).gameObject;
 
         PlayerStat = gameObject.GetComponentInParent<Status>();
     }
@@ -21,12 +21,24 @@ public class PlayerUI : MonoBehaviour
     // Player UI 업데이트 (체력바 등등)
     public void PlayerUIUpdate()
     {
+        
+
+        HPUIUpdate();
+
+    }
+
+    void HPUIUpdate()
+    {
         if (PlayerStat.HP > PlayerStat.MaxHp)
             PlayerStat.HP = PlayerStat.MaxHp;
 
-        HPbar.fillAmount = PlayerStat.HP / PlayerStat.MaxHp;
+        HPUI.transform.GetChild(1).GetComponent<Image>().fillAmount = PlayerStat.HP / PlayerStat.MaxHp; // 체력바 이미지 변환
+        string hpvalue = "";
+        hpvalue += PlayerStat.HP.ToString();
+        hpvalue += " / ";
+        hpvalue += PlayerStat.MaxHp.ToString();
+        HPUI.transform.GetChild(2).GetComponent<Text>().text = hpvalue;
     }
-
     // Player 사망시 공식 UI 띄우기
     public void PopupPlayerDieUI()
     {

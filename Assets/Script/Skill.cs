@@ -10,6 +10,8 @@ public class Skill : MonoBehaviour
     Animator anim;
     SpriteRenderer sr; 
 
+    AudioSource audioSource;
+    EffectAudioManager audioManager;
 
     Status stat;
     Player player;
@@ -24,6 +26,7 @@ public class Skill : MonoBehaviour
 
     string KeyReservation;                  // 스킬 예약 (연속으로 여러개 누른경우 대기 후 실행)
 
+    GameObject PlayerAttackBox;
     GameObject PlayerAttackRange;           // Player 공격 범위
 
     void Start()
@@ -33,11 +36,15 @@ public class Skill : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
+        audioSource = GetComponent<AudioSource>();
+        audioManager = GetComponent<EffectAudioManager>();
+
+
         stat = GetComponent<Status>();
         player = GetComponent<Player>();
 
-        PlayerAttackRange = gameObject.transform.GetChild(2).gameObject;
-
+        PlayerAttackBox = gameObject.transform.GetChild(2).gameObject;
+        
 
         if (Fire == null)
             Fire = Resources.Load("Prefab/Fire") as GameObject;
@@ -62,7 +69,7 @@ public class Skill : MonoBehaviour
     // Player 공격범위 방향 변경
     void AttackBoxDirectionAsync()
     {
-        PlayerAttackRange.GetComponentInChildren<Transform>().localScale = sr.flipX ? new Vector2(-1, 1) : new Vector2(1, 1);
+        PlayerAttackBox.GetComponentInChildren<Transform>().localScale = sr.flipX ? new Vector2(-1, 1) : new Vector2(1, 1);
     }
 
     // Player 키보드 입력 (스킬)
@@ -120,6 +127,8 @@ public class Skill : MonoBehaviour
             switch (player.ChangeMode)
             {
                 case "iron":
+                    audioSource.clip = audioManager.Esound; // 효과음 변경
+                    audioSource.Play();                     // 효과음 재생
                     Color None = player.originColor;
                     None.a = 0;
                     sr.color = None;
@@ -186,10 +195,10 @@ public class Skill : MonoBehaviour
         switch (attacktype)
         {
             case "default":
-                PlayerAttackRange = transform.GetChild(2).GetChild(0).GetChild(0).gameObject;
+                PlayerAttackRange = PlayerAttackBox.transform.GetChild(0).GetChild(0).gameObject;
                 break;
             case "ironSkill1":
-                PlayerAttackRange = transform.GetChild(2).GetChild(0).GetChild(1).gameObject;
+                PlayerAttackRange = PlayerAttackBox.transform.GetChild(0).GetChild(1).gameObject;
                 break;
         }
     }
