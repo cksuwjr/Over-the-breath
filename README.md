@@ -66,10 +66,38 @@ E
 
 
 <br><br><br>
-
-
 <hr>
-기능 구현에 도움받은 사이트 링크<br><br>
+<h2>음원 출처</h2><br><br>
+
+```
+  == The-Beginning-w-Caturday ==
+
+  The Beginning (w Caturday) by Babasmas | https://soundcloud.com/babasmasmoosic
+  Music promoted by https://www.chosic.com/free-music/all/
+  Creative Commons CC BY-SA 3.0
+  https://creativecommons.org/licenses/by-sa/3.0/
 
 
-<a href="https://unitybeginner.tistory.com/105"> 지면 관통 2D Platform Effector2D </a>
+  == 희망의 산호초 ==
+
+  음원제공 - BGM팩토리 (https://bgmfactory.com)
+  사용음원 - 희망의 산호초
+
+
+
+  == punch-deck-the-soul-crushing-monotony-of-isolation-instrumental-mix==
+
+  The Soul-Crushing Monotony Of Isolation (Instrumental Mix) by Punch Deck | https://soundcloud.com/punch-deck
+  Music promoted by https://www.chosic.com/free-music/all/
+  Creative Commons Attribution 3.0 Unported License
+  https://creativecommons.org/licenses/by/3.0/deed.en_US 
+```
+
+
+<br><br><br>
+<hr>
+  <h2>기능 구현에 도움받은 사이트 링크</h2><br><br>
+
+
+<a href="https://unitybeginner.tistory.com/105"> 지면 관통 2D Platform Effector2D </a><br><br>
+<a href="https://junsugi.tistory.com/12"> 효과음, 음악 넣기 AudioSource </a><br><br>
