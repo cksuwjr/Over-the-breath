@@ -67,7 +67,7 @@ E
 
 <br><br><br>
 <hr>
-음원 출처<br><br>
+<h2>음원 출처<h2><br><br>
 
 ```
   == The-Beginning-w-Caturday ==
@@ -96,7 +96,7 @@ E
 
 <br><br><br>
 <hr>
-기능 구현에 도움받은 사이트 링크<br><br>
+  <h2>기능 구현에 도움받은 사이트 링크</h2><br><br>
 
 
 <a href="https://unitybeginner.tistory.com/105"> 지면 관통 2D Platform Effector2D </a><br><br>
