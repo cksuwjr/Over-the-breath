@@ -66,7 +66,7 @@ public class Spawner : MonoBehaviour
         GameObject newPlayer = Instantiate(Resources.Load("Prefab/Player"), new Vector2(PlayerSpawnPosX, PlayerSpawnPosY), Quaternion.identity) as GameObject;
 
         newPlayer.GetComponent<Status>().StatInit(player.GetComponent<Status>());
-        newPlayer.GetComponent<Player>().ChangeDragon("iron");
+        newPlayer.GetComponent<Player>().ChangeDragon(player.GetComponent<Player>().ChangeMode);
         Destroy(player);
         player = newPlayer;
 
