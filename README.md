@@ -73,3 +73,4 @@ E
 
 
 <a href="https://unitybeginner.tistory.com/105"> 지면 관통 2D Platform Effector2D </a>
+<a href="https://junsugi.tistory.com/12"> 효과음, 음악 넣기 AudioSource </a>
