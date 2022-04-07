@@ -24,6 +24,9 @@ public class EnemyAI : MonoBehaviour
 
     bool isActing;
     bool isHitStunned;
+    bool isMumchit; 
+
+    public string MyEnemyType;
 
     [SerializeField]
     public List<string> plus_stat;
@@ -48,6 +51,8 @@ public class EnemyAI : MonoBehaviour
     const float MinActionTime = 1f;
     const float MaxActionTime = 3f;
 
+    GameObject EnemyAttackBox;
+
 
     void Start()
     {
@@ -56,6 +61,8 @@ public class EnemyAI : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         stat = GetComponent<Status>();
         cc = GetComponent<CapsuleCollider2D>();
+
+        EnemyAttackBox = gameObject.transform.GetChild(1).gameObject;
 
         HPUI = transform.GetChild(0).gameObject;
         HPbar = HPUI.transform.GetChild(1).gameObject.GetComponent<Image>();
@@ -70,6 +77,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        AttackBoxDirectionAsync();
         ChangeDirection();
         CheckingTopography();
         MovingPattern();
@@ -150,7 +158,15 @@ public class EnemyAI : MonoBehaviour
         }
         else  // 공격 대상이 있다면
         {
-            if (!isHitStunned && isGround) // 피격시간 끝나면
+            if (isMumchit || isGround)
+            {
+                if (!isHitStunned)
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+            else
+                rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
+
+            if (!isHitStunned && isGround && !isMumchit) // 피격시간 끝나면
             {
                 sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
 
@@ -160,17 +176,56 @@ public class EnemyAI : MonoBehaviour
                 rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
             }
 
-            if (!isHitStunned && Mathf.Abs(transform.position.x - AttackTarget.transform.position.x) < 2f) // 가까울때 적이 나보다 높이 위치하면 점프
+            float distanceXGap = Mathf.Abs(transform.position.x - AttackTarget.transform.position.x);
+            if (!isHitStunned && distanceXGap < 2f && !isMumchit) // 가까울때 적이 
             {
-                float dinstanceGap = transform.position.y - AttackTarget.transform.position.y;
-                if (Mathf.Abs(dinstanceGap) > 0.5f && dinstanceGap < 0 && isGround)
-                    rb.velocity = new Vector2(rb.velocity.x, 7);
+                float dinstanceYGap = transform.position.y - AttackTarget.transform.position.y;
+                if (Mathf.Abs(dinstanceYGap) > 0.5f && dinstanceYGap < 0) // 나보다 높이 위치하면 점프
+                {
+                    if (isGround)
+                        rb.velocity = new Vector2(rb.velocity.x, 7);
+                }
+
+                // 공격패턴
+                float AttackableDistance;
+                switch (MyEnemyType) {
+                    case "Warrior":
+                        AttackableDistance = 1f;
+                        if (distanceXGap < AttackableDistance)
+                        {
+                            anim.SetTrigger("Attack");
+                            StartCoroutine("GetMumchit", 0.5f);
+                            Attack();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                
             }
 
 
             if (!isActing)
                 AttackTarget = null;
         }
+    }
+
+    void Attack()
+    {
+        StartCoroutine(DamageDelay(GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), 0.04f));
+    }
+    int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
+    {
+        int Damage;
+        Damage = (int)(OriginDamage * UnityEngine.Random.Range(minX, maxX));
+        return Damage;
+    }
+
+    IEnumerator GetMumchit(float time)
+    {
+        isMumchit = true;
+        yield return new WaitForSeconds(time);
+        isMumchit = false;
     }
 
     // 상태 랜덤 부여  
@@ -220,15 +275,18 @@ public class EnemyAI : MonoBehaviour
     IEnumerator GetHittedStun(float time)
     {
         isHitStunned = true;
+        stat.MoveSpeed = 0.01f;
         yield return new WaitForSeconds(time);
         isHitStunned = false;
+        stat.MoveSpeed = stat.BasicSpeed;
     }
 
     public void GetDamaged(int damage, GameObject Fromwho)
     {
         AttackTarget = Fromwho;
         if (damage == 0)
-            damage = AttackTarget.GetComponent<Status>().AttackPower;
+
+        damage = AttackTarget.GetComponent<Status>().AttackPower;
 
 
         if (AppearHPCoroutine != null)
@@ -282,6 +340,51 @@ public class EnemyAI : MonoBehaviour
         DamageUI.GetComponentInChildren<DamageUI>().Spawn(damage, gameObject);
     }
 
+    void AttackBoxDirectionAsync()
+    {
+        EnemyAttackBox.GetComponent<Transform>().localScale = sr.flipX ? new Vector2(1, 1) : new Vector2(-1, 1);
+    }
+
+
+    private void DamageAllinHitBox(int damage, GameObject effect = null, string CCtype = null)
+    {
+        List<GameObject> Enemys = EnemyAttackBox.GetComponent<EnemyAttackBox>().GetAttackableTargets();
+        for (int i = 0; i < Enemys.Count; i++)
+            if (Enemys[i] != null)
+            {
+                GameObject Spawnedeffect;
+                if (effect != null)
+                {
+                    Spawnedeffect = Instantiate(effect, Enemys[i].transform.position, Quaternion.identity);
+                    Spawnedeffect.transform.SetParent(Enemys[i].transform);
+                }
+
+
+                if (Enemys[i].tag == "Enemy")
+                {
+                    EnemyAI ai;
+                    ai = Enemys[i].GetComponent<EnemyAI>();
+                    if (ai != null)
+                          ai.GetDamaged(damage, gameObject);
+                }
+                else if (Enemys[i].tag == "Player") {
+                    Player ai;
+                    ai = Enemys[i].GetComponent<Player>();
+                    if (ai != null)
+                          ai.GetDamage(damage);
+                }
+                
+            }
+
+    }
+
+
+    IEnumerator DamageDelay(int damage, float time, GameObject Effect = null, string CCtype = null)
+    {
+
+        yield return new WaitForSeconds(time);
+        DamageAllinHitBox(damage, Effect, CCtype);
+    }
 
     // 죽음
     IEnumerator Die()

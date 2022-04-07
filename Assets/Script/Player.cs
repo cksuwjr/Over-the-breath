@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     Skill skill;
     PlayerUI playerUI;
 
+    bool die = false;
+
     public string ChangeMode;                      // DragonMode, public
 
     public GameObject DamageText;           // Skill
@@ -38,7 +40,10 @@ public class Player : MonoBehaviour
         ChangeDragon("default");
 
     }
-
+    void Start()
+    {
+        playerUI.PlayerUIUpdate();
+    }
     // Player 스탯 변화
     public void PlayerStatChange(Dictionary<string, float> statu)
     {
@@ -104,14 +109,18 @@ public class Player : MonoBehaviour
     // 피해 입을시
     public void GetDamage(int damage)
     {
-        stat.HP -= damage;
-        playerUI.PlayerUIUpdate();
+        if (!die)
+        {
 
-        StartCoroutine("BeShadowing");
-        PopUpDamageText(damage);
+            stat.HP -= damage;
+            playerUI.PlayerUIUpdate();
 
-        if (stat.HP <= 0)
-            Die();
+            StartCoroutine("BeShadowing");
+            PopUpDamageText(damage);
+
+            if (stat.HP <= 0)
+                Die();
+        }
     }
 
 
@@ -160,6 +169,7 @@ public class Player : MonoBehaviour
         stat.HP = stat.MaxHp;
         playerUI.PlayerUIUpdate();
         playerUI.PopupPlayerDieUI();
+        die = true;
         gameObject.SetActive(false);
     }
 
