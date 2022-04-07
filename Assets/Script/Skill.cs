@@ -29,7 +29,7 @@ public class Skill : MonoBehaviour
     GameObject PlayerAttackBox;
     GameObject PlayerAttackRange;           // Player 공격 범위
 
-    void Start()
+    void Awake()
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
@@ -97,6 +97,10 @@ public class Skill : MonoBehaviour
                     Instantiate(Fire, SpawnPosition, Quaternion.identity);
                     break;
                 case "iron":
+                    audioSource.clip = audioManager.Esound; // 효과음 변경
+                    audioSource.pitch = 3.0f;
+                    audioSource.volume = 0.43f;
+                    audioSource.Play();                     // 효과음 재생
                     if (sr.flipX)
                         rb.transform.Translate(new Vector3(-0.3f, 0));
                     else
@@ -128,6 +132,8 @@ public class Skill : MonoBehaviour
             {
                 case "iron":
                     audioSource.clip = audioManager.Esound; // 효과음 변경
+                    audioSource.pitch = 1.0f;
+                    audioSource.volume = 1.0f;
                     audioSource.Play();                     // 효과음 재생
                     Color None = player.originColor;
                     None.a = 0;
