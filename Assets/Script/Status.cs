@@ -23,7 +23,7 @@ public class Status : MonoBehaviour
     public float BasicSpeed { get { return _basicspeed; } set { _basicspeed = value; } }
     public float JumpPower { get { return _jumppower; } set { _jumppower = value; } }
 
-    private void Start()
+    private void Awake()
     {
         if(_hp == 0)
             _hp = 500f;
