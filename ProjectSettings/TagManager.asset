@@ -8,6 +8,7 @@ TagManager:
   - PlayerAttack
   - Wall
   - Ground
+  - StoryObject
   layers:
   - Default
   - TransparentFX

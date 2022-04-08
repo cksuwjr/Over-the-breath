@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Move : MonoBehaviour
 {
     Rigidbody2D rb;     
     SpriteRenderer sr;  
-    Animator anim;  
+    Animator anim;
+    UIManager officialUI;
 
     Status stat;   
     Skill skill;
@@ -18,6 +19,7 @@ public class Move : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        officialUI = GameObject.Find("UI").GetComponent<UIManager>();
 
         stat = GetComponent<Status>();
         skill = GetComponent<Skill>();
@@ -25,7 +27,7 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        if (skill.isMumchit)
+        if (skill.isMumchit || officialUI.isStoryTelling)
             rb.velocity = new Vector2(0, rb.velocity.y);
         else
             PlayerKeyboardInput();
@@ -70,12 +72,15 @@ public class Move : MonoBehaviour
             }
         }
 
-        // 제자리!! [완성시 삭제예정]
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            transform.position = new Vector2(0, 0);
-            Debug.Log("눌림");
+            Application.Quit();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+
 
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -96,5 +101,4 @@ public class Move : MonoBehaviour
             anim.SetBool("Jump", false);
         }
     }
-
 }
