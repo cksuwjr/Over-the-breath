@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
         stat = GetComponent<Status>();
         skill = GetComponent<Skill>();
+        
         playerUI = GetComponentInChildren<PlayerUI>();
 
         originColor = sr.color;
@@ -172,5 +173,7 @@ public class Player : MonoBehaviour
         die = true;
         gameObject.SetActive(false);
     }
+
+
 
 }
