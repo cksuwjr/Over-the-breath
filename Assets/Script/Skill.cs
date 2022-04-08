@@ -8,7 +8,9 @@ public class Skill : MonoBehaviour
     Transform tr;
     Rigidbody2D rb;
     Animator anim;
-    SpriteRenderer sr; 
+    SpriteRenderer sr;
+    
+    UIManager officialUI;
 
     AudioSource audioSource;
     EffectAudioManager audioManager;
@@ -35,6 +37,8 @@ public class Skill : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        officialUI = GameObject.Find("UI").GetComponent<UIManager>();
+
 
         audioSource = GetComponent<AudioSource>();
         audioManager = GetComponent<EffectAudioManager>();
@@ -57,7 +61,7 @@ public class Skill : MonoBehaviour
     private void Update()
     {
         AttackBoxDirectionAsync();
-        if (!isMumchit)
+        if (!isMumchit || officialUI.isStoryTelling)
             PlayerKeyboardInput();
         else
         {
