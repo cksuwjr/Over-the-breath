@@ -11,10 +11,10 @@ public class UIManager : MonoBehaviour
     string[] Story;
     public bool isStoryTelling = false;
     Coroutine ProceedingStoryCoroutine;
-
     int StorySequence;
     string whoisTelling;
 
+    Color originillustColor;
     private void Start()
     {
         DieCount = transform.GetChild(0).GetChild(2).GetComponent<Text>();
@@ -22,7 +22,9 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
 
         // 스토리 데이터베이스(txt) 경로로 텍스트 모두 읽어오기
-        Story = System.IO.File.ReadAllLines(@"C:\Users\cksuw\Desktop\UnityProject\Over-the-breath\Assets\Resources\Story\Story.txt");
+        Story = System.IO.File.ReadAllLines(@"Assets\Resources\Story\Story.txt");
+
+        originillustColor = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>().color;
     }
     int FindStoryStart(string storyname)
     {
@@ -34,7 +36,7 @@ public class UIManager : MonoBehaviour
         }
         return StoryStartNum + 1;
     }
-    int FindStoryEnd()
+    public int FindStoryEnd()
     {
         int StoryEndNum;
         for (StoryEndNum = StorySequence; StoryEndNum < Story.Length; StoryEndNum++)
@@ -87,7 +89,8 @@ public class UIManager : MonoBehaviour
     {
         player.transform.GetChild(0).gameObject.SetActive(!TorF);
         player.transform.GetChild(1).gameObject.SetActive(!TorF);
-
+        if (TorF)
+            player.transform.GetChild(1).GetComponent<PlayerHitbox>().init();
         transform.GetChild(1).gameObject.SetActive(TorF);
     }
 
@@ -106,7 +109,7 @@ public class UIManager : MonoBehaviour
         Text SayWhat = ScenarioTeller.transform.GetChild(2).GetComponent<Text>();
         string who = Story[StorySequence].Substring(0, Story[StorySequence].LastIndexOf(","));
         whoistelling.text = who;
-
+        SetImage(who);
         if (ProceedingStoryCoroutine != null)
             StopCoroutine(ProceedingStoryCoroutine);
 
@@ -124,7 +127,28 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
+    void SetImage(string who)
+    {
+        SpriteRenderer illust = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>();
+        Animator illustAnim = transform.GetChild(1).GetChild(4).GetComponent<Animator>();
+        illust.color = originillustColor;
+        switch (who)
+        {
+            case "???":
+                illustAnim.SetTrigger("Slime");
+                illust.color = new Color(0, 0, 0, 1f);
+                break;
+            case "친절한 슬라임":
+                illustAnim.SetTrigger("Slime");
+                break;
+            case "지나가던 전사":
+                illustAnim.SetTrigger("Warrior");
+                break;
+            default:
+                illust.color = new Color(0, 0, 0, 0f);
+                break;
+        }
+    }
 
 
 }

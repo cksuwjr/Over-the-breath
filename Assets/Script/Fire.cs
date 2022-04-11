@@ -33,7 +33,7 @@ public class Fire : MonoBehaviour
     // Trigger Ω√¿€Ω√
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Enemy" && col.GetComponent<Status>().MoveSpeed != 0)
+        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Neutrality") && col.GetComponent<Status>().MoveSpeed != 0)
         {
             col.GetComponent<EnemyAI>().GetDamaged(GetRandomDamageValue(GameObject.FindGameObjectWithTag("Player").GetComponent<Status>().AttackPower, 0.8f, 1.2f), GameObject.FindGameObjectWithTag("Player"));
             Destroy(gameObject);
