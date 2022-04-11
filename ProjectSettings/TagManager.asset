@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Ground
   - StoryObject
+  - Neutrality
   layers:
   - Default
   - TransparentFX

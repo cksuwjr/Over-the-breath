@@ -12,7 +12,9 @@ public class Move : MonoBehaviour
     Status stat;   
     Skill skill;
 
-    int JumpCount = 2; 
+    int JumpCount = 2;
+    public bool isWall;
+    float direction;
 
     void Awake()
     {
@@ -31,6 +33,8 @@ public class Move : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         else
             PlayerKeyboardInput();
+
+        FrontWallCheck();
     }
 
     // Player 키보드 입력 (움직임)
@@ -90,7 +94,26 @@ public class Move : MonoBehaviour
 
 
     }
+    void FrontWallCheck()
+    {
+        // 전방에 벽이 있다면 해당방향 이동시 이동속도(X축)를 0으로 만들어 벽뜷기를 방지
+        //Debug.DrawRay(transform.position, new Vector3(Input.GetAxisRaw("Horizontal") * 0.5f, 0, 0), new Color(0, 1, 0));
+        if (Input.GetAxisRaw("Horizontal") != 0)
+            direction = Input.GetAxisRaw("Horizontal");
 
+        RaycastHit2D rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(direction, 0, 0), 0.5f, (1 << LayerMask.NameToLayer("UnPassableWall")) + (1 << LayerMask.NameToLayer("Wall")));
+        if (rayFrontWallCheck.collider != null)
+        {
+            isWall = true;
+            if (direction == 1 && Input.GetKey(KeyCode.RightArrow))
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            else if (direction == -1 && Input.GetKey(KeyCode.LeftArrow))
+                rb.velocity = new Vector2(0, rb.velocity.y);
+
+        }
+        else
+            isWall = false;
+    }
     // 충돌 설정
     void OnCollisionEnter2D(Collision2D col)
     {

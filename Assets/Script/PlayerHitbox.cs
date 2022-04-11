@@ -14,7 +14,7 @@ public class PlayerHitbox : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" || collision.tag == "Neutrality")
         {
             Monsters.Add(collision.gameObject);
             if (!isDamagedRecent)
@@ -23,7 +23,7 @@ public class PlayerHitbox : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" || collision.tag == "Neutrality")
             if (Monsters.Contains(collision.gameObject))
                 Monsters.Remove(collision.gameObject);
     }
@@ -37,7 +37,10 @@ public class PlayerHitbox : MonoBehaviour
         else
             isDamagedRecent = false;
     }
-
+    public void init()
+    {
+        isDamagedRecent = false;        
+    }
     int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
     {
         int Damage;
