@@ -28,6 +28,8 @@ public class EnemyAI : MonoBehaviour
 
     public string MyEnemyType;
 
+    GameObject mySpawner;
+
     [SerializeField]
     public List<string> plus_stat;
     [SerializeField]
@@ -158,53 +160,63 @@ public class EnemyAI : MonoBehaviour
         }
         else  // 공격 대상이 있다면
         {
-            if (isMumchit || isGround)
+            try
             {
-                if (!isHitStunned)
-                    rb.velocity = new Vector2(0, rb.velocity.y);
-            }
-            else
-                rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
-
-            if (!isHitStunned && isGround && !isMumchit) // 피격시간 끝나면
-            {
-                sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
-
-                anim.SetBool("Idle", false);
-                anim.SetBool("Walk", true);
-
-                rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
-            }
-
-            float distanceXGap = Mathf.Abs(transform.position.x - AttackTarget.transform.position.x);
-            if (!isHitStunned && distanceXGap < 2f && !isMumchit) // 가까울때 적이 
-            {
-                float dinstanceYGap = transform.position.y - AttackTarget.transform.position.y;
-                if (Mathf.Abs(dinstanceYGap) > 0.5f && dinstanceYGap < 0) // 나보다 높이 위치하면 점프
+                if (isMumchit || isGround)
                 {
-                    if (isGround)
-                        rb.velocity = new Vector2(rb.velocity.x, 7);
+                    if (!isHitStunned)
+                        rb.velocity = new Vector2(0, rb.velocity.y);
+                }
+                else
+                    rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
+
+                if (!isHitStunned && isGround && !isMumchit) // 피격시간 끝나면
+                {
+                    sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
+
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Walk", true);
+
+                    rb.velocity = new Vector2(stat.MoveSpeed * 1.2f * Direction, rb.velocity.y);
                 }
 
-                // 공격패턴
-                float AttackableDistance;
-                switch (MyEnemyType) {
-                    case "Warrior":
-                        AttackableDistance = 1f;
-                        if (distanceXGap < AttackableDistance)
-                        {
-                            anim.SetTrigger("Attack");
-                            StartCoroutine("GetMumchit", 0.5f);
-                            Attack();
-                        }
-                        break;
-                    default:
-                        break;
+                float distanceXGap = Mathf.Abs(transform.position.x - AttackTarget.transform.position.x);
+                if (!isHitStunned && distanceXGap < 2f && !isMumchit) // 가까울때 적이 
+                {
+                    float dinstanceYGap = transform.position.y - AttackTarget.transform.position.y;
+                    if (Mathf.Abs(dinstanceYGap) > 0.5f && dinstanceYGap < 0) // 나보다 높이 위치하면 점프
+                    {
+                        if (isGround)
+                            rb.velocity = new Vector2(rb.velocity.x, 7);
+                    }
+
+                    // 공격패턴
+                    float AttackableDistance;
+                    switch (MyEnemyType)
+                    {
+                        case "Warrior":
+                            AttackableDistance = 1f;
+                            if (distanceXGap < AttackableDistance)
+                            {
+                                anim.SetTrigger("Attack");
+                                StartCoroutine("GetMumchit", 0.5f);
+                                Attack();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
-                
             }
-
-
+            catch
+            {
+                AttackTarget = null;
+                isDamagedRecent = false;
+                isActing = false;
+                SetAction();
+            }
+            
             if (!isActing)
                 AttackTarget = null;
         }
@@ -283,49 +295,60 @@ public class EnemyAI : MonoBehaviour
 
     public void GetDamaged(int damage, GameObject Fromwho)
     {
-        AttackTarget = Fromwho;
-        if (damage == 0)
-
-        damage = AttackTarget.GetComponent<Status>().AttackPower;
-
-
-        if (AppearHPCoroutine != null)
-            StopCoroutine(AppearHPCoroutine);
-        AppearHPCoroutine = StartCoroutine("AppearHPUI");
-        stat.HP -= damage;
-        HPbar.fillAmount = stat.HP / stat.MaxHp;
-
-        // 맞은 방향 쳐다본후 뒤로 밀리기
-        sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
-        rb.velocity = new Vector2(1.3f * -Direction, rb.velocity.y);
-
-        // 애니메이션
-        anim.SetTrigger("Hitted");
-
-        if (HittedCoroutine != null)
-            StopCoroutine(HittedCoroutine);
-        HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
-
-        if (ProceedingCoroutine != null)
-            StopCoroutine(ProceedingCoroutine);
-        ProceedingCoroutine = StartCoroutine("SetActingTrue", 10f);
-
-        PopUpDamageText(damage);
-
-        if (stat.HP < 0)
+        try
         {
-            if (AttackTarget.tag == "Player")
+            AttackTarget = Fromwho;
+            if (damage == 0)
+
+                damage = AttackTarget.GetComponent<Status>().AttackPower;
+
+
+            if (AppearHPCoroutine != null)
+                StopCoroutine(AppearHPCoroutine);
+            AppearHPCoroutine = StartCoroutine("AppearHPUI");
+            stat.HP -= damage;
+            HPbar.fillAmount = stat.HP / stat.MaxHp;
+
+            // 맞은 방향 쳐다본후 뒤로 밀리기
+            sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
+            rb.velocity = new Vector2(1.3f * -Direction, rb.velocity.y);
+
+            // 애니메이션
+            anim.SetTrigger("Hitted");
+
+            if (HittedCoroutine != null)
+                StopCoroutine(HittedCoroutine);
+            HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
+
+            if (ProceedingCoroutine != null)
+                StopCoroutine(ProceedingCoroutine);
+            ProceedingCoroutine = StartCoroutine("SetActingTrue", 10f);
+
+            PopUpDamageText(damage);
+
+            if (stat.HP < 0)
             {
-                Dictionary<string, float> statyouearn = new Dictionary<string, float>();
-                for (int i = 0; i < plus_stat.Count; i++)
+                if (AttackTarget.tag == "Player")
                 {
-                    statyouearn.Add(plus_stat[i], plus_value[i]);
-                    
+                    Dictionary<string, float> statyouearn = new Dictionary<string, float>();
+                    for (int i = 0; i < plus_stat.Count; i++)
+                    {
+                        statyouearn.Add(plus_stat[i], plus_value[i]);
+
+                    }
+                    AttackTarget.GetComponent<Player>().PlayerStatChange(statyouearn);
                 }
-                AttackTarget.GetComponent<Player>().PlayerStatChange(statyouearn);
+                if (AttackTarget.tag == "Enemy")
+                {
+                    Status hisStat = AttackTarget.GetComponent<Status>();
+                    hisStat.MaxHp += stat.MaxHp;
+                    hisStat.HP = hisStat.MaxHp;
+                    hisStat.AttackPower += stat.AttackPower;
+                }
+                StartCoroutine("Die");
             }
-            StartCoroutine("Die");
         }
+        catch { }
     }
 
     public void GetAirborne(Vector2 force)
@@ -360,7 +383,7 @@ public class EnemyAI : MonoBehaviour
                 }
 
 
-                if (Enemys[i].tag == "Enemy")
+                if (Enemys[i].tag == "Neutrality")
                 {
                     EnemyAI ai;
                     ai = Enemys[i].GetComponent<EnemyAI>();
@@ -402,6 +425,56 @@ public class EnemyAI : MonoBehaviour
             sr.color = color;
             yield return null;
         }
+        if(mySpawner != null)
+            mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
         Destroy(gameObject);
+    }
+    public void MySpawner(GameObject spawner)
+    {
+        mySpawner = spawner;
+    }
+
+
+
+
+
+    List<GameObject> Monsters = new List<GameObject>();
+    bool isDamagedRecent = false;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (tag == "Enemy" && collision.tag == "Neutrality")
+        {
+            Monsters.Add(collision.gameObject);
+            if (!isDamagedRecent)
+                StartCoroutine(GetHurt(collision.gameObject, collision.transform.GetComponent<Status>().AttackPower));
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (tag == "Enemy" && collision.tag == "Neutrality")
+            if (Monsters.Contains(collision.gameObject))
+                Monsters.Remove(collision.gameObject);
+    }
+    IEnumerator GetHurt(GameObject fromwho, int Damage)
+    {
+        isDamagedRecent = true;
+        try
+        {
+            GetDamaged(GetRandomDamageValue(Damage, 0.8f, 1.2f), fromwho);
+        }
+        catch
+        {}
+        yield return new WaitForSeconds(1.7f);
+        if (Monsters.Count > 0)
+        {
+            isDamagedRecent = false;
+            StartCoroutine(GetHurt(Monsters[0], Monsters[0].transform.GetComponent<Status>().AttackPower));
+        }
+        else
+            isDamagedRecent = false;
+    }
+    public void init()
+    {
+        isDamagedRecent = false;
     }
 }

@@ -31,6 +31,8 @@ public class Skill : MonoBehaviour
     GameObject PlayerAttackBox;
     GameObject PlayerAttackRange;           // Player 공격 범위
 
+
+    Coroutine BuffCoroutine;
     void Awake()
     {
         tr = GetComponent<Transform>();
@@ -61,13 +63,13 @@ public class Skill : MonoBehaviour
     private void Update()
     {
         AttackBoxDirectionAsync();
-        if (!isMumchit || officialUI.isStoryTelling)
-            PlayerKeyboardInput();
-        else
+        if (isMumchit || officialUI.isStoryTelling)
         {
             if (Input.inputString != "")
                 KeyReservation = Input.inputString;
         }
+        else
+            PlayerKeyboardInput();
     }
 
     // Player 공격범위 방향 변경
@@ -145,11 +147,17 @@ public class Skill : MonoBehaviour
                     StartCoroutine("GetMumchit", 0.3f);
                     ChangeHitbox("ironSkill1");
                     DamageAllinHitBox(GetRandomDamageValue(stat.AttackPower * 4, 1.0f, 1.5f), Skill_iron_Effect);
-                    Instantiate(TeleportCalculator, tr.position, Quaternion.identity);
+                    if (player.GetComponent<Move>().isWall)
+                        TeleportByCalcul(tr.position);
+                    else
+                        Instantiate(TeleportCalculator, tr.position, Quaternion.identity);
                     anim.SetTrigger("Skill1");
                     if (basicAttackSequence == 0)
                         basicAttackSequence = 1;
-                    StartCoroutine(Buff("Speed", 4, 3f));
+                    if (BuffCoroutine != null)
+                        StopCoroutine(BuffCoroutine);
+                    BuffCoroutine = StartCoroutine(Buff("Speed", 7, 0.5f));
+
                     break;
             }
         }
@@ -216,6 +224,10 @@ public class Skill : MonoBehaviour
     public void TeleportByCalcul(Vector2 pos)
     {
         rb.position = pos;
+        Invoke("Appear", 0.1f);
+    }
+    public void Appear()
+    {
         sr.color = player.originColor;
     }
     // 버프 설정 (현재 이동속도만 추가)
@@ -224,11 +236,11 @@ public class Skill : MonoBehaviour
         switch (what)
         {
             case "Speed":
-                stat.MoveSpeed += how;
+                stat.MoveSpeed = stat.BasicSpeed + how;
                 break;
         }
         yield return new WaitForSeconds(time);
-        stat.MoveSpeed -= how;
+        stat.MoveSpeed = stat.BasicSpeed;
     }
 
     // 데미지 지연 후 입히기. (스킬 애니메이션과 싱크로 맞추기 위함) 
