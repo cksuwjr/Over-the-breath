@@ -22,8 +22,8 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
 
         // 스토리 데이터베이스(txt) 경로로 텍스트 모두 읽어오기
-        Story = System.IO.File.ReadAllLines(@"Assets\Resources\Story\Story.txt");
-
+        //Story
+        Story = System.IO.File.ReadAllLines(System.IO.Path.Combine(Application.streamingAssetsPath ,"Story/Story.txt"));
         originillustColor = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>().color;
     }
     int FindStoryStart(string storyname)
