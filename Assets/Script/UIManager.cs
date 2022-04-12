@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
         //Story
         Story = System.IO.File.ReadAllLines(System.IO.Path.Combine(Application.streamingAssetsPath ,"Story/Story.txt"));
         originillustColor = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>().color;
+
+        DontDestroyOnLoad(gameObject);
     }
     int FindStoryStart(string storyname)
     {
