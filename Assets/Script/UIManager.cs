@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
     {
         isStoryTelling = false;
         StorySequence = 0;
-        ScenarioTell(FindStoryStart(storyname));
+        ScenarioTell(FindStoryStart(storyname), "Slow");
     }
     void Update()
     {
@@ -62,11 +62,21 @@ public class UIManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 if (FindStoryEnd() > StorySequence)
-                    ScenarioTell();
+                {
+                    if (ProceedingStoryCoroutine != null)
+                        ScenarioTell(0, "Fast");
+                    else
+                        ScenarioTell(0, "Slow");
+                }
                 else
                 {
-                    isStoryTelling = false;
-                    SetStoryUISee(false);
+                    if (ProceedingStoryCoroutine != null)
+                        ScenarioTell(0, "Fast");
+                    else
+                    {
+                        isStoryTelling = false;
+                        SetStoryUISee(false);
+                    }
                 }
             }
         }
@@ -96,13 +106,18 @@ public class UIManager : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(TorF);
     }
 
-    public void ScenarioTell(int startNum = 0)
+    public void ScenarioTell(int startNum = 0, string SloworFast = null)
     {
         if(!isStoryTelling)
         {
             StorySequence = startNum;
             SetStoryUISee(true);
             isStoryTelling = true;
+        }
+        else
+        {
+            if(SloworFast == "Fast")
+                StorySequence -= 1;
         }
 
         GameObject ScenarioTeller = transform.GetChild(1).gameObject;
@@ -116,19 +131,27 @@ public class UIManager : MonoBehaviour
             StopCoroutine(ProceedingStoryCoroutine);
 
         string whatSaying = Story[StorySequence].Substring(Story[StorySequence].LastIndexOf(",") + 1);
-        ProceedingStoryCoroutine = StartCoroutine(TellSlowly(SayWhat, whatSaying));
+        ProceedingStoryCoroutine = StartCoroutine(Tell(SayWhat, whatSaying, SloworFast));
 
         StorySequence++;
     }
-    IEnumerator TellSlowly(Text SayWhat, string whatSaying)
+    IEnumerator Tell(Text SayWhat, string whatSaying, string SloworQuick)
     {
         Text sayWhat = SayWhat;
-        for (int i = 0; i <= whatSaying.Length; i++)
+        if(SloworQuick == "Slow")
+            for (int i = 0; i <= whatSaying.Length; i++)
+            {
+                sayWhat.text = whatSaying.Substring(0, i);
+                yield return new WaitForSeconds(0.1f);
+            }
+        else
         {
-            sayWhat.text = whatSaying.Substring(0, i);
-            yield return new WaitForSeconds(0.1f);
+            sayWhat.text = whatSaying;
+            yield return null;
         }
+        ProceedingStoryCoroutine = null;
     }
+
     void SetImage(string who)
     {
         SpriteRenderer illust = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>();
