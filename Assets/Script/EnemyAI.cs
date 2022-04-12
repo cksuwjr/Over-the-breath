@@ -27,6 +27,8 @@ public class EnemyAI : MonoBehaviour
     bool isMumchit; 
 
     public string MyEnemyType;
+    public bool isBoss= false;
+    public float Bossstance = 0.5f;
 
     GameObject mySpawner;
 
@@ -34,6 +36,8 @@ public class EnemyAI : MonoBehaviour
     public List<string> plus_stat;
     [SerializeField]
     public List<float> plus_value;
+
+    public string DieAndStartStory;
 
     enum State
     {
@@ -310,9 +314,14 @@ public class EnemyAI : MonoBehaviour
             HPbar.fillAmount = stat.HP / stat.MaxHp;
 
             // 맞은 방향 쳐다본후 뒤로 밀리기
-            sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
-            rb.velocity = new Vector2(1.3f * -Direction, rb.velocity.y);
-
+            if (!isBoss)
+            {
+                if ((Random.value > Bossstance))
+                {
+                    sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
+                    rb.velocity = new Vector2(1.3f * -Direction, rb.velocity.y);
+                }
+            }
             // 애니메이션
             anim.SetTrigger("Hitted");
 
@@ -412,6 +421,9 @@ public class EnemyAI : MonoBehaviour
     // 죽음
     IEnumerator Die()
     {
+        if(DieAndStartStory != "" && DieAndStartStory != null)
+            GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory);
+
         anim.SetTrigger("Hitted");
         stat.MoveSpeed = 0f;
         Color color = sr.color;
