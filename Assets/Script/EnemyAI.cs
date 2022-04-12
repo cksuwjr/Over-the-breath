@@ -351,8 +351,9 @@ public class EnemyAI : MonoBehaviour
                 {
                     Status hisStat = AttackTarget.GetComponent<Status>();
                     hisStat.MaxHp += stat.MaxHp;
-                    hisStat.HP = hisStat.MaxHp;
+                    hisStat.HP += stat.MaxHp;
                     hisStat.AttackPower += stat.AttackPower;
+                    HPbar.fillAmount = stat.HP / stat.MaxHp;
                 }
                 StartCoroutine("Die");
             }
