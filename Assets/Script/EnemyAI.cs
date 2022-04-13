@@ -220,9 +220,9 @@ public class EnemyAI : MonoBehaviour
                 isActing = false;
                 SetAction();
             }
-            
-            if (!isActing)
-                AttackTarget = null;
+            if(!isBoss)
+                if (!isActing)
+                    AttackTarget = null;
         }
     }
 
@@ -301,7 +301,8 @@ public class EnemyAI : MonoBehaviour
     {
         try
         {
-            AttackTarget = Fromwho;
+            //if(AttackTarget != GameObject.FindGameObjectWithTag("Player"))
+                AttackTarget = Fromwho;
             if (damage == 0)
 
                 damage = AttackTarget.GetComponent<Status>().AttackPower;
@@ -314,20 +315,31 @@ public class EnemyAI : MonoBehaviour
             HPbar.fillAmount = stat.HP / stat.MaxHp;
 
             // 맞은 방향 쳐다본후 뒤로 밀리기
-            if (!isBoss)
+            if (isBoss)
             {
                 if ((Random.value > Bossstance))
                 {
                     sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
                     rb.velocity = new Vector2(1.3f * -Direction, rb.velocity.y);
+                    // 애니메이션
+                    anim.SetTrigger("Hitted");
+
+                    if (HittedCoroutine != null)
+                        StopCoroutine(HittedCoroutine);
+                    HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
                 }
             }
-            // 애니메이션
-            anim.SetTrigger("Hitted");
+            else
+            {
+                sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; // 방향 설정
+                rb.velocity = new Vector2(0.8f * -Direction, rb.velocity.y);
+                // 애니메이션
+                anim.SetTrigger("Hitted");
 
-            if (HittedCoroutine != null)
-                StopCoroutine(HittedCoroutine);
-            HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
+                if (HittedCoroutine != null)
+                    StopCoroutine(HittedCoroutine);
+                HittedCoroutine = StartCoroutine("GetHittedStun", 0.5f);
+            }
 
             if (ProceedingCoroutine != null)
                 StopCoroutine(ProceedingCoroutine);
@@ -355,7 +367,17 @@ public class EnemyAI : MonoBehaviour
                     hisStat.AttackPower += stat.AttackPower;
                     HPbar.fillAmount = stat.HP / stat.MaxHp;
                 }
-                StartCoroutine("Die");
+                try
+                {
+                    StartCoroutine("Die");
+                }
+                catch
+                {
+                    Debug.LogError("오류발생!");
+                    if (DieAndStartStory != "" && DieAndStartStory != null)
+                        StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory, 0));
+                    Destroy(gameObject);
+                }
             }
         }
         catch { }
@@ -423,7 +445,7 @@ public class EnemyAI : MonoBehaviour
     IEnumerator Die()
     {
         if(DieAndStartStory != "" && DieAndStartStory != null)
-            GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory);
+            StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory,0));
 
         anim.SetTrigger("Hitted");
         stat.MoveSpeed = 0f;

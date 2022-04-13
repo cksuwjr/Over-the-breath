@@ -30,7 +30,6 @@ public class Spawner : MonoBehaviour
         player = newPlayer;
 
         GameObject.Find("CAM").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
-        Debug.Log("¸®½ºÆù!");
     }
 
 

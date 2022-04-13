@@ -12,7 +12,7 @@ public class StoryScenarioStarter : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player") {
-            officialUI.StartScenario(name);
+            officialUI.StartCoroutine(officialUI.StartScenario(name,0));
             Destroy(gameObject);
         }
             
