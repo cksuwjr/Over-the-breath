@@ -6,6 +6,7 @@ public class SceneTransport : MonoBehaviour
 {
     public string NextScene;
     public string StartStory;
+    public float startdelay;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -42,7 +43,7 @@ public class SceneTransport : MonoBehaviour
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(NextScene));
         if (StartStory != null)
-            GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory);
+            GameObject.Find("UI").GetComponent<UIManager>().StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory,startdelay));
         Destroy(gameObject);
 
     }

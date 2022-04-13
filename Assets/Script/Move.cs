@@ -86,6 +86,8 @@ public class Move : MonoBehaviour
         }
 
 
+
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             stat.AttackPower += 30;
