@@ -45,14 +45,21 @@ public class UIManager : MonoBehaviour
         {
             if (Story[StoryEndNum] == "End")
                 break;
+             
+            
         }
         return StoryEndNum;
 
     }
-    public void StartScenario(string storyname)
+    public IEnumerator StartScenario(string storyname, float startdelay = 0)
     {
         isStoryTelling = false;
         StorySequence = 0;
+        string CAMname = storyname + "CAM";
+        CAMON(CAMname);
+
+        yield return new WaitForSeconds(startdelay);
+
         ScenarioTell(FindStoryStart(storyname), "Slow");
     }
     void Update()
@@ -76,6 +83,7 @@ public class UIManager : MonoBehaviour
                     {
                         isStoryTelling = false;
                         SetStoryUISee(false);
+                        CAMOFF();
                     }
                 }
             }
@@ -99,6 +107,8 @@ public class UIManager : MonoBehaviour
 
     public void SetStoryUISee(bool TorF)
     {
+        if(player == null)
+            player = GameObject.FindGameObjectWithTag("Player").gameObject;
         player.transform.GetChild(0).gameObject.SetActive(!TorF);
         player.transform.GetChild(1).gameObject.SetActive(!TorF);
         if (TorF)
@@ -142,7 +152,7 @@ public class UIManager : MonoBehaviour
             for (int i = 0; i <= whatSaying.Length; i++)
             {
                 sayWhat.text = whatSaying.Substring(0, i);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSecondsRealtime(0.1f);
             }
         else
         {
@@ -157,16 +167,17 @@ public class UIManager : MonoBehaviour
         SpriteRenderer illust = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>();
         Animator illustAnim = transform.GetChild(1).GetChild(4).GetComponent<Animator>();
         illust.color = originillustColor;
+
         switch (who)
         {
             case "???":
                 illustAnim.SetTrigger("Slime");
                 illust.color = new Color(0, 0, 0, 1f);
                 break;
-            case "친절한 슬라임":
+            case "슬라임":
                 illustAnim.SetTrigger("Slime");
                 break;
-            case "지나가던 전사":
+            case "모험가":
                 illustAnim.SetTrigger("Warrior");
                 break;
             default:
@@ -174,6 +185,27 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
-
+    void CAMOFF()
+    {
+        GameObject UnActiveCAMS = GameObject.Find("UnActiveCAMS");
+        if (UnActiveCAMS != null)
+            for (int i = 0; i < UnActiveCAMS.transform.childCount; i++)
+                UnActiveCAMS.transform.GetChild(i).gameObject.SetActive(false);
+        else
+            Debug.Log("현재Scene에 UnActiveCAMS가 없어 끌 다른 카메라가 없습니다.");
+    }
+    void CAMON(string CAMname)
+    {
+        GameObject UnActiveCAMS = GameObject.Find("UnActiveCAMS");
+        if (UnActiveCAMS != null)
+            for (int i = 0; i < UnActiveCAMS.transform.childCount; i++)
+                if (UnActiveCAMS.transform.GetChild(i).name == CAMname)
+                {
+                    UnActiveCAMS.transform.GetChild(i).gameObject.SetActive(true);
+                    break;
+                }
+        else
+            Debug.Log("현재Scene에 UnActiveCAMS가 없어 카메라 전환하지 않습니다.");
+    }
 
 }
