@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     Coroutine ProceedingStoryCoroutine;
     int StorySequence;
     string whoisTelling;
+    GameObject UnActivedSpawner;
 
     Color originillustColor;
     private void Start()
@@ -53,13 +54,29 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator StartScenario(string storyname, float startdelay = 0)
     {
+
         isStoryTelling = false;
         StorySequence = 0;
         string CAMname = storyname + "CAM";
         CAMON(CAMname);
 
-        yield return new WaitForSeconds(startdelay);
+        foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            a.GetComponent<EnemyAI>().enabled = false;
+            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
+        {
+            a.GetComponent<EnemyAI>().enabled = false;
+            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        if(GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
+            foreach (EnemySpawner a in GameObject.FindGameObjectWithTag("SpawnerGroup").GetComponentsInChildren<EnemySpawner>())
+            {
+                a.stopSpawn();
+            }
 
+        yield return new WaitForSeconds(startdelay);
         ScenarioTell(FindStoryStart(storyname), "Slow");
     }
     void Update()
@@ -84,6 +101,24 @@ public class UIManager : MonoBehaviour
                         isStoryTelling = false;
                         SetStoryUISee(false);
                         CAMOFF();
+                        foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
+                        {
+                            a.GetComponent<EnemyAI>().enabled = true;
+                            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                        }
+                        foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
+                        {
+                            a.GetComponent<EnemyAI>().enabled = true;
+                            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                        }
+                        if (GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
+                            foreach (EnemySpawner a in GameObject.FindGameObjectWithTag("SpawnerGroup").GetComponentsInChildren<EnemySpawner>())
+                            {
+                                a.resumeSpawn();
+                            }
                     }
                 }
             }
