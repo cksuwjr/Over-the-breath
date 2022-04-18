@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 public class SceneTransport : MonoBehaviour
 {
     public string NextScene;
@@ -42,9 +43,14 @@ public class SceneTransport : MonoBehaviour
     void HiNewScene()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(NextScene));
+        GameObject.Find("CAM").GetComponent<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
+
         if (StartStory != null)
             GameObject.Find("UI").GetComponent<UIManager>().StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory,startdelay));
+        if (GameObject.Find("Director") != null)
+        {
+            GameObject.Find("Director").GetComponent<TimelineControl>().Play();
+        }
         Destroy(gameObject);
-
     }
 }

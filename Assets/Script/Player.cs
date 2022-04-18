@@ -41,8 +41,6 @@ public class Player : MonoBehaviour
         ChangeDragon("default");
 
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(GameObject.Find("PlayerCamera"));
-        DontDestroyOnLoad(GameObject.Find("CAM"));
     }
     void Start()
     {
