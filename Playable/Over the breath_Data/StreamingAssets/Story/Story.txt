@@ -1,38 +1,114 @@
-Tutorial
-???,스토리 부분 구현 중이야
-???,생각보단 어렵네
-???,크아아아아아악
-???,일단 널 위해 움직임부터 스킬까지 하나하나 간단히 설명하자면
-<움직임>,    →←↑↓
-<기본공격>, Q
-<스킬>, E  * 강철드래곤만 사용가능
-???, 까지 있고 그 외의 관리자 입력키로는
-<게임 초기화>, P
-<강철 드래곤으로 변경>, T [+공격력30증가 중첩O 공격력UI 업뎃X]
-???,라고 전하래.
-???,가독성 꽝이구만~
+작성 방식 ( :  , 로 꼭 구분 지을것, 반드시 포함)
+////////////////////
+스토리이름
+인물 : 일러스트트리거명 , 대사
 End
+////////////////////  (끝날시 End도 반드시 포함)
+
+Tutorial1
+용용이:PlayerIdle,으으.. 여긴 어디지...?
+용용이:PlayerIdle,절벽에서 떨어진건가?
+용용이:PlayerIdle,무서워..... 아무것도 생각안나..
+용용이:PlayerIdle,보고싶어..
+용용이:PlayerIdle,.....
+용용이:PlayerIdle,나.. 그리워..?
+용용이:PlayerIdle,뭐가 그리운거지..? 난..
+용용이:PlayerIdle,일단 주변을 좀 살펴봐야겠어
+:, (← → [방향키] 를 이용해 주변을 둘러보자)
+End
+
+
+Cliff
+용용이:PlayerIdle,이 위에서 떨어진 것 같은데..
+용용이:PlayerIdle,다시는 위로 올라가기 힘들 것 같네..
+End
+
+
+Tutorial2
+용용이:PlayerIdle,이런 땅은 점프하면 밟을 수 있겠지?
+:, ( ↑ 를 눌러 점프할 수 있을 것 같다.) 
+End
+
+Tutorial3
+용용이:PlayerIdle,벽이 참 높네. 이단점프를 해야는걸?
+:, (↑를 두 번 눌러보자)
+End
+
 
 FindWarrior
-지나가던 전사,난 꼭 최강의 전사가 되겠어!
-지나가던 전사,덤벼라 슬라임!!
-지나가던 전사,으아아!!
+용용이:PlayerIdle,저기요..
+모험가:WarriorIdle,난 꼭 최강의 전사가 되겠어!
+용용이:PlayerIdle,저기.....
+모험가:WarriorAttack,덤벼라 몬스터!!
+용용이:PlayerIdle,아니
+용용이:PlayerIdle,(말 오지게 씹네. 일단 Q로 대응해야겠다...)
+End
+
+DieWarrior
+모험가:WarriorHitted,으윽..
+모험가:WarriorHitted,이 몬스턴 뭐야..
+모험가:WarriorHitted,너무.. 아파 엄마...흑흑
+용용이:PlayerIdle, ...엄마가 뭐야?
+모험가:WarriorHitted,저리....  가....족같은ㅅ..
+용용이:PlayerIdle,가족?
+End
+
+AttackWarrior
+전사:WarriorHitted, 아얏! 이 몬스터는 뭐야??
+용용이:PlayerIdle, 앗 미안.. 방금 만난 사람과 똑같이 생겨서.. 적인줄
+용용이:PlayerIdle, 혹시 가족이 뭔지 알아?
+전사:WarriorIdle, 가족은 피로 뭉친 사이..
+전사:WarriorIdle, 누구보다 자신에게 소중한 사람들이지
+용용이:PlayerIdle, 으와... 나도 가족이 있을까?
+전사:WarriorIdle, 내겐 동생이 있지. 근처에서 놀고 있으라 했는데 안보이네?
+전사:WarriorHitted, ..... 방금 만난 사람..? 똑같이..? 적...?
+전사:WarriorAttack, 너 이쉨!!!!!!
+용용이:PlayerIdle, 앗
+End
+
+DieWarrior2
+전사:WarriorHitted, 으윽... 동생의 원수..
+용용이:PlayerIdle, 미안
 End
 
 
-Story1Example
-지나가던 개스키,크르러엉
-지나가던 개스키,크르ㅇ러엉
-지나가던 개스키,크르러엉ㄹ
-지나가던 개스키,크ㅗ르러엉
-용용이, 으르렁?
-지나가던 개스키,깨갱!??!?
+Tutorial4
+용용이:PlayerIdle, 되게 미안하네 ㅋㅋ
 End
+↑↓
+<기본공격>, Q
+<스킬>, E  * 강철드래곤만 사용가능
+???, 관리자용 입력키
+<게임 초기화>, P
+<강철 드래곤으로 변경>, T [+공격력30증가 중첩가능]
 
 
-Story2Example
-친절한 슬라임,이봐
-친절한 슬라임,이 앞은 위험하니 조심해.
-친절한 슬라임,이 절벽 너머에는 화난 슬라임이 살고 있지
-친절한 슬라임,조심하는게 좋을거야
+
+
+Boss1
+슬라임:SlimeIdle,  (- ㅍ -)
+슬라임:SlimeIdle,  (- ㅇ -)?
+슬라임:SlimeIdle, 끵?
+용용이:PlayerIdle, 뭐
+슬라임:SlimeHitted,  (  X   )
 End
+
+==========================================
+
+FindSlime
+전사:WarriorIdle,으와!
+전사:WarriorIdle,저건 설마 허니슬라임?
+전사:WarriorIdle,저게 왜 여기있지?? 벌집에서 떨어져나온건가?
+전사:WarriorIdle,아무튼 구하기 힘든 녀석이잖아? 잡자!
+허니 슬라임:,(끈적)
+End
+
+DieWarriors
+전사:WarriorHitted,너무.. 강..력하네..  
+End
+
+DieSlime
+허니 슬라임:,... 끄읭...
+용용이:PlayerIdle, 어우 꿀 묻었네 끈적해..
+End
+
