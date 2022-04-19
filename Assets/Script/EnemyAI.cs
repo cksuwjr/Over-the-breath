@@ -37,6 +37,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     public List<float> plus_value;
 
+    public string HittedAndStartStory;
     public string DieAndStartStory;
 
     enum State
@@ -301,8 +302,18 @@ public class EnemyAI : MonoBehaviour
     {
         try
         {
+            if (Fromwho.tag == "Player" && HittedAndStartStory != "" && HittedAndStartStory != null)
+            {
+                StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(HittedAndStartStory, 0));
+                HittedAndStartStory = "";
+            }
+
             //if(AttackTarget != GameObject.FindGameObjectWithTag("Player"))
-                AttackTarget = Fromwho;
+            
+            AttackTarget = Fromwho;
+
+
+            
             if (damage == 0)
 
                 damage = AttackTarget.GetComponent<Status>().AttackPower;
@@ -480,8 +491,13 @@ public class EnemyAI : MonoBehaviour
         if (tag == "Enemy" && collision.tag == "Neutrality")
         {
             Monsters.Add(collision.gameObject);
-            if (!isDamagedRecent)
-                StartCoroutine(GetHurt(collision.gameObject, collision.transform.GetComponent<Status>().AttackPower));
+            try
+            {
+                if (!isDamagedRecent)
+                    StartCoroutine(GetHurt(collision.gameObject, collision.transform.GetComponent<Status>().AttackPower));
+            }catch{
+                Debug.Log("시나리오 실행이라 피해X");
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -512,4 +528,19 @@ public class EnemyAI : MonoBehaviour
     {
         isDamagedRecent = false;
     }
+
+
+
+
+
+    // 추가됨
+    public void SetAttackTarget(GameObject target)
+    {
+        AttackTarget = target;
+        if (ProceedingCoroutine != null)
+            StopCoroutine(ProceedingCoroutine);
+        ProceedingCoroutine = StartCoroutine("SetActingTrue", 300f);
+    }
+
+
 }

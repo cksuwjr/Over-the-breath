@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
         Story = System.IO.File.ReadAllLines(System.IO.Path.Combine(Application.streamingAssetsPath ,"Story/Story.txt"));
         originillustColor = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>().color;
 
-        DontDestroyOnLoad(gameObject);
     }
     int FindStoryStart(string storyname)
     {
@@ -53,30 +52,40 @@ public class UIManager : MonoBehaviour
 
     }
     public IEnumerator StartScenario(string storyname, float startdelay = 0)
+        // startdelay는 컷씬 시작만 늦출겁니다.
     {
-
-        isStoryTelling = false;
+        isStoryTelling = true;
         StorySequence = 0;
-        string CAMname = storyname + "CAM";
-        CAMON(CAMname);
-
         foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             a.GetComponent<EnemyAI>().enabled = false;
             a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            a.GetComponent<Rigidbody2D>().Sleep();
         }
         foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
         {
             a.GetComponent<EnemyAI>().enabled = false;
             a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            a.GetComponent<Rigidbody2D>().Sleep();
         }
-        if(GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
+        if (GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
             foreach (EnemySpawner a in GameObject.FindGameObjectWithTag("SpawnerGroup").GetComponentsInChildren<EnemySpawner>())
             {
                 a.stopSpawn();
             }
 
+
+        string CAMname = storyname + "CAM";
+
+        CAMON(CAMname);
+
         yield return new WaitForSeconds(startdelay);
+        isStoryTelling = false; 
+
+        if (GameObject.Find("Director") != null)
+        {
+            GameObject.Find("Director").GetComponent<TimelineControl>().Play();
+        }
         ScenarioTell(FindStoryStart(storyname), "Slow");
     }
     void Update()
@@ -98,20 +107,21 @@ public class UIManager : MonoBehaviour
                         ScenarioTell(0, "Fast");
                     else
                     {
+      
                         isStoryTelling = false;
                         SetStoryUISee(false);
                         CAMOFF();
                         foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
                         {
                             a.GetComponent<EnemyAI>().enabled = true;
-                            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                             a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                            a.GetComponent<Rigidbody2D>().WakeUp();
                         }
                         foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
                         {
                             a.GetComponent<EnemyAI>().enabled = true;
-                            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                             a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                            a.GetComponent<Rigidbody2D>().WakeUp();
 
                         }
                         if (GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
@@ -169,15 +179,24 @@ public class UIManager : MonoBehaviour
 
         Text whoistelling = ScenarioTeller.transform.GetChild(1).GetComponent<Text>();
         Text SayWhat = ScenarioTeller.transform.GetChild(2).GetComponent<Text>();
-        string who = Story[StorySequence].Substring(0, Story[StorySequence].LastIndexOf(","));
+        try
+        {
+        string who = Story[StorySequence].Substring(0, Story[StorySequence].LastIndexOf(":"));
         whoistelling.text = who;
-        SetImage(who);
+
+            string Imotion = Story[StorySequence].Substring(Story[StorySequence].LastIndexOf(":") + 1, Story[StorySequence].LastIndexOf(",") - Story[StorySequence].LastIndexOf(":") - 1);
+            SetImage(Imotion);
+        }
+        catch { Debug.LogError(":이 빠졌잖아 바보야 메모장 고쳐라"); }
         if (ProceedingStoryCoroutine != null)
             StopCoroutine(ProceedingStoryCoroutine);
 
-        string whatSaying = Story[StorySequence].Substring(Story[StorySequence].LastIndexOf(",") + 1);
-        ProceedingStoryCoroutine = StartCoroutine(Tell(SayWhat, whatSaying, SloworFast));
-
+        try
+        {
+            string whatSaying = Story[StorySequence].Substring(Story[StorySequence].LastIndexOf(",") + 1);
+            ProceedingStoryCoroutine = StartCoroutine(Tell(SayWhat, whatSaying, SloworFast));
+        }
+        catch { Debug.LogError(",이 빠졌잖아 바보야 메모장 고쳐라"); }
         StorySequence++;
     }
     IEnumerator Tell(Text SayWhat, string whatSaying, string SloworQuick)
@@ -197,28 +216,36 @@ public class UIManager : MonoBehaviour
         ProceedingStoryCoroutine = null;
     }
 
-    void SetImage(string who)
+    void SetImage(string what)
     {
         SpriteRenderer illust = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>();
         Animator illustAnim = transform.GetChild(1).GetChild(4).GetComponent<Animator>();
         illust.color = originillustColor;
 
-        switch (who)
-        {
-            case "???":
-                illustAnim.SetTrigger("Slime");
-                illust.color = new Color(0, 0, 0, 1f);
-                break;
-            case "슬라임":
-                illustAnim.SetTrigger("Slime");
-                break;
-            case "모험가":
-                illustAnim.SetTrigger("Warrior");
+        switch (what) {
+            case "":
                 break;
             default:
-                illust.color = new Color(0, 0, 0, 0f);
+                illustAnim.SetTrigger(what);
                 break;
+
         }
+        //switch (who)
+        //{
+        //    case "???":
+        //        illustAnim.SetTrigger("Slime");
+        //        illust.color = new Color(0, 0, 0, 1f);
+        //        break;
+        //    case "슬라임":
+        //        illustAnim.SetTrigger("Slime");
+        //        break;
+        //    case "모험가":
+        //        illustAnim.SetTrigger("Warrior");
+        //        break;
+        //    default:
+        //        illust.color = new Color(0, 0, 0, 0f);
+        //        break;
+        //}
     }
     void CAMOFF()
     {
