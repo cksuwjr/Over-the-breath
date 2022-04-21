@@ -48,6 +48,7 @@ public class PlayerUI : MonoBehaviour
     // Player »ç¸Á½Ã °ø½Ä UI ¶ç¿ì±â
     public void PopupPlayerDieUI()
     {
+        UI = GameObject.Find("UI");
         UI.GetComponent<UIManager>().PlayerDie();
     }
 }

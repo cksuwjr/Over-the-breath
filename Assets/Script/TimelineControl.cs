@@ -16,17 +16,6 @@ public class TimelineControl : MonoBehaviour
     {
         playableDirector = GetComponent<PlayableDirector>();
     }
-    private void Update()
-    {
-        if (playableDirector.time > 0)
-        {
-            for (int i = 0; i < PauseTime.Count; i++)
-            {
-                if (PauseTime[i] == playableDirector.time)
-                    Pause();
-            }
-        }
-    }
     public void Play()
     {
         playableDirector.Play();
@@ -40,11 +29,11 @@ public class TimelineControl : MonoBehaviour
     public void Play(float time)
     {
         Invoke("Play", time);
-        Debug.Log(" ½ÇÇà " + time);
+     
     }
     public double GetPlaytime()
     {
-        return timeline.duration;
+        return playableDirector.time;
     }
     public void Pause()
     {
@@ -56,3 +45,4 @@ public class TimelineControl : MonoBehaviour
     }
 
 }
+              
