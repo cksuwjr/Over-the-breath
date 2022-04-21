@@ -251,6 +251,9 @@ public class Skill : MonoBehaviour
         yield return new WaitForSeconds(time);
         DamageAllinHitBox(damage, Effect, CCtype);
     }
-   
 
+    public void SceneChangeUIChanged()
+    {
+        officialUI = GameObject.Find("UI").GetComponent<UIManager>();
+    }
 }

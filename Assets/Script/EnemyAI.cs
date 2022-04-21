@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour
 
     public string HittedAndStartStory;
     public string DieAndStartStory;
+    public List<string> CheckCondition;
+    public string IfIDieCheckAcheivePlease;
 
     enum State
     {
@@ -304,8 +306,20 @@ public class EnemyAI : MonoBehaviour
         {
             if (Fromwho.tag == "Player" && HittedAndStartStory != "" && HittedAndStartStory != null)
             {
-                StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(HittedAndStartStory, 0));
-                HittedAndStartStory = "";
+                bool Checking;
+                AcheiveList acheiveList = GameObject.Find("CheckList").GetComponent<AcheiveList>();
+                Checking = true;
+                foreach (string condition in CheckCondition)
+                {
+                    if (!acheiveList.CheckPlease(condition))
+                        Checking = false;
+                }
+
+                if (Checking)
+                {
+                    StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(HittedAndStartStory, 0));
+                    HittedAndStartStory = "";
+                }
             }
 
             //if(AttackTarget != GameObject.FindGameObjectWithTag("Player"))
@@ -455,6 +469,8 @@ public class EnemyAI : MonoBehaviour
     // Á×À½
     IEnumerator Die()
     {
+        GameObject.Find("CheckList").GetComponent<AcheiveList>().Add(IfIDieCheckAcheivePlease);
+
         if(DieAndStartStory != "" && DieAndStartStory != null)
             StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory,0));
 

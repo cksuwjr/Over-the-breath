@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: CAM
-    m_To: FindSlimeCAM
+    m_To: FindHoneySlimeCAM
     m_Blend:
       m_Style: 2
       m_Time: 3
@@ -24,7 +24,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: FindSlimeCAM
+  - m_From: FindHoneySlimeCAM
     m_To: CAM
     m_Blend:
       m_Style: 5

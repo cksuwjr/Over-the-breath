@@ -37,6 +37,11 @@ public class Move : MonoBehaviour
         FrontWallCheck();
     }
 
+    public void SceneChangeUIChanged()
+    {
+        officialUI = GameObject.Find("UI").GetComponent<UIManager>();
+    }
+
     // Player 키보드 입력 (움직임)
     void PlayerKeyboardInput()
     {
