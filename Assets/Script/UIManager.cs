@@ -51,38 +51,39 @@ public class UIManager : MonoBehaviour
         return StoryEndNum;
 
     }
-    public IEnumerator StartScenario(string storyname, float startdelay = 0)
+    public IEnumerator StartScenario(string storyname, float startdelay = 0, bool MonsterFreeze = true, string CutScene = null)
         // startdelay는 컷씬 시작만 늦출겁니다.
     {
         isStoryTelling = true;
         StorySequence = 0;
-        foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
+        if (MonsterFreeze)
         {
-            a.GetComponent<EnemyAI>().enabled = false;
-            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            a.GetComponent<Rigidbody2D>().Sleep();
-        }
-        foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
-        {
-            a.GetComponent<EnemyAI>().enabled = false;
-            a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            a.GetComponent<Rigidbody2D>().Sleep();
-        }
-        if (GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
-            foreach (EnemySpawner a in GameObject.FindGameObjectWithTag("SpawnerGroup").GetComponentsInChildren<EnemySpawner>())
+            foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
             {
-                a.stopSpawn();
+                a.GetComponent<EnemyAI>().enabled = false;
+                a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                a.GetComponent<Rigidbody2D>().Sleep();
             }
-
+            foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
+            {
+                a.GetComponent<EnemyAI>().enabled = false;
+                a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                a.GetComponent<Rigidbody2D>().Sleep();
+            }
+            if (GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
+                foreach (EnemySpawner a in GameObject.FindGameObjectWithTag("SpawnerGroup").GetComponentsInChildren<EnemySpawner>())
+                {
+                    a.stopSpawn();
+                }
+        }
 
         string CAMname = storyname + "CAM";
 
         CAMON(CAMname);
-
         yield return new WaitForSeconds(startdelay);
         isStoryTelling = false; 
 
-        if (GameObject.Find("Director") != null)
+        if (CutScene != null && CutScene != "" && GameObject.Find("Director") != null)
         {
             GameObject.Find("Director").GetComponent<TimelineControl>().Play();
         }
@@ -131,6 +132,33 @@ public class UIManager : MonoBehaviour
                             }
                     }
                 }
+            }
+
+
+            // 완성시 삭제 예정
+            if (Input.GetKeyDown(KeyCode.Return)) // 엔터키
+            {
+                    isStoryTelling = false;
+                    SetStoryUISee(false);
+                    CAMOFF();
+                    foreach (GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
+                    {
+                        a.GetComponent<EnemyAI>().enabled = true;
+                        a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                        a.GetComponent<Rigidbody2D>().WakeUp();
+                    }
+                    foreach (GameObject a in GameObject.FindGameObjectsWithTag("Neutrality"))
+                    {
+                        a.GetComponent<EnemyAI>().enabled = true;
+                        a.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                        a.GetComponent<Rigidbody2D>().WakeUp();
+
+                    }
+                    if (GameObject.FindGameObjectWithTag("SpawnerGroup") != null)
+                        foreach (EnemySpawner a in GameObject.FindGameObjectWithTag("SpawnerGroup").GetComponentsInChildren<EnemySpawner>())
+                        {
+                            a.resumeSpawn();
+                        }
             }
         }
     }
@@ -202,12 +230,14 @@ public class UIManager : MonoBehaviour
     IEnumerator Tell(Text SayWhat, string whatSaying, string SloworQuick)
     {
         Text sayWhat = SayWhat;
-        if(SloworQuick == "Slow")
+        if (SloworQuick == "Slow")
+        {
             for (int i = 0; i <= whatSaying.Length; i++)
             {
                 sayWhat.text = whatSaying.Substring(0, i);
                 yield return new WaitForSecondsRealtime(0.1f);
             }
+        }
         else
         {
             sayWhat.text = whatSaying;
@@ -221,6 +251,8 @@ public class UIManager : MonoBehaviour
         SpriteRenderer illust = transform.GetChild(1).GetChild(4).GetComponent<SpriteRenderer>();
         Animator illustAnim = transform.GetChild(1).GetChild(4).GetComponent<Animator>();
         illust.color = originillustColor;
+
+        // 만약 사진이 안뜬다면 UI에서 RenderCamera를 PlayerCamera로 두고 다시 확인해보시오"
 
         switch (what) {
             case "":
@@ -251,8 +283,10 @@ public class UIManager : MonoBehaviour
     {
         GameObject UnActiveCAMS = GameObject.Find("UnActiveCAMS");
         if (UnActiveCAMS != null)
+        {
             for (int i = 0; i < UnActiveCAMS.transform.childCount; i++)
                 UnActiveCAMS.transform.GetChild(i).gameObject.SetActive(false);
+        }
         else
             Debug.Log("현재Scene에 UnActiveCAMS가 없어 끌 다른 카메라가 없습니다.");
     }
@@ -260,12 +294,14 @@ public class UIManager : MonoBehaviour
     {
         GameObject UnActiveCAMS = GameObject.Find("UnActiveCAMS");
         if (UnActiveCAMS != null)
+        {
             for (int i = 0; i < UnActiveCAMS.transform.childCount; i++)
                 if (UnActiveCAMS.transform.GetChild(i).name == CAMname)
                 {
                     UnActiveCAMS.transform.GetChild(i).gameObject.SetActive(true);
                     break;
                 }
+        }
         else
             Debug.Log("현재Scene에 UnActiveCAMS가 없어 카메라 전환하지 않습니다.");
     }

@@ -54,6 +54,9 @@ public class SceneTransport : MonoBehaviour
         NowCamera = GameObject.FindGameObjectWithTag("MainCamera");
         NowVirtualCAM = GameObject.Find("CAM");
         NowVirtualCAM.GetComponent<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Move>().SceneChangeUIChanged();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Skill>().SceneChangeUIChanged();
+
 
         if (StartStory != null)
             GameObject.Find("UI").GetComponent<UIManager>().StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory,startdelay));
