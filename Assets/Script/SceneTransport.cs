@@ -25,6 +25,7 @@ public class SceneTransport : MonoBehaviour
     }
     IEnumerator NewSceneStart()
     {
+        string nowSceneName = SceneManager.GetActiveScene().name;
         DontDestroyOnLoad(NowCamera);
         DontDestroyOnLoad(NowVirtualCAM);
         AsyncOperation isComplete = SceneManager.LoadSceneAsync(NextScene, LoadSceneMode.Single);// Additive);
@@ -40,7 +41,6 @@ public class SceneTransport : MonoBehaviour
                 break;
             }
         }
-
         
     }
     void HiNewScene()
@@ -60,7 +60,6 @@ public class SceneTransport : MonoBehaviour
 
         if (StartStory != null)
             GameObject.Find("UI").GetComponent<UIManager>().StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory,startdelay));
-        
         Destroy(gameObject);
     }
 }

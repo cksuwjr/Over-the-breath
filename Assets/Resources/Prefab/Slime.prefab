@@ -508,3 +508,5 @@ MonoBehaviour:
   - 35
   HittedAndStartStory: 
   DieAndStartStory: 
+  CheckCondition: []
+  IfIDieCheckAcheivePlease: 
