@@ -257,6 +257,14 @@ public class UIManager : MonoBehaviour
         switch (what) {
             case "":
                 break;
+            case "HoneySlimeIdle":
+                illust.color = new Color(255, 107, 0);
+                illustAnim.SetTrigger("SlimeIdle");
+                break;
+            case "HoneySlimeHitted":
+                illust.color = new Color(255, 107, 0);
+                illustAnim.SetTrigger("SlimeHitted");
+                break;
             default:
                 illustAnim.SetTrigger(what);
                 break;
