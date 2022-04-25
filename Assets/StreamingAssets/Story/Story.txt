@@ -6,6 +6,10 @@
 End                                          ( 스토리 끝낼 시 End 반드시 포함)
 ///////////////////////////////////////////
 
+
+======================  Dutorial ( 1 - 1 )     ====================
+
+
 Tutorial1
 용용이:PlayerIdle, 으으.. 여긴 어디지...?
 용용이:PlayerIdle, 절벽에서 떨어진건가?
@@ -94,7 +98,7 @@ FindSlimes
 슬라임:SlimeHitted,  X  !!
 End
 
-==========================================
+
 
 FindHoneySlime
 전사1:WarriorIdle,야 우리 기사단 신입 너무 빠지지 않았냐?
@@ -102,7 +106,7 @@ FindHoneySlime
 전사1:WarriorIdle,어라. 저건 설마 허니슬라임?
 전사1:WarriorIdle,저게 왜 여기있지?? 벌집에서 떨어져나온건가?
 전사2:WarriorAttack,아무튼 구하기 힘든 녀석이잖아? 잡기만 하면 꿀빤다구. 잡자!
-허니 슬라임:SlimeIdle,(끈적)
+허니 슬라임:HoneySlimeIdle,(끈적)
 End
 
 DieWarriors
@@ -110,7 +114,19 @@ DieWarriors
 End
 
 DieSlime
-허니 슬라임:,... 끄읭...
+허니 슬라임:HoneySlimeHitted,... 끄읭...
 용용이:PlayerIdle, 어우 꿀 묻었네 끈적해..
 End
 
+Find1-2
+용용이:PlayerIdle,여기 벽에 구멍이 있는 것 같은데?
+용용이:PlayerIdle,지나갈 수 있을 것 같아.
+End
+
+
+======================  1 - 2     ====================
+
+InTheTernal1
+용용이:PlayerIdle, 땅굴에 들어온 것 같다..
+용용이:PlayerIdle, 어디가 바닥인지 잘 보이지 않으니 잘 살펴보며 올라가야 하겠네
+End
