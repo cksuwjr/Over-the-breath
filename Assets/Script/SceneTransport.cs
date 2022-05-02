@@ -11,6 +11,10 @@ public class SceneTransport : MonoBehaviour
 
     GameObject NowVirtualCAM;
     GameObject NowCamera;
+
+    bool OnOff = true;
+    GameObject beforePlayer;
+    GameObject beforeCheckList;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -20,8 +24,14 @@ public class SceneTransport : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Player")
-            StartCoroutine(NewSceneStart());
+        if(OnOff)
+            if (collision.transform.tag == "Player")
+            {
+                StartCoroutine(NewSceneStart());
+                beforePlayer = GameObject.FindGameObjectWithTag("Player");
+                beforeCheckList = GameObject.FindGameObjectWithTag("AcheiveList");
+                OnOff = false;
+            }
     }
     IEnumerator NewSceneStart()
     {
@@ -46,6 +56,17 @@ public class SceneTransport : MonoBehaviour
     void HiNewScene()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(NextScene));
+
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if(player != beforePlayer)
+                Destroy(player);
+        }
+        foreach (GameObject Acheivelist in GameObject.FindGameObjectsWithTag("AcheiveList"))
+        {
+            if (Acheivelist != beforeCheckList)
+                Destroy(Acheivelist);
+        }
         NowCamera.tag = "Untagged";
         NowVirtualCAM.name = "BeforeCAM";
         GameObject.FindGameObjectWithTag("MainCamera").transform.position = NowCamera.transform.position;
@@ -60,6 +81,8 @@ public class SceneTransport : MonoBehaviour
 
         if (StartStory != null)
             GameObject.Find("UI").GetComponent<UIManager>().StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory,startdelay));
+
+        
         Destroy(gameObject);
     }
 }

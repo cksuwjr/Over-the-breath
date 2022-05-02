@@ -7,7 +7,83 @@ End                                          ( 스토리 끝낼 시 End 반드�
 ///////////////////////////////////////////
 
 
+============= 1-1 ==============
+
+1-1start
+용용이:PlayerIdle,뭐야. 여긴 어디야.
+용용이:PlayerIdle,일단 여길 둘러봐야겠군
+용용이:PlayerIdle, (← → 방향키를 사용해 움직여보자)
+End
+
+1-1icanjump
+용용이:PlayerIdle,나 벌써 점프할 줄 알아?
+End
+
+1-1ishouldjump
+용용이:PlayerIdle,이 절벽은 점프해야 오를 수 있겠는걸
+용용이:PlayerIdle, (↑ 방향키를 사용해 점프해보자)
+End
+
+1-1icantgothere
+용용이:PlayerIdle,막다른 길이네. 아무래도 더블점프를 해야할 것 같아.
+용용이:PlayerIdle, (↑ 방향키를 연속으로 사용해 점프해보자)
+End
+
+1-1icantjumpover
+용용이:PlayerIdle,여기선 더블점프해도 안닿네..           아!
+End
+
+1-1findslime
+용용이:PlayerIdle, ...?
+슬라임:SlimeIdle, 끼익..!!
+용용이:PlayerIdle, 왠지 공격해올 것 같은데..
+용용이:PlayerIdle, (Q를 눌러 공격해보자)
+End
+
+1-1dieslime
+용용이:PlayerIdle, 어... 뭐지 체력이 좀 오른 것 같은걸?
+End
+
+1-1noway
+용용이:PlayerIdle,음...! 막다른길이네...?
+용용이:PlayerIdle,왔던 길로 되돌아가기는 어려울 것 같아.
+용용이:PlayerIdle,벽을 좀 살펴볼까?
+End
+
+1-1findway
+용용이:PlayerIdle,어? 여기 틈이 있는 것 같아
+용용이:PlayerIdle,지나갈 수 있겠는걸?
+End
+
+
+================ 1-2 ===================
+
+start1-2
+용용이:PlayerIdle,어? 어어..?
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ======================  Dutorial ( 1 - 1 )     ====================
+
+Hi
+용용이:,Hi
+End
 
 
 Tutorial1
