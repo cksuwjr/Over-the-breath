@@ -11,6 +11,7 @@ TagManager:
   - StoryObject
   - Neutrality
   - SpawnerGroup
+  - AcheiveList
   layers:
   - Default
   - TransparentFX

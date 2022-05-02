@@ -13,6 +13,7 @@ public class Move : MonoBehaviour
     Skill skill;
 
     int JumpCount = 2;
+    public int JumpMaxCount = 2;
     public bool isWall;
     float direction;
 
@@ -121,14 +122,32 @@ public class Move : MonoBehaviour
         else
             isWall = false;
     }
-    // 충돌 설정
-    void OnCollisionEnter2D(Collision2D col)
+
+
+    // 충돌 설정 ===> JumpBox 추가 후 아래와 같이 수정하였음.
+    //void OnCollisionEnter2D(Collision2D col)
+    //{
+    //    if (col.transform.tag == "Ground")
+    //    {
+    //        if (JumpCount != 2)
+    //            JumpCount = 2;
+    //        anim.SetBool("Jump", false);
+    //    }
+    //}
+
+    // 점프 가능
+    public void CanJump()
     {
-        if (col.transform.tag == "Ground")
-        {
-            if (JumpCount != 2)
-                JumpCount = 2;
-            anim.SetBool("Jump", false);
-        }
+        if (JumpCount != JumpMaxCount)
+            JumpCount = JumpMaxCount;
+        anim.SetBool("Jump", false);
+    }
+
+    // 바닥없이 점프 방지
+    public void CantJump()
+    {
+        if (JumpCount != JumpMaxCount - 1)
+            JumpCount = 0;
+        anim.SetBool("Jump", false);
     }
 }
