@@ -130,3 +130,34 @@ InTheTernal1
 용용이:PlayerIdle, 땅굴에 들어온 것 같다..
 용용이:PlayerIdle, 어디가 바닥인지 잘 보이지 않으니 잘 살펴보며 올라가야 하겠네
 End
+
+
+
+Stone1
+용용이:PlayerIdle,(숲에 어울리지 않는 소녀가 울고있다.)
+???:BlueGirl,흑..으그 훌쩍..
+용용이:PlayerIdle,왜 여기서 울고있어.
+???:BlueGirl,흑.. 내 소중이를가 도망 갔어.. 이제 나한테 안돌아오려나봐.
+용용이:PlayerIdle,(소중이?) 내가 도와 줘도 될까?
+???:BlueGirl,응...
+용용이:PlayerIdle,그게 어디로 간건지 알려줄수 있어?
+???:BlueGirl,언덕에있어 너무 높아서 갈수가 없었어.
+용용이:PlayerIdle,내가 갔다올게.
+???:BlueGirl,응...
+용용이:PlayerIdle,(언덕? 어느 방향에 있는걸 말하는 걸까?)
+End
+
+Stone2
+용용이:PlayerIdle,이건...가?
+용용이:PlayerIdle,(소녀의 훌쩍이는 소리가 아직도 들리는거 같다 빨리 돌아가보자.)
+End
+
+Stone3
+용용이:PlayerIdle,소중이라는게 이거 맞아?
+???:BlueGirl,응!!! 맞아 정말 찾아줬구나!!!
+???:BlueGirl,정말 고마워 꼬마야!
+용용이:PlayerIdle,응? 꼬마?? 그게...
+???:BlueGirl,고마워 안녕!
+용용이:PlayerIdle,(금세 사라져 버렸다.)
+용용이:PlayerIdle,찝찝하게 이게 뭐야..
+End
