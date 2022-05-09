@@ -7,7 +7,7 @@ public class PlayerHitbox : MonoBehaviour
     List<GameObject> Monsters = new List<GameObject>();
     Player Player;
     bool isDamagedRecent = false;
-
+    GameObject Trap;
     private void Awake()
     {
         Player = transform.parent.GetComponent<Player>();
@@ -20,12 +20,20 @@ public class PlayerHitbox : MonoBehaviour
             if (!isDamagedRecent)
                 StartCoroutine("GetHurtPlayer", collision.transform.GetComponent<Status>().AttackPower);
         }
+        if(collision.tag == "trap")
+        {
+            Trap = collision.gameObject;
+            if (!isDamagedRecent)
+                StartCoroutine("GetHurtPlayer", collision.GetComponent<TrapDamage>().trapDamage);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Enemy" || collision.tag == "Neutrality")
             if (Monsters.Contains(collision.gameObject))
                 Monsters.Remove(collision.gameObject);
+        if (collision.tag == "trap")
+            Trap = null;
     }
     IEnumerator GetHurtPlayer(int Damage)
     {
@@ -36,6 +44,9 @@ public class PlayerHitbox : MonoBehaviour
             StartCoroutine("GetHurtPlayer", Monsters[0].transform.GetComponent<Status>().AttackPower);
         else
             isDamagedRecent = false;
+
+        if(Trap != null)
+            StartCoroutine("GetHurtPlayer", Trap.transform.GetComponent<TrapDamage>().trapDamage);
     }
     public void init()
     {

@@ -12,6 +12,7 @@ TagManager:
   - Neutrality
   - SpawnerGroup
   - AcheiveList
+  - trap
   layers:
   - Default
   - TransparentFX

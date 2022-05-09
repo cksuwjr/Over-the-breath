@@ -18,8 +18,8 @@ public class SceneTransport : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        NowCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        NowVirtualCAM = GameObject.Find("CAM");
+        //NowCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        //NowVirtualCAM = GameObject.Find("CAM");
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,8 +36,19 @@ public class SceneTransport : MonoBehaviour
     IEnumerator NewSceneStart()
     {
         string nowSceneName = SceneManager.GetActiveScene().name;
+        
+        
+        
+        NowCamera = GameObject.FindGameObjectWithTag("MainCamera");
         DontDestroyOnLoad(NowCamera);
+
+
+        NowVirtualCAM = GameObject.Find("CAM");
         DontDestroyOnLoad(NowVirtualCAM);
+
+
+
+
         AsyncOperation isComplete = SceneManager.LoadSceneAsync(NextScene, LoadSceneMode.Single);// Additive);
         isComplete.allowSceneActivation = false;
         while (!isComplete.isDone)
@@ -79,7 +90,7 @@ public class SceneTransport : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<Skill>().SceneChangeUIChanged();
 
 
-        if (StartStory != null)
+        if (StartStory != "")
             GameObject.Find("UI").GetComponent<UIManager>().StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(StartStory,startdelay));
 
         

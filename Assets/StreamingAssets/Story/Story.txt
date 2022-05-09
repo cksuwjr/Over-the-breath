@@ -62,9 +62,14 @@ start1-2
 용용이:PlayerIdle,어? 어어..?
 End
 
+1-2gethurt
+용용이:PlayerIdle,으으... 다리를 다친 것 같아..
+용용이:PlayerIdle,한동안 2단 점프는 힘들겠는걸..
+End
 
-
-
+1-2sotired
+용용이:PlayerIdle,에고.. 힘들다 헥헥..
+End
 
 
 
