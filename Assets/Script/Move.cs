@@ -36,8 +36,15 @@ public class Move : MonoBehaviour
             PlayerKeyboardInput();
 
         FrontWallCheck();
-    }
 
+        FallSpeedLimit();
+
+    }
+    public void FallSpeedLimit()
+    {
+        if(rb.velocity.y < -15)
+            rb.velocity = new Vector2(rb.velocity.x, -15);
+    }
     public void SceneChangeUIChanged()
     {
         officialUI = GameObject.Find("UI").GetComponent<UIManager>();

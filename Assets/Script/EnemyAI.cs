@@ -24,10 +24,10 @@ public class EnemyAI : MonoBehaviour
 
     bool isActing;
     bool isHitStunned;
-    bool isMumchit; 
+    bool isMumchit;
 
     public string MyEnemyType;
-    public bool isBoss= false;
+    public bool isBoss = false;
     public float Bossstance = 0.5f;
 
     GameObject mySpawner;
@@ -223,7 +223,7 @@ public class EnemyAI : MonoBehaviour
                 isActing = false;
                 SetAction();
             }
-            if(!isBoss)
+            if (!isBoss)
                 if (!isActing)
                     AttackTarget = null;
         }
@@ -323,11 +323,11 @@ public class EnemyAI : MonoBehaviour
             }
 
             //if(AttackTarget != GameObject.FindGameObjectWithTag("Player"))
-            
+
             AttackTarget = Fromwho;
 
 
-            
+
             if (damage == 0)
 
                 damage = AttackTarget.GetComponent<Status>().AttackPower;
@@ -445,15 +445,16 @@ public class EnemyAI : MonoBehaviour
                     EnemyAI ai;
                     ai = Enemys[i].GetComponent<EnemyAI>();
                     if (ai != null)
-                          ai.GetDamaged(damage, gameObject);
+                        ai.GetDamaged(damage, gameObject);
                 }
-                else if (Enemys[i].tag == "Player") {
+                else if (Enemys[i].tag == "Player")
+                {
                     Player ai;
                     ai = Enemys[i].GetComponent<Player>();
                     if (ai != null)
-                          ai.GetDamage(damage);
+                        ai.GetDamage(damage);
                 }
-                
+
             }
 
     }
@@ -471,8 +472,8 @@ public class EnemyAI : MonoBehaviour
     {
         GameObject.Find("CheckList").GetComponent<AcheiveList>().Add(IfIDieCheckAcheivePlease);
 
-        if(DieAndStartStory != "" && DieAndStartStory != null)
-            StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory,0));
+        if (DieAndStartStory != "" && DieAndStartStory != null)
+            StartCoroutine(GameObject.Find("UI").GetComponent<UIManager>().StartScenario(DieAndStartStory, 0));
 
         anim.SetTrigger("Hitted");
         stat.MoveSpeed = 0f;
@@ -481,13 +482,13 @@ public class EnemyAI : MonoBehaviour
         color.a = sr.color.a / 2;
         sr.color = color;
 
-        while (color.a >= 0f) 
+        while (color.a >= 0f)
         {
             color.a -= (Time.deltaTime / 0.5f); // 0.5초에 걸쳐 사라짐
             sr.color = color;
             yield return null;
         }
-        if(mySpawner != null)
+        if (mySpawner != null)
             mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
         Destroy(gameObject);
     }
@@ -511,7 +512,9 @@ public class EnemyAI : MonoBehaviour
             {
                 if (!isDamagedRecent)
                     StartCoroutine(GetHurt(collision.gameObject, collision.transform.GetComponent<Status>().AttackPower));
-            }catch{
+            }
+            catch
+            {
                 Debug.Log("시나리오 실행이라 피해X");
             }
         }
@@ -530,7 +533,7 @@ public class EnemyAI : MonoBehaviour
             GetDamaged(GetRandomDamageValue(Damage, 0.8f, 1.2f), fromwho);
         }
         catch
-        {}
+        { }
         yield return new WaitForSeconds(1.7f);
         if (Monsters.Count > 0)
         {
