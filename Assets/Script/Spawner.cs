@@ -6,10 +6,6 @@ using Cinemachine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField]
-    public float PlayerSpawnPosX;
-    [SerializeField]
-    public float PlayerSpawnPosY;
 
     GameObject player;
 
@@ -22,7 +18,7 @@ public class Spawner : MonoBehaviour
     }
     public void PlayerReSpawn()
     {
-        GameObject newPlayer = Instantiate(Resources.Load("Prefab/Player"), new Vector2(PlayerSpawnPosX, PlayerSpawnPosY), Quaternion.identity) as GameObject;
+        GameObject newPlayer = Instantiate(Resources.Load("Prefab/Player"), new Vector2(transform.localPosition.x, transform.localPosition.y), Quaternion.identity) as GameObject;
 
         newPlayer.GetComponent<Status>().StatInit(player.GetComponent<Status>());
         newPlayer.GetComponent<Player>().ChangeDragon(player.GetComponent<Player>().ChangeMode);
