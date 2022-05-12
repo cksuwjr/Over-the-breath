@@ -7,6 +7,7 @@ public class Fire : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     int direction;
+    public float Damage;
 
     void Start()
     {
@@ -30,20 +31,4 @@ public class Fire : MonoBehaviour
 
     }
 
-    // Trigger Ω√¿€Ω√
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Neutrality") && col.GetComponent<Status>().MoveSpeed != 0)
-        {
-            col.GetComponent<EnemyAI>().GetDamaged(GetRandomDamageValue(GameObject.FindGameObjectWithTag("Player").GetComponent<Status>().AttackPower, 0.8f, 1.2f), GameObject.FindGameObjectWithTag("Player"));
-            Destroy(gameObject);
-        }
-    }
-
-    int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
-    {
-        int Damage;
-        Damage = (int)(OriginDamage * UnityEngine.Random.Range(minX, maxX));
-        return Damage;
-    }
 }
