@@ -100,7 +100,8 @@ public class Skill : MonoBehaviour
                     else
                         SpawnPosition = tr.position + new Vector3(1f, 0);
                     anim.SetTrigger("BasicAttack");
-                    Instantiate(Fire, SpawnPosition, Quaternion.identity);
+                    GameObject fire = Instantiate(Fire, SpawnPosition, Quaternion.identity);
+                    fire.GetComponent<Fire>().Damage = stat.AttackPower;
                     break;
                 case "iron":
                     audioSource.clip = audioManager.Esound; // 효과음 변경
