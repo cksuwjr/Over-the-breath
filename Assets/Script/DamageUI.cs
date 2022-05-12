@@ -13,7 +13,7 @@ public class DamageUI : MonoBehaviour
     public void Spawn(int Damage, GameObject target)
     {
         GetComponent<Text>().text = Damage.ToString();
-        transform.Translate(new Vector3(0, target.GetComponent<SpriteRenderer>().size.y * 0.8f));
+        transform.localPosition = new Vector2(0, target.GetComponent<CapsuleCollider2D>().size.y);
         StartCoroutine("GoUp");
     }
     IEnumerator GoUp()
