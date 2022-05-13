@@ -30,5 +30,6 @@ public class Fire : MonoBehaviour
         rb.velocity = new Vector2(direction * 15, 0);
 
     }
+    
 
 }

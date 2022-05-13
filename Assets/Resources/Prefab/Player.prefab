@@ -868,6 +868,7 @@ MonoBehaviour:
   _movespeed: 0
   _basicspeed: 0
   _jumppower: 5.2
+  _basicjumppower: 5.2
 --- !u!70 &380889351831904454
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -946,6 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45af1dee73658e40a0a7b9c0c164d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpMaxCount: 2
   isWall: 0
 --- !u!82 &2035615471
 AudioSource:

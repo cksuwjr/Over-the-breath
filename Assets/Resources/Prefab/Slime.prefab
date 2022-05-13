@@ -484,6 +484,7 @@ MonoBehaviour:
   _movespeed: 2
   _basicspeed: 2
   _jumppower: 7
+  _basicjumppower: 7
 --- !u!114 &2327554882721988596
 MonoBehaviour:
   m_ObjectHideFlags: 0
