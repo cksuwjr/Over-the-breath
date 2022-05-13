@@ -15,6 +15,8 @@ public class Status : MonoBehaviour
     protected float _basicspeed;
     [SerializeField]
     protected float _jumppower;
+    [SerializeField]
+    protected float _basicjumppower;
 
     public float MaxHp { get { return _maxhp; } set { _maxhp = value; } }
     public float HP { get { return _hp; } set { _hp = value; } }
@@ -22,6 +24,7 @@ public class Status : MonoBehaviour
     public float MoveSpeed { get { return _movespeed; } set { _movespeed = value; } }
     public float BasicSpeed { get { return _basicspeed; } set { _basicspeed = value; } }
     public float JumpPower { get { return _jumppower; } set { _jumppower = value; } }
+    public float BasicJumpPower { get { return _basicjumppower; } set { _basicjumppower = value; } }
 
     private void Awake()
     {
@@ -37,15 +40,18 @@ public class Status : MonoBehaviour
             _movespeed = 5f;
         if (_jumppower == 0)
             _jumppower = 5f;
+        if (_basicjumppower == 0)
+            _basicjumppower = 5f;
 
     }
-    public void StatInit(float hp, int power, float Maxhp, float Basicspeed, float Movespeed, float Jumppower)
+    public void StatInit(float hp, int power, float Maxhp, float Basicspeed, float Movespeed, float BasicJumppower, float Jumppower)
     {
         _maxhp = Maxhp;
         _hp = hp;
         _attackpower = power;
         _basicspeed = Basicspeed;
         _movespeed = Movespeed;
+        _basicjumppower = BasicJumppower;
         _jumppower = Jumppower;
     }
     public void StatInit(Status stat)
@@ -56,6 +62,7 @@ public class Status : MonoBehaviour
         _basicspeed = stat.BasicSpeed;
         _movespeed = stat.BasicSpeed;
         //_movespeed = stat.MoveSpeed;
-        _jumppower = stat.JumpPower;
+        _basicjumppower = stat.BasicJumpPower;
+        _jumppower = stat.BasicJumpPower;
     }
 }

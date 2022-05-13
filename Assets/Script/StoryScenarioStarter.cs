@@ -28,7 +28,6 @@ public class StoryScenarioStarter : MonoBehaviour
     {
         if(collision.tag == "Player") {
             bool Checking = true;
-
             AcheiveList acheiveList = GameObject.Find("CheckList").GetComponent<AcheiveList>();
             foreach (string condition in CheckCondition)
             {
@@ -42,12 +41,15 @@ public class StoryScenarioStarter : MonoBehaviour
                 {
                     foreach (GameObject n in SpawnSomeThing)
                     {
+                        GameObject Spawned = Instantiate(n, transform.position + new Vector3(SpawnPlusX + Random.Range(-SpawnLandomPlusAll, SpawnLandomPlusAll), SpawnPlusY + Random.Range(0, SpawnLandomPlusAll), 0), Quaternion.identity);
                         if (n != null && (n.tag == "Enemy" || n.tag == "Neutrality"))
                         {
-                            GameObject Spawned = Instantiate(n, transform.position + new Vector3(SpawnPlusX + Random.Range(-SpawnLandomPlusAll, SpawnLandomPlusAll), SpawnPlusY + Random.Range(-SpawnLandomPlusAll, SpawnLandomPlusAll), 0), Quaternion.identity);
-                            Spawned.GetComponent<EnemyAI>().SetAttackTarget(GameObject.FindGameObjectWithTag("Player"));
-                            Spawned.GetComponent<EnemyAI>().DieAndStartStory = SpawnedDieAndStartStory;
-                            Spawned.GetComponent<EnemyAI>().IfIDieCheckAcheivePlease = IfSpawnedDieCheckAcheivePlease;
+                            if (Spawned.tag == "Enemy" || Spawned.tag == "Neutrality")
+                            {
+                                Spawned.GetComponent<EnemyAI>().SetAttackTarget(GameObject.FindGameObjectWithTag("Player"));
+                                Spawned.GetComponent<EnemyAI>().DieAndStartStory = SpawnedDieAndStartStory;
+                                Spawned.GetComponent<EnemyAI>().IfIDieCheckAcheivePlease = IfSpawnedDieCheckAcheivePlease;
+                            }
                         }
                     }
                 }

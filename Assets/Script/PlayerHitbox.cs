@@ -22,9 +22,13 @@ public class PlayerHitbox : MonoBehaviour
         }
         if(collision.tag == "trap")
         {
-            Trap = collision.gameObject;
-            if (!isDamagedRecent)
-                StartCoroutine("GetHurtPlayer", collision.GetComponent<TrapDamage>().trapDamage);
+            TrapDamage t = collision.GetComponent<TrapDamage>();
+            if (t.traptype == "Fixed")
+            {
+                Trap = collision.gameObject;
+                if (!isDamagedRecent)
+                    StartCoroutine("GetHurtPlayer", t.trapDamage);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

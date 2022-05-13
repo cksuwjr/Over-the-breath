@@ -79,9 +79,16 @@ End
 
 
 
-
-
-
+=============== Exercise =====================
+ExerciseTreeOfDesire
+욕망의 나무:TreeOfDesireIdle,크아아악!!!! 자라지 않아 자라지 않아!!!
+욕망의 나무:TreeOfDesireIdle,부족하다..... 부족해!!!
+용용이:PlayerIdle, 뭐가 부족하다는거지..?
+욕망의 나무:TreeOfDesireIdle,피...... 피가 필요해!!!!!
+욕망의 나무:TreeOfDesireIdle,머리가 자라지 않아... 머리... 피가 필요해!! 피!!!!!
+용용이:PlayerIdle, 아ㅋㅋㅎ 탈모였구낰ㅋㅋ 탈모쉨ㅋㅋㅎㅎㅎㅋㅋ
+욕망의 나무:TreeOfDesireIdle,이런 ㅅ
+End
 
 
 
