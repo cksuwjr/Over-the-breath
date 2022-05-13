@@ -25,7 +25,7 @@ public class EnemyAI2 : MonoBehaviour
 
     Status stat;
 
-    int Direction;
+    int Direction = 1;
     bool isGround;
     bool isJumpRecent; // 점프 너무 자주해서 제한하려고
 
@@ -141,9 +141,11 @@ public class EnemyAI2 : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 break;
             case State.Move:
-                Direction = (bool)(Random.value > 0.5f) ? 1 : -1;
-                sr.flipX = Direction == 1 ? false : true; 
-
+                if (isGround) // 점프 아닐때만 방향바꾸게 (자꾸 점프 도중 방향바꿔서 사나워보임)
+                {
+                    Direction = (bool)(Random.value > 0.5f) ? 1 : -1;
+                    sr.flipX = Direction == 1 ? false : true;
+                }
                 anim.SetBool("Idle", false);
                 anim.SetBool("Walk", true);
 
@@ -157,7 +159,7 @@ public class EnemyAI2 : MonoBehaviour
                 yield break;
                 //break;
         }
-        yield return new WaitForSeconds(Random.Range(1, 3)); // 활동 시간
+        yield return new WaitForSeconds(Random.Range(2, 3)); // 활동 시간
         ActCoroutine = StartCoroutine("Act");
     }
 
@@ -234,7 +236,7 @@ public class EnemyAI2 : MonoBehaviour
     }
 
     // 데미지 입음
-    void GetDamaged(float damage, GameObject Fromwho)
+    public void GetDamaged(float damage, GameObject Fromwho)
     {
         stat.HP -= damage;                          // 체력감소
         HPbar.fillAmount = stat.HP / stat.MaxHp;    // UI 업데이트
@@ -262,37 +264,54 @@ public class EnemyAI2 : MonoBehaviour
 
     IEnumerator HittedStunned(GameObject Fromwho)
     {
-        // 타겟 설정
-        AttackTarget = Fromwho;
-
         anim.SetTrigger("Hitted");
 
-        if (ChaseCoroutine != null)             // 기존 추적 제거
+        // 타겟 설정
+        if (Fromwho.tag != "trap")
+        {
+            AttackTarget = Fromwho;
+
+            if (ChaseCoroutine != null)             // 기존 추적 제거
+                StopCoroutine(ChaseCoroutine);
+            if (ActCoroutine != null)               // 기본 활동 제거
+                StopCoroutine(ActCoroutine);
+
+            // 넉백
+            sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true;
+            Direction = sr.flipX ? -1 : 1;
+            rb.velocity = new Vector2(-0.2f * Direction, rb.velocity.y);
+            yield return new WaitForSeconds(0.5f);  // 스턴
+
+            ChaseCoroutine = StartCoroutine("ChaseEnemy"); // 쫒기 시작
+
+            yield return new WaitForSeconds(10f); // 10초 후 어그로 풀림
             StopCoroutine(ChaseCoroutine);
-        if (ActCoroutine != null)               // 기본 활동 제거
-            StopCoroutine(ActCoroutine);
 
-        // 넉백
-        sr.flipX = (transform.position.x < AttackTarget.transform.position.x) ? false : true; 
-        Direction = sr.flipX ? -1 : 1;
-        rb.velocity = new Vector2(-0.2f * Direction, rb.velocity.y);
-          
-        yield return new WaitForSeconds(0.5f);  // 스턴
+            // 기본 활동 재개
+            if (ActCoroutine != null)
+                StopCoroutine(ActCoroutine);
+            ActCoroutine = StartCoroutine("Act");
+        }
+        else
+        {
+            if (ChaseCoroutine != null)             // 기존 추적 제거
+                StopCoroutine(ChaseCoroutine);
+            if (ActCoroutine != null)               // 기본 활동 제거
+                StopCoroutine(ActCoroutine);
 
-        ChaseCoroutine = StartCoroutine("ChaseEnemy"); // 쫒기 시작
-
-        yield return new WaitForSeconds(10f); // 10초 후 어그로 풀림
-        StopCoroutine(ChaseCoroutine);
-
-        // 기본 활동 재개
-        if (ActCoroutine != null)
-            StopCoroutine(ActCoroutine);
-        ActCoroutine = StartCoroutine("Act");
+            yield return new WaitForSeconds(0.5f);  // 스턴
+            // 기본 활동 재개
+            if (ActCoroutine != null)
+                StopCoroutine(ActCoroutine);
+            ActCoroutine = StartCoroutine("Act");
+        }
     }
 
     void Die(GameObject Fromwho)
     {
-        //Fromwho.GetComponent<Status>().
+        //if(Fromwho != null){
+        //      Fromwho.GetComponent<Status>().
+        //}
         Destroy(gameObject);
     }
 
@@ -318,4 +337,5 @@ public class EnemyAI2 : MonoBehaviour
         DamageUI.GetComponentInChildren<DamageUI>().Spawn((int)damage, gameObject);
     }
 
+    
 }

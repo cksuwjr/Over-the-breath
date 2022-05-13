@@ -383,6 +383,7 @@ MonoBehaviour:
   _movespeed: 2
   _basicspeed: 2
   _jumppower: 7
+  _basicjumppower: 7
 --- !u!114 &6700430091351715304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,10 +398,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageText: {fileID: 3390887777086309186, guid: 2f7cf56da97c16245a7a9d969c86658d, type: 3}
   MyEnemyType: Warrior
+  isBoss: 0
+  Bossstance: 0.5
   plus_stat:
   - AttackPower
   plus_value:
   - 1
+  HittedAndStartStory: 
+  DieAndStartStory: 
+  CheckCondition: []
+  IfIDieCheckAcheivePlease: 
 --- !u!1 &6700430091618236633
 GameObject:
   m_ObjectHideFlags: 0
