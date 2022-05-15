@@ -3,40 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TreeOfDesire : MonoBehaviour
+public class TreeOfDesireWeed : MonoBehaviour
 {
-    Animator anim;
 
     Status stat;
-    enum Faze
-    {
-        Faze1,
-        Faze2
-    }
-
-    Faze MyFaze = Faze.Faze1;
-
 
 
     GameObject HPUI;
     Image HPbar;
     public GameObject DamageText;
 
-
-
     Coroutine AppearHPUICoroutine;
-
-
-    public GameObject Seed;
-
-    Coroutine ActCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
-
-
         // UI 관련
         HPUI = transform.GetChild(0).gameObject;
         HPbar = HPUI.transform.GetChild(1).gameObject.GetComponent<Image>();
@@ -45,57 +26,7 @@ public class TreeOfDesire : MonoBehaviour
             DamageText = Resources.Load("Prefab/DamageUim") as GameObject;
 
         stat = GetComponent<Status>();
-
-
-
-
-
-
-
-        ActCoroutine = StartCoroutine("Act");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    IEnumerator Act()
-    {
-        yield return new WaitForSeconds(10f);
-
-        int Actnum = 0;//Random.Range(0, 3);
-        switch (Actnum)
-        {
-            case 0:
-                SummonSeeds(Random.Range(8,20));
-                break;
-        }
-        //yield return new WaitForSeconds(10f);
-        ActCoroutine = StartCoroutine("Act");
-    }
-    void SummonSeeds(float count)
-    {
-        Debug.Log("발사!");
-        for (int i = 0; i < count; i++)
-        {
-            StartCoroutine(SeedManage());
-        }
-    }
-    IEnumerator SeedManage()
-    {
-        GameObject Spawned = Instantiate(Seed, transform.position, Quaternion.identity);
-        Spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(0.02f, 0.04f)));
-        yield return new WaitForSeconds(3f);
-        Spawned.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-        Spawned.GetComponent<CircleCollider2D>().isTrigger = true;
-        yield return new WaitForSeconds(3f);
-        Destroy(Spawned);
-    }
-
-
-
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "PlayerAttack")
@@ -124,7 +55,7 @@ public class TreeOfDesire : MonoBehaviour
 
         PopUpDamageText(damage);
 
-        FazeCheck();
+
 
         if (stat.HP <= 0)                           // 체력 다달면
         {
@@ -153,15 +84,6 @@ public class TreeOfDesire : MonoBehaviour
         DamageUI.GetComponentInChildren<DamageUI>().Spawn((int)damage, gameObject);
     }
 
-    void FazeCheck()
-    {
-        if(MyFaze == Faze.Faze1 && stat.HP < stat.MaxHp * 0.5f)
-        {
-            anim.SetTrigger("Faze2");
-            MyFaze = Faze.Faze2;
-            transform.position = new Vector2(transform.position.x, -1.24f);
-        }
-    }
 
 
 }

@@ -1,25 +1,37 @@
 fileFormatVersion: 2
-guid: fa416f53927af644986e3c14b2f4177b
+guid: af2a6b6c7d61f9c46b43526c16ca0a1f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4164582089372794599
-    second: Boss_Wood_Idle_0
+      213: -8349877624328793004
+    second: Boss_Wood_Weed_Idle_0
   - first:
-      213: 2587540288181537162
-    second: Boss_Wood_Idle_1
+      213: -6458819219772981716
+    second: Boss_Wood_Weed_Idle_1
   - first:
-      213: -5885873051544838915
-    second: Boss_Wood_Idle_2
+      213: 7252895437781895406
+    second: Boss_Wood_Weed_Idle_2
   - first:
-      213: -1606879529172350821
-    second: Boss_Wood_Idle_3
+      213: -5920942277678101663
+    second: Boss_Wood_Weed_Idle_3
   - first:
-      213: -8331615980302866748
-    second: Boss_Wood_Idle_4
+      213: 5170594590838423186
+    second: Boss_Wood_Weed_Idle_4
   - first:
-      213: 6172359150403873859
-    second: Boss_Wood_Idle_5
+      213: 5508501398031487918
+    second: Boss_Wood_Weed_Idle_5
+  - first:
+      213: 4813248987992226011
+    second: Boss_Wood_Weed_Idle_6
+  - first:
+      213: 4856488924593916424
+    second: Boss_Wood_Weed_Idle_7
+  - first:
+      213: -8335667438598206995
+    second: Boss_Wood_Weed_Idle_8
+  - first:
+      213: -5766146572497817231
+    second: Boss_Wood_Weed_Idle_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -83,7 +95,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -95,7 +107,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -109,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boss_Wood_Idle_0
+      name: Boss_Wood_Weed_Idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
-        height: 360
+        width: 150
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eef40b68519bc930800000000000000
-      internalID: 4164582089372794599
+      spriteID: 45456eb4a864f1c80800000000000000
+      internalID: -8349877624328793004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Wood_Idle_1
+      name: Boss_Wood_Weed_Idle_1
       rect:
         serializedVersion: 2
-        x: 360
+        x: 150
         y: 0
-        width: 360
-        height: 360
+        width: 150
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a898217ce2ac8e320800000000000000
-      internalID: 2587540288181537162
+      spriteID: c2e37f0d32aad56a0800000000000000
+      internalID: -6458819219772981716
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Wood_Idle_2
+      name: Boss_Wood_Weed_Idle_2
       rect:
         serializedVersion: 2
-        x: 720
+        x: 300
         y: 0
-        width: 360
-        height: 360
+        width: 150
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +177,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfc10a1f4ad215ea0800000000000000
-      internalID: -5885873051544838915
+      spriteID: ee88a0229f577a460800000000000000
+      internalID: 7252895437781895406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Wood_Idle_3
+      name: Boss_Wood_Weed_Idle_3
       rect:
         serializedVersion: 2
-        x: 1080
+        x: 450
         y: 0
-        width: 360
-        height: 360
+        width: 150
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +198,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b98c5d2f49733b9e0800000000000000
-      internalID: -1606879529172350821
+      spriteID: 16b87637e5694dda0800000000000000
+      internalID: -5920942277678101663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Wood_Idle_4
+      name: Boss_Wood_Weed_Idle_4
       rect:
         serializedVersion: 2
-        x: 1440
+        x: 600
         y: 0
-        width: 360
-        height: 360
+        width: 150
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c66411a867206c80800000000000000
-      internalID: -8331615980302866748
+      spriteID: 29efa78a264a1c740800000000000000
+      internalID: 5170594590838423186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Wood_Idle_5
+      name: Boss_Wood_Weed_Idle_5
       rect:
         serializedVersion: 2
-        x: 1800
+        x: 750
         y: 0
-        width: 360
-        height: 360
+        width: 150
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,8 +240,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34c64f9d1ff98a550800000000000000
-      internalID: 6172359150403873859
+      spriteID: ea3d86216d0227c40800000000000000
+      internalID: 5508501398031487918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Wood_Weed_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 150
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd8f8c0f3781cc240800000000000000
+      internalID: 4813248987992226011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Wood_Weed_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 150
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a0a0632f6b56340800000000000000
+      internalID: 4856488924593916424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Wood_Weed_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 150
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de9409cf0a2c15c80800000000000000
+      internalID: -8335667438598206995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Wood_Weed_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 0
+        width: 150
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1717e6f1e388affa0800000000000000
+      internalID: -5766146572497817231
       vertices: []
       indices: 
       edges: []

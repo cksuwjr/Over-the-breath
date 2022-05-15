@@ -39,23 +39,27 @@ public class TrapDamage : MonoBehaviour
         Status targetStat = target.GetComponent<Status>();
         Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
         targetRb.velocity = new Vector2(0, targetRb.velocity.y);
+
+
+
+
         targetStat.MoveSpeed = 0;
         targetStat.JumpPower = 1f;
 
         for (int i = 0; i < 4; i++)
         {
-            if(target.tag == "Player")
+            if (target.tag == "Player")
                 target.GetComponent<Player>().GetDamage((int)trapDamage);
             else
                 target.GetComponent<EnemyAI2>().GetDamaged(trapDamage, gameObject);
 
-            if(GameObject.Find("TreeOfDesire") != null) // ¿å¸ÁÀÇ³ª¹«°¡ ÀÖ´Ù¸é 
+            if (GameObject.Find("TreeOfDesire") != null) // ¿å¸ÁÀÇ³ª¹«°¡ ÀÖ´Ù¸é 
             {
                 GameObject.Find("TreeOfDesire").GetComponent<Status>().MaxHp += trapDamage;
                 GameObject.Find("TreeOfDesire").GetComponent<Status>().HP += trapDamage;
             }
             yield return new WaitForSeconds(0.65f);
-            if(target == null)
+            if (target == null)
             {
                 Destroy(SpawnedTrap);
                 Destroy(gameObject);
