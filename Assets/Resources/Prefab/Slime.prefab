@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 7020062274740241207}
   - component: {fileID: 7020062274740241205}
   - component: {fileID: 2327554882721988596}
+  - component: {fileID: 1695337277}
   m_Layer: 6
   m_Name: Slime
   m_TagString: Neutrality
@@ -492,7 +493,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7020062274740241201}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a20bb0f2631ecee4cae61e802341c90f, type: 3}
   m_Name: 
@@ -511,3 +512,16 @@ MonoBehaviour:
   DieAndStartStory: 
   CheckCondition: []
   IfIDieCheckAcheivePlease: 
+--- !u!114 &1695337277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020062274740241201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7756431c88917d742bbc5d28b951d413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageText: {fileID: 3390887777086309186, guid: 2f7cf56da97c16245a7a9d969c86658d, type: 3}
