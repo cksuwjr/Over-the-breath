@@ -153,8 +153,8 @@ public class Move : MonoBehaviour
     // 바닥없이 점프 방지
     public void CantJump()
     {
-        if (JumpCount != JumpMaxCount - 1)
+        if (JumpCount != JumpMaxCount - 1 && rb.velocity.y <= 0)
             JumpCount = 0;
-        anim.SetBool("Jump", false);
+        anim.SetBool("Jump", true);
     }
 }
