@@ -15,6 +15,10 @@ public class TreeOfDesireWeed : MonoBehaviour
 
     Coroutine AppearHPUICoroutine;
 
+
+    public GameObject SpawnSpikeRange;
+    public GameObject WoodSpike;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,8 @@ public class TreeOfDesireWeed : MonoBehaviour
             DamageText = Resources.Load("Prefab/DamageUim") as GameObject;
 
         stat = GetComponent<Status>();
+
+        StartCoroutine(SummonSpike());
     }
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -84,6 +90,26 @@ public class TreeOfDesireWeed : MonoBehaviour
         DamageUI.GetComponentInChildren<DamageUI>().Spawn((int)damage, gameObject);
     }
 
+    IEnumerator SummonSpike()
+    {
+        GameObject SpikeRange;
+        try
+        {
+            GameObject Player = GameObject.FindGameObjectWithTag("Player");
+            SpikeRange = Instantiate(SpawnSpikeRange, Player.transform.position, Quaternion.identity);
+        }catch{
+            SpikeRange = Instantiate(SpawnSpikeRange, transform.position, Quaternion.identity);
+        }
+
+        SpikeRange.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameObject Spike = Instantiate(WoodSpike, SpikeRange.transform.position, Quaternion.identity);
+        Destroy(SpikeRange);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(Spike);
+        yield return new WaitForSeconds(3f); // ¿Á»£√‚
+        StartCoroutine(SummonSpike());
+    }
 
 
 }
