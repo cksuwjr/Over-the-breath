@@ -19,6 +19,8 @@ public class TreeOfDesireWeed : MonoBehaviour
     public GameObject SpawnSpikeRange;
     public GameObject WoodSpike;
 
+    GameObject Spike;
+    GameObject SpikeRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,9 +72,10 @@ public class TreeOfDesireWeed : MonoBehaviour
     }
     void Die(GameObject Fromwho)
     {
-        //if(Fromwho != null){
-        //      Fromwho.GetComponent<Status>().
-        //}
+        if (SpikeRange != null)
+            Destroy(SpikeRange);
+        if (Spike != null)
+            Destroy(Spike);
         Destroy(gameObject);
     }
 
@@ -92,7 +95,6 @@ public class TreeOfDesireWeed : MonoBehaviour
 
     IEnumerator SummonSpike()
     {
-        GameObject SpikeRange;
         try
         {
             GameObject Player = GameObject.FindGameObjectWithTag("Player");
@@ -103,7 +105,7 @@ public class TreeOfDesireWeed : MonoBehaviour
 
         SpikeRange.SetActive(true);
         yield return new WaitForSeconds(1f);
-        GameObject Spike = Instantiate(WoodSpike, SpikeRange.transform.position, Quaternion.identity);
+        Spike = Instantiate(WoodSpike, SpikeRange.transform.position, Quaternion.identity);
         Destroy(SpikeRange);
         yield return new WaitForSeconds(0.5f);
         Destroy(Spike);

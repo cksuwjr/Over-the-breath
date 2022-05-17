@@ -157,4 +157,12 @@ public class Move : MonoBehaviour
             JumpCount = 0;
         anim.SetBool("Jump", true);
     }
+
+    public bool AreYouGround()
+    {
+        if (JumpCount == JumpMaxCount)
+            return true;
+        else
+            return false;
+    }
 }
