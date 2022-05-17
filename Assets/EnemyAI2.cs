@@ -336,6 +336,10 @@ public class EnemyAI2 : MonoBehaviour
         GameObject DamageUI = Instantiate(DamageText, transform.localPosition, Quaternion.identity);
         DamageUI.GetComponentInChildren<DamageUI>().Spawn((int)damage, gameObject);
     }
-
+    
+    public bool AreYouGround()
+    {
+        return isGround;
+    }
     
 }
