@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 44016182396931163}
   - component: {fileID: 44016182396931162}
   - component: {fileID: 44016182396931161}
-  - component: {fileID: 44016182396931164}
   - component: {fileID: 44016182396931165}
   m_Layer: 6
   m_Name: TreeOfDesire_Weed
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 3000
-  _attackpower: 1
+  _attackpower: 100
   _maxhp: 5000
   _movespeed: 0
   _basicspeed: 0
@@ -158,28 +157,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.11951065, y: -0.051220417}
   m_Size: {x: 0.8004837, y: 2.1557283}
   m_Direction: 0
---- !u!114 &44016182396931164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44016182396931157}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a20bb0f2631ecee4cae61e802341c90f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageText: {fileID: 0}
-  MyEnemyType: 
-  isBoss: 0
-  Bossstance: 0.5
-  plus_stat: []
-  plus_value: []
-  HittedAndStartStory: 
-  DieAndStartStory: 
-  CheckCondition: []
-  IfIDieCheckAcheivePlease: 
 --- !u!50 &44016182396931165
 Rigidbody2D:
   serializedVersion: 4

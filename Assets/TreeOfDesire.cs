@@ -15,7 +15,7 @@ public class TreeOfDesire : MonoBehaviour
 
     Faze MyFaze = Faze.Faze1;
 
-
+    int EyePosition;
 
     GameObject HPUI;
     Image HPbar;
@@ -28,6 +28,7 @@ public class TreeOfDesire : MonoBehaviour
 
     public GameObject Seed;
     public GameObject Weed;
+    public GameObject EarthquakeWeed;
 
 
     Coroutine ActCoroutine;
@@ -63,36 +64,62 @@ public class TreeOfDesire : MonoBehaviour
 
     IEnumerator Act()
     {
-        yield return new WaitForSeconds(10f);
-
-        int Actnum;
+        // ·£´ý ·ê·¿
+        int Actnum = 0;
         if (MyFaze == Faze.Faze1) 
         {
              Actnum = Random.Range(0, 2);
         }
         else if(MyFaze == Faze.Faze2)
         {
-            Actnum = Random.Range(2, 3);
+            Actnum = Random.Range(0, 4);
         }
-        else
-        {
-             Actnum = Random.Range(0, 2);
-        }
+        // Çàµ¿
         switch (Actnum)
         {
-            case 0:
+            case 0: // ¼ö¸¹Àº ¾¾¾Ñ¼ÒÈ¯
                 SummonSeeds(Random.Range(8,20));
                 break;
-            case 1:
+            case 1: // ÁÙ±â ¼ÒÈ¯
                 if(GameObject.Find("TreeOfDesire_Weed(Clone)") == null)
-                    SummonWeed();
+                    SummonWeed(new Vector2(88.5f, -4.820125f), new Vector2(1,1));
                 break;
-            case 2:
+            case 2: // ´« À§Ä¡ º¯È¯
                 ChangeEye();
+                break;
+            case 3: // ÁöÁø ÁÙ±â ¼ÒÈ¯
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    if (player.transform.position.y < -0.8f)
+                    {
+                        SummonEarthquake(player.transform.position.x);
+                        yield return new WaitForSeconds(2f);
+                    }
+                }
+
                 break;
 
         }
-        //yield return new WaitForSeconds(10f);
+        // µô·¹ÀÌ
+        switch (Actnum)
+        {
+            case 0:
+                yield return new WaitForSeconds(5f);
+                break;
+            case 1:
+                yield return new WaitForSeconds(10f);
+                break;
+            case 2:
+                yield return new WaitForSeconds(1f);
+                break;
+            case 3:
+                yield return new WaitForSeconds(0f);
+                break;
+            default:
+                yield return new WaitForSeconds(10f);
+                break;
+        }
         ActCoroutine = StartCoroutine("Act");
     }
     void SummonSeeds(float count)
@@ -104,7 +131,23 @@ public class TreeOfDesire : MonoBehaviour
     }
     IEnumerator SeedManage()
     {
-        GameObject Spawned = Instantiate(Seed, transform.position, Quaternion.identity);
+        Vector2 spawnpos;
+        switch (EyePosition)
+        {
+            case 0:
+                spawnpos = new Vector2(transform.position.x, 3.3f);
+                break;
+            case 1:
+                spawnpos = new Vector2(transform.position.x, 1.7f);
+                break;
+            case 2:
+                spawnpos = new Vector2(transform.position.x, 0.15f);
+                break;
+            default:
+                spawnpos = transform.position;
+                break;
+        }
+        GameObject Spawned = Instantiate(Seed, spawnpos, Quaternion.identity);
         Spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(0.02f, 0.04f)));
         yield return new WaitForSeconds(3f);
         Spawned.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
@@ -112,11 +155,16 @@ public class TreeOfDesire : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Destroy(Spawned);
     }
-    void SummonWeed()
+    void SummonWeed(Vector2 SummonPosition, Vector2 SummonScale)
     {
-        Instantiate(Weed, new Vector3(88.5f, -4.820125f, 0), Quaternion.identity);
+        GameObject SpawnedWeed = Instantiate(Weed, SummonPosition, Quaternion.identity);
+        SpawnedWeed.transform.localScale = SummonScale;
     }
-
+    void SummonEarthquake(float x)
+    {        
+        Instantiate(EarthquakeWeed, new Vector2(x, -3.538542f), Quaternion.identity);
+        
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "PlayerAttack")
@@ -157,6 +205,11 @@ public class TreeOfDesire : MonoBehaviour
         //if(Fromwho != null){
         //      Fromwho.GetComponent<Status>().
         //}
+        for(int i = 0; i < 5; i++)
+            if (GameObject.Find("TreeOfDesire_Weed(Clone)") != null)
+                Destroy(GameObject.Find("TreeOfDesire_Weed(Clone)"));
+        if (GameObject.Find("Trap") != null)
+            Destroy(GameObject.Find("Trap"));
         Destroy(gameObject);
     }
 
@@ -184,6 +237,7 @@ public class TreeOfDesire : MonoBehaviour
             MyFaze = Faze.Faze2;
 
             StartCoroutine(Soaring());
+            StartCoroutine(GrowingWeeds());
             //transform.position = new Vector2(transform.position.x, -1.24f);
         }
     }
@@ -196,9 +250,20 @@ public class TreeOfDesire : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+    IEnumerator GrowingWeeds()
+    {
+        yield return new WaitForSeconds(1f);
+        SummonWeed(new Vector2(88.53f, -2.8f), new Vector2(1,0.6f));
+        yield return new WaitForSeconds(0.75f);
+        SummonWeed(new Vector2(88.67f, -0.27f), new Vector2(1.178f, 0.48f));
+        yield return new WaitForSeconds(0.75f);
+        SummonWeed(new Vector2(91.65f, 1.25f), new Vector2(-1.4f, -0.6f));
+        yield return new WaitForSeconds(0.75f);
+        SummonWeed(new Vector2(91.8f, -0.32f), new Vector2(-0.87f, -0.53f));
+    }
     void ChangeEye()
     {
-        int EyePosition = Random.Range(0, 3);
+        EyePosition = Random.Range(0, 3);
         anim.SetInteger("Eye", EyePosition);
         CapsuleCollider2D cc;
         cc = GetComponent<CapsuleCollider2D>();
