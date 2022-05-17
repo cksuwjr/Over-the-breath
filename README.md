@@ -104,7 +104,71 @@ ScenarioTeller<br>
 <br><br><br>
 <h1> 2022 / 05 / 17 진행</h1>
 
+보스 몬스터 추가           <br>
+Desire Of Tree           <br>
 
+```
+  1페이즈
+
+  패턴1
+  
+  씨앗을 흩뿌려 적중한 대상을 일정시간 속박하고 (점프력 감소, 이동불가)
+  일정한 피해를 입힙니다. 가한 피해만큼 체력을 회복합니다.
+  (중첩 적용 가능)
+```
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/63836325/168763081-bdcd7901-0685-44bc-a3cb-0bbff21843c9.gif)           <br>
+
+<br><br><br>
+
+```
+  1페이즈
+  
+  패턴2
+  
+  줄기를 땅으로 뻗어 일정시간마다 플레이어의 위치에
+  날카로운 뿌리를 뻗습니다.
+  적중시 플레이어는 일정한 피해를 입습니다.
+
+```
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/63836325/168765079-0604635b-6bbd-4cac-8666-48e336a7670f.gif)           <br>
+
+<br><br><br>
+
+```
+   2페이즈 진입
+   
+   페이즈 진입시 1페이즈의 패턴2에 해당하는 가지를 네 개 각 방향으로 뻗습니다.
+   파괴되기 전까지 일정시간마다 날카로운 뿌리를 뻗습니다.
+```
+
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/63836325/168766301-46a91ff6-f1b3-4ce0-b84d-9bb1f0a82e04.gif)         <br>
+
+
+```
+  2페이즈
+  
+  2페이즈는 1페이즈의 패턴 또한 가지고 있습니다.
+  
+  패턴1
+  
+  눈의 위치를 맞바꾸어 타격위치를 전환합니다.
+  
+```
+
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/63836325/168767597-9be1fef5-e741-4c9e-8a8c-6bea1f596e55.gif)        <br>
+
+
+```
+  2페이즈
+  
+  패턴2
+  
+  나무줄기를 소환하여 지진을 일으킵니다.
+  지진발생 주변의 대상이 땅에 맞닿아 있는 상태라면 매우 큰 피해를 입습니다.
+  
+  또한 나무줄기는 바닥에 남으며 지면판정을 갖습니다.
 
 
 
