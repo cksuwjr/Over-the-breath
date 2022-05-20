@@ -137,13 +137,13 @@ public class TreeOfDesire : MonoBehaviour
         switch (EyePosition)
         {
             case 0:
-                spawnpos = new Vector2(transform.position.x, 3.3f - 20.84f);
+                spawnpos = new Vector2(transform.position.x, 3.3f);
                 break;
             case 1:
-                spawnpos = new Vector2(transform.position.x, 1.7f - 20.84f);
+                spawnpos = new Vector2(transform.position.x, 1.7f);
                 break;
             case 2:
-                spawnpos = new Vector2(transform.position.x, 0.15f - 20.84f);
+                spawnpos = new Vector2(transform.position.x, 0.15f);
                 break;
             default:
                 spawnpos = transform.position;
@@ -212,6 +212,15 @@ public class TreeOfDesire : MonoBehaviour
                 Destroy(GameObject.Find("TreeOfDesire_Weed(Clone)"));
         if (GameObject.Find("Trap") != null)
             Destroy(GameObject.Find("Trap"));
+
+        GameObject nextstage = Instantiate(Resources.Load("Prefab/NextStage") as GameObject, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity);
+        SceneTransport nt = nextstage.GetComponent<SceneTransport>();
+        nt.NextScene = "new1-6";
+        nt.StartStory = "1-5DieTree";
+
+
+
+
         Destroy(gameObject);
     }
 
@@ -273,13 +282,13 @@ public class TreeOfDesire : MonoBehaviour
         switch (EyePosition)
         {
             case 0:
-                cc.offset = new Vector2(cc.offset.x, 3.3f - 20.84f); 
+                cc.offset = new Vector2(cc.offset.x, 3.3f); 
                 break;
             case 1:
-                cc.offset = new Vector2(cc.offset.x, 1.7f - 20.84f);
+                cc.offset = new Vector2(cc.offset.x, 1.7f);
                 break;
             case 2:
-                cc.offset = new Vector2(cc.offset.x, 0.15f - 20.84f);
+                cc.offset = new Vector2(cc.offset.x, 0.15f);
                 break;
         }
     }
