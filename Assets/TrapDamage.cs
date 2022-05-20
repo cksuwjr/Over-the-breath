@@ -9,6 +9,7 @@ public class TrapDamage : MonoBehaviour
     public string traptype = "Fixed";
     public GameObject bindTrap;
 
+    GameObject mySpawner;
 
     void Start()
     {
@@ -28,6 +29,13 @@ public class TrapDamage : MonoBehaviour
                 Trap.transform.SetParent(col.transform);
                 StartCoroutine(BindTrap(col.gameObject, Trap));
             }
+        }
+
+        if(col.gameObject.name == "Deleter")
+        {
+            if (mySpawner != null)
+                mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
+            Destroy(gameObject);
         }
     }
 
@@ -61,6 +69,8 @@ public class TrapDamage : MonoBehaviour
             yield return new WaitForSeconds(0.65f);
             if (target == null)
             {
+                if (mySpawner != null)
+                    mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
                 Destroy(SpawnedTrap);
                 Destroy(gameObject);
                 yield break;
@@ -69,6 +79,8 @@ public class TrapDamage : MonoBehaviour
 
         targetStat.MoveSpeed = targetStat.BasicSpeed;
         targetStat.JumpPower = targetStat.BasicJumpPower;
+        if (mySpawner != null)
+            mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
         Destroy(SpawnedTrap);
         Destroy(gameObject);
     }
@@ -82,5 +94,10 @@ public class TrapDamage : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, -13);
             yield return null;
         }
+    }
+
+    public void MySpawner(GameObject spawner)
+    {
+        mySpawner = spawner;
     }
 }

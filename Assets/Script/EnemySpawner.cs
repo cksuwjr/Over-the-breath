@@ -24,7 +24,10 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine("CalTime");
             GetComponentInParent<EnemySpawnManager>().AdjustEnemyCount(+1);
             GameObject spawned = Instantiate(Enemy, transform.position, Quaternion.identity);
-            spawned.GetComponent<EnemyAI>().MySpawner(transform.parent.gameObject);
+            if(spawned.tag == "Enemy" || spawned.tag == "Neutrality")
+                spawned.GetComponent<EnemyAI2>().MySpawner(transform.parent.gameObject);
+            else if(spawned.tag == "Trap")
+                spawned.GetComponent<TrapDamage>().MySpawner(transform.parent.gameObject);
         }
     }
     public void resumeSpawn()

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 11019812776186566}
   - component: {fileID: 1881422220517190182}
   - component: {fileID: 1424402120}
+  - component: {fileID: 748361001215753395}
+  - component: {fileID: -6137213179514053008}
   m_Layer: 3
   m_Name: EarthquakeWeed
   m_TagString: Ground
@@ -172,3 +174,46 @@ CapsuleCollider2D:
   m_Offset: {x: 0.054277897, y: -4.745722}
   m_Size: {x: 6.5497084, y: 6.5497093}
   m_Direction: 0
+--- !u!50 &748361001215753395
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11019812776186570}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!66 &-6137213179514053008
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11019812776186570}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 856d0eacd526fb24b9ba1f9683613c08, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
