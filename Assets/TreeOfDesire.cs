@@ -15,7 +15,7 @@ public class TreeOfDesire : MonoBehaviour
 
     Faze MyFaze = Faze.Faze1;
 
-    int EyePosition;
+    int EyePosition = 2;
 
     GameObject HPUI;
     Image HPbar;
@@ -66,15 +66,16 @@ public class TreeOfDesire : MonoBehaviour
     {
         // ·£´ý ·ê·¿
         int Actnum = 0;
-        if (MyFaze == Faze.Faze1) 
+        if (MyFaze == Faze.Faze1)
         {
-             Actnum = Random.Range(0, 2);
+            Actnum = Random.Range(0, 2);
         }
-        else if(MyFaze == Faze.Faze2)
+        else if (MyFaze == Faze.Faze2)
         {
             Actnum = Random.Range(0, 4);
         }
         // Çàµ¿
+
         switch (Actnum)
         {
             case 0: // ¼ö¸¹Àº ¾¾¾Ñ¼ÒÈ¯
@@ -82,7 +83,8 @@ public class TreeOfDesire : MonoBehaviour
                 break;
             case 1: // ÁÙ±â ¼ÒÈ¯
                 if(GameObject.Find("TreeOfDesire_Weed(Clone)") == null)
-                    SummonWeed(new Vector2(88.5f, -4.820125f), new Vector2(1,1));
+                    SummonWeed(new Vector2(88.5f + 232.82f, -4.820125f - 20.84f), new Vector2(1,1));
+                
                 break;
             case 2: // ´« À§Ä¡ º¯È¯
                 ChangeEye();
@@ -135,13 +137,13 @@ public class TreeOfDesire : MonoBehaviour
         switch (EyePosition)
         {
             case 0:
-                spawnpos = new Vector2(transform.position.x, 3.3f);
+                spawnpos = new Vector2(transform.position.x, 3.3f - 20.84f);
                 break;
             case 1:
-                spawnpos = new Vector2(transform.position.x, 1.7f);
+                spawnpos = new Vector2(transform.position.x, 1.7f - 20.84f);
                 break;
             case 2:
-                spawnpos = new Vector2(transform.position.x, 0.15f);
+                spawnpos = new Vector2(transform.position.x, 0.15f - 20.84f);
                 break;
             default:
                 spawnpos = transform.position;
@@ -162,7 +164,7 @@ public class TreeOfDesire : MonoBehaviour
     }
     void SummonEarthquake(float x)
     {        
-        Instantiate(EarthquakeWeed, new Vector2(x, -3.538542f), Quaternion.identity);
+        Instantiate(EarthquakeWeed, new Vector2(x, -3.538542f - 20.84f), Quaternion.identity);
         
     }
     void OnTriggerEnter2D(Collider2D col)
@@ -229,10 +231,11 @@ public class TreeOfDesire : MonoBehaviour
 
     void FazeCheck()
     {
-        if(MyFaze == Faze.Faze1 && stat.HP < stat.MaxHp * 0.5f)
+
+        if (MyFaze == Faze.Faze1 && stat.HP < stat.MaxHp * 0.5f)
         {
-            transform.position = new Vector2(transform.position.x, -6.9f);
-            GetComponent<CapsuleCollider2D>().offset = new Vector2(GetComponent<CapsuleCollider2D>().offset.x, 3.3f);
+            transform.position = new Vector2(transform.position.x, -6.9f - 20.84f);
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(GetComponent<CapsuleCollider2D>().offset.x, 3.3f - 20.84f);
             anim.SetTrigger("Faze2");
             MyFaze = Faze.Faze2;
 
@@ -253,13 +256,13 @@ public class TreeOfDesire : MonoBehaviour
     IEnumerator GrowingWeeds()
     {
         yield return new WaitForSeconds(1f);
-        SummonWeed(new Vector2(88.53f, -2.8f), new Vector2(1,0.6f));
+        SummonWeed(new Vector2(88.53f + 232.82f, -2.8f - 20.84f), new Vector2(1,0.6f));
         yield return new WaitForSeconds(0.75f);
-        SummonWeed(new Vector2(88.67f, -0.27f), new Vector2(1.178f, 0.48f));
+        SummonWeed(new Vector2(88.67f + 232.82f, -0.27f - 20.84f), new Vector2(1.178f, 0.48f));
         yield return new WaitForSeconds(0.75f);
-        SummonWeed(new Vector2(91.65f, 1.25f), new Vector2(-1.4f, -0.6f));
+        SummonWeed(new Vector2(91.65f + 232.82f, 1.25f - 20.84f), new Vector2(-1.4f, -0.6f));
         yield return new WaitForSeconds(0.75f);
-        SummonWeed(new Vector2(91.8f, -0.32f), new Vector2(-0.87f, -0.53f));
+        SummonWeed(new Vector2(91.8f + 232.82f, -0.32f - 20.84f), new Vector2(-0.87f, -0.53f));
     }
     void ChangeEye()
     {
@@ -270,13 +273,13 @@ public class TreeOfDesire : MonoBehaviour
         switch (EyePosition)
         {
             case 0:
-                cc.offset = new Vector2(cc.offset.x, 3.3f); 
+                cc.offset = new Vector2(cc.offset.x, 3.3f - 20.84f); 
                 break;
             case 1:
-                cc.offset = new Vector2(cc.offset.x, 1.7f);
+                cc.offset = new Vector2(cc.offset.x, 1.7f - 20.84f);
                 break;
             case 2:
-                cc.offset = new Vector2(cc.offset.x, 0.15f);
+                cc.offset = new Vector2(cc.offset.x, 0.15f - 20.84f);
                 break;
         }
     }

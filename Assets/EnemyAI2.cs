@@ -28,7 +28,7 @@ public class EnemyAI2 : MonoBehaviour
     int Direction = 1;
     bool isGround;
     bool isJumpRecent; // 점프 너무 자주해서 제한하려고
-
+    
 
 
     Coroutine CheckingTopographyCoroutine;
@@ -39,7 +39,7 @@ public class EnemyAI2 : MonoBehaviour
     
 
     GameObject AttackTarget;
-
+    GameObject mySpawner;
 
     void Start()
     {
@@ -312,6 +312,8 @@ public class EnemyAI2 : MonoBehaviour
         //if(Fromwho != null){
         //      Fromwho.GetComponent<Status>().
         //}
+        if (mySpawner != null)
+            mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
         Destroy(gameObject);
     }
 
@@ -341,5 +343,9 @@ public class EnemyAI2 : MonoBehaviour
     {
         return isGround;
     }
-    
+
+    public void MySpawner(GameObject spawner)
+    {
+        mySpawner = spawner;
+    }
 }
