@@ -25,12 +25,12 @@ End
 End
 
 1-1icantgothere
-용용이:PlayerIdle,막다른 길이네. 아무래도 더블점프를 해야할 것 같아.
+용용이:PlayerIdle,막다른 길이네. 아무래도 두 번 연달아 점프를 해야할 것 같아.
 용용이:PlayerIdle, (↑ 방향키를 연속으로 사용해 점프해보자)
 End
 
 1-1icantjumpover
-용용이:PlayerIdle,여기선 더블점프해도 안닿네..           아!
+용용이:PlayerIdle,여기선 두 번 점프해도 안닿네..           아!
 End
 
 1-1findslime
@@ -64,7 +64,7 @@ End
 
 1-2gethurt
 용용이:PlayerIdle,으으... 다리를 다친 것 같아..
-용용이:PlayerIdle,한동안 2단 점프는 힘들겠는걸..
+용용이:PlayerIdle,한동안 두 번 연속 점프는 힘들겠는걸..
 End
 
 ================ 1-3 ===================
@@ -77,6 +77,57 @@ End
 용용이:PlayerIdle,준내 악독하네 개발자쉨들
 End
 
+================ 1-4 ===================
+
+start1-4
+용용이:PlayerIdle, 다리가 이제 안아픈것 같아
+용용이:PlayerIdle, 두 번 연속 점프할 수 있을 것 같아
+용용이:PlayerIdle, 여기부터는 좀 어둡네..
+End
+
+1-4FoundSlime
+용용이:PlayerIdle, 슬라임이 무지 많네
+용용이:PlayerIdle, 몇몇은.. 나무뿌리에 흡수되고 있다..?
+욕망의 나무:TreeOfDesireIdle,크큭.. 새로운 거름이 들어왔구나
+용용이:PlayerIdle, 나무가 말을...!?  어디서 하는거지?
+욕망의 나무:TreeOfDesireIdle,찾지 않아도 된다. 허허. 그곳에서 소화될터이니
+욕망의 나무:TreeOfDesireIdle,너희를 먹을수록 내 체력과 공격력은 오를테지
+욕망의 나무:TreeOfDesireIdle,잎을 틔울 날이 머지 않았어
+욕망의 나무:TreeOfDesireIdle,크하하하하하!!
+End
+
+1-4EscapeFrom
+욕망의 나무:TreeOfDesireIdle,말도 안돼.. 이렇게 쉽게 벗어나다니
+욕망의 나무:TreeOfDesireIdle, .. 네녀석을 흡수하면 더욱 큰 양분이 될테지
+욕망의 나무:TreeOfDesireIdle, 더 가까이 오거라.. 직접 흡수해주마
+End
+
+1-4Safezone
+용용이:PlayerIdle, 여긴 그나마 좀 안전하네
+용용이:PlayerIdle, 나무뿌리를 틔우는 열매가 점점 많아지는것 같아
+용용이:PlayerIdle, 서둘러 지나가야겠어.
+End
+
+1-4beforeTree
+용용이:PlayerIdle, (이 너머에 그 나무가 있는건가..)
+용용이:PlayerIdle, (다른길은 없는건가..? 너무 위험하다)
+용용이:PlayerIdle, (이대로 넘어가서 무찌를까. 아니면 돌아가서 슬라임을 통해 힘을 키우고 올까? 신중하게 선택하자.)
+End
+
+================ 1 - 6 ===================
+
+1-5DieTree
+욕망의 나무:TreeOfDesireIdle, !!!!!!!!!!!!!!!! 어떻게 너 따위가..!!! 나를...!!
+욕망의 나무:TreeOfDesireIdle, 조금만 더 모았더라면... 더 모았더라면...!!
+욕망의 나무:TreeOfDesireIdle, 양지바른 곳을 찾아 새로운 새싹을 틔워냈 을.. 터인데....
+욕망의 나무:TreeOfDesireIdle, 분... 하구나....
+용용이:PlayerIdle, 어떻게 여길 탈출하지?
+용용이:PlayerIdle, 주변을 좀 살펴봐야겠어
+End
+
+1-6FindEnter
+용용이:PlayerIdle, 나무가 있던 부분 지면이 약한것 같다..
+End
 
 
 =============== Exercise =====================
