@@ -24,7 +24,10 @@ public class Spawner : MonoBehaviour
         newPlayer.GetComponent<Player>().ChangeDragon(player.GetComponent<Player>().ChangeMode);
         Destroy(player);
         player = newPlayer;
-
+        if (GameObject.Find("Constraints").GetComponent<PlayerConstraints>().JumpTwice)
+            player.GetComponent<Move>().JumpMaxCount = 2;
+        else
+            player.GetComponent<Move>().JumpMaxCount = 1;
         GameObject.Find("CAM").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
     }
 
