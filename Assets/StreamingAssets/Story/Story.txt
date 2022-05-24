@@ -1,0 +1,274 @@
+ 
+/////////////   작성 형식   /////////////
+
+스토리이름
+인물 : 일러스트트리거명 , 대사          ( 반드시 ":" 과 "," 로 구분 지을것, 내용 없더라도 반드시 포함해야함)
+End                                          ( 스토리 끝낼 시 End 반드시 포함)
+///////////////////////////////////////////
+
+
+============= 1-1 ==============
+
+1-1start
+용용이:PlayerIdle,뭐야. 여긴 어디야.
+용용이:PlayerIdle,일단 여길 둘러봐야겠군
+용용이:PlayerIdle, (← → 방향키를 사용해 움직여보자)
+End
+
+1-1icanjump
+용용이:PlayerIdle,나 벌써 점프할 줄 알아?
+End
+
+1-1ishouldjump
+용용이:PlayerIdle,이 절벽은 점프해야 오를 수 있겠는걸
+용용이:PlayerIdle, (↑ 방향키를 사용해 점프해보자)
+End
+
+1-1icantgothere
+용용이:PlayerIdle,막다른 길이네. 아무래도 두 번 연달아 점프를 해야할 것 같아.
+용용이:PlayerIdle, (↑ 방향키를 연속으로 사용해 점프해보자)
+End
+
+1-1icantjumpover
+용용이:PlayerIdle,여기선 두 번 점프해도 안닿네..           아!
+End
+
+1-1findslime
+용용이:PlayerIdle, ...?
+슬라임:SlimeIdle, 끼익..!!
+용용이:PlayerIdle, 왠지 공격해올 것 같은데..
+용용이:PlayerIdle, (Q를 눌러 공격해보자)
+End
+
+1-1dieslime
+용용이:PlayerIdle, 어... 뭐지 체력이 좀 오른 것 같은걸?
+End
+
+1-1noway
+용용이:PlayerIdle,음...! 막다른길이네...?
+용용이:PlayerIdle,왔던 길로 되돌아가기는 어려울 것 같아.
+용용이:PlayerIdle,벽을 좀 살펴볼까?
+End
+
+1-1findway
+용용이:PlayerIdle,어? 여기 틈이 있는 것 같아
+용용이:PlayerIdle,지나갈 수 있겠는걸?
+End
+
+
+================ 1-2 ===================
+
+start1-2
+용용이:PlayerIdle,어? 어어..?
+End
+
+1-2gethurt
+용용이:PlayerIdle,으으... 다리를 다친 것 같아..
+용용이:PlayerIdle,한동안 두 번 연속 점프는 힘들겠는걸..
+End
+
+================ 1-3 ===================
+
+1-3windblow
+용용이:PlayerIdle,으윽.. 여긴 바람이 거세네
+End
+
+1-3traptrap
+용용이:PlayerIdle,준내 악독하네 개발자쉨들
+End
+
+================ 1-4 ===================
+
+start1-4
+용용이:PlayerIdle, 다리가 이제 안아픈것 같아
+용용이:PlayerIdle, 두 번 연속 점프할 수 있을 것 같아
+용용이:PlayerIdle, 여기부터는 좀 어둡네..
+End
+
+1-4FoundSlime
+용용이:PlayerIdle, 슬라임이 무지 많네
+용용이:PlayerIdle, 몇몇은.. 나무뿌리에 흡수되고 있다..?
+욕망의 나무:TreeOfDesireIdle,크큭.. 새로운 거름이 들어왔구나
+용용이:PlayerIdle, 나무가 말을...!?  어디서 하는거지?
+욕망의 나무:TreeOfDesireIdle,찾지 않아도 된다. 허허. 그곳에서 소화될터이니
+욕망의 나무:TreeOfDesireIdle,너희를 먹을수록 내 체력과 공격력은 오를테지
+욕망의 나무:TreeOfDesireIdle,잎을 틔울 날이 머지 않았어
+욕망의 나무:TreeOfDesireIdle,크하하하하하!!
+End
+
+1-4EscapeFrom
+욕망의 나무:TreeOfDesireIdle,말도 안돼.. 이렇게 쉽게 벗어나다니
+욕망의 나무:TreeOfDesireIdle, .. 네녀석을 흡수하면 더욱 큰 양분이 될테지
+욕망의 나무:TreeOfDesireIdle, 더 가까이 오거라.. 직접 흡수해주마
+End
+
+1-4Safezone
+용용이:PlayerIdle, 여긴 그나마 좀 안전하네
+용용이:PlayerIdle, 나무뿌리를 틔우는 열매가 점점 많아지는것 같아
+용용이:PlayerIdle, 서둘러 지나가야겠어.
+End
+
+1-4beforeTree
+용용이:PlayerIdle, (이 너머에 그 나무가 있는건가..)
+용용이:PlayerIdle, (다른길은 없는건가..? 너무 위험하다)
+용용이:PlayerIdle, (이대로 넘어가서 무찌를까. 아니면 돌아가서 슬라임을 통해 힘을 키우고 올까? 신중하게 선택하자.)
+End
+
+================ 1 - 6 ===================
+
+1-5DieTree
+욕망의 나무:TreeOfDesireIdle, !!!!!!!!!!!!!!!! 어떻게 너 따위가..!!! 나를...!!
+욕망의 나무:TreeOfDesireIdle, 조금만 더 모았더라면... 더 모았더라면...!!
+욕망의 나무:TreeOfDesireIdle, 양지바른 곳을 찾아 새로운 새싹을 틔워냈 을.. 터인데....
+욕망의 나무:TreeOfDesireIdle, 분... 하구나....
+용용이:PlayerIdle, 어떻게 여길 탈출하지?
+용용이:PlayerIdle, 주변을 좀 살펴봐야겠어
+End
+
+1-6FindEnter
+용용이:PlayerIdle, 나무가 있던 부분 지면이 약한것 같다..
+End
+
+
+=============== Exercise =====================
+ExerciseTreeOfDesire
+욕망의 나무:TreeOfDesireIdle,크아아악!!!! 자라지 않아 자라지 않아!!!
+욕망의 나무:TreeOfDesireIdle,부족하다..... 부족해!!!
+용용이:PlayerIdle, 뭐가 부족하다는거지..?
+욕망의 나무:TreeOfDesireIdle,피...... 피가 필요해!!!!!
+욕망의 나무:TreeOfDesireIdle,머리가 자라지 않아... 머리... 피가 필요해!! 피!!!!!
+용용이:PlayerIdle, 아ㅋㅋㅎ 탈모였구낰ㅋㅋ 탈모쉨ㅋㅋㅎㅎㅎㅋㅋ
+욕망의 나무:TreeOfDesireIdle,이런 ㅅ
+End
+
+
+
+
+
+======================  Dutorial ( 1 - 1 )     ====================
+
+Hi
+용용이:,Hi
+End
+
+
+Tutorial1
+용용이:PlayerIdle, 으으.. 여긴 어디지...?
+용용이:PlayerIdle, 절벽에서 떨어진건가?
+용용이:PlayerIdle, 기억이 나질 않아..
+용용이:PlayerIdle, 아아
+용용이:PlayerIdle, .....
+용용이:PlayerIdle,일단 주변을 좀 둘러봐야겠어
+:, (← → [방향키] 를 이용해 주변을 둘러보자)
+End
+
+
+Cliff
+용용이:PlayerIdle, 이 위에서 떨어진 것 같은데
+용용이:PlayerIdle, 다시 위로 올라가기는 불가할 것 같네..
+End
+
+
+Tutorial2
+용용이:PlayerIdle, 이런 땅은 점프하면 밟을 수 있겠지?
+:, ( ↑ 를 눌러 점프할 수 있을 것 같다. ) 
+End
+
+Tutorial3
+용용이:PlayerIdle, 벽이 많이 높네. 이단점프를 해야겠는 걸?
+:, (↑를 두 번 눌러보자)
+End
+
+
+FindWarrior
+용용이:PlayerIdle, 어 인간이다.
+용용이:PlayerIdle, 저기
+모험가:WarriorIdle, 난 꼭 최강의 전사가 되겠어!
+용용이:PlayerIdle, 저기.....
+모험가:WarriorAttack, 덤벼라 몬스터!!
+용용이:PlayerIdle, 아니
+용용이:PlayerIdle, (마구잡이네. 피해갈까? 공격할까?)
+:, ( Q 를 눌러 공격할 수 있을 것 같다. )
+End
+
+DieWarrior
+모험가:WarriorHitted,으윽..
+모험가:WarriorHitted,너무.. 아파 형... 흑흑
+용용이:PlayerIdle, ... 형이 뭐야?
+모험가:WarriorHitted,저리....  가....족같은..
+용용이:PlayerIdle,가족?
+End
+
+AttackWarrior
+전사:WarriorHitted, 아야! 이 몬스터는 뭐야??
+용용이:PlayerIdle, 앗 미안.. 방금 싸운 사람과 똑같이 생겨서.. 적인줄;;
+용용이:PlayerIdle, 혹시 가족이 뭔지 알아?
+전사:WarriorIdle, 가족은 자신에게 가장 소중한 사람들이지
+용용이:PlayerIdle, 으와... 나도 가족이 있을까?
+전사:WarriorIdle, 넌 몰라도 내겐 동생이 있지. 아주 귀여운..
+전사:WarriorIdle, 근처에서 놀고 있으라 했는데 안보이네?
+전사:WarriorHitted, ..... 잠시만.. 방금 싸운 사람..? 똑같이..? 적...?
+전사:WarriorAttack, 너 이쉨!!!!!!
+용용이:PlayerIdle, 앗
+End
+
+DieWarrior2
+전사:WarriorHitted, 으윽... 동생의 원수..
+용용이:PlayerIdle, 유감
+End
+
+
+Tutorial4
+용용이:PlayerIdle, 되게 미안하네 ㅋㅋ
+End
+
+
+<기본공격>, Q
+<스킬>, E  * 강철드래곤만 사용가능
+???, 관리자용 입력키
+<게임 초기화>, P
+<강철 드래곤으로 변경>, T [+공격력30증가 중첩가능]
+
+
+
+
+FindSlimes
+슬라임:SlimeIdle, - ㅅ - 
+슬라임:SlimeIdle, - 0 -?
+슬라임:SlimeIdle, 끵?
+용용이:PlayerIdle, 뭐야 이건
+슬라임:SlimeHitted,  X  !!
+End
+
+
+
+FindHoneySlime
+전사1:WarriorIdle,야 우리 기사단 신입 너무 빠지지 않았냐?
+전사2:WarriorIdle,동생도 들인다는거 겨우겨우 말렸지..
+전사1:WarriorIdle,어라. 저건 설마 허니슬라임?
+전사1:WarriorIdle,저게 왜 여기있지?? 벌집에서 떨어져나온건가?
+전사2:WarriorAttack,아무튼 구하기 힘든 녀석이잖아? 잡기만 하면 꿀빤다구. 잡자!
+허니 슬라임:HoneySlimeIdle,(끈적)
+End
+
+DieWarriors
+전사:WarriorHitted,너무.. 강..력하네..  
+End
+
+DieSlime
+허니 슬라임:HoneySlimeHitted,... 끄읭...
+용용이:PlayerIdle, 어우 꿀 묻었네 끈적해..
+End
+
+Find1-2
+용용이:PlayerIdle,여기 벽에 구멍이 있는 것 같은데?
+용용이:PlayerIdle,지나갈 수 있을 것 같아.
+End
+
+
+======================  1 - 2     ====================
+
+InTheTernal1
+용용이:PlayerIdle, 땅굴에 들어온 것 같다..
+용용이:PlayerIdle, 어디가 바닥인지 잘 보이지 않으니 잘 살펴보며 올라가야 하겠네
+End
