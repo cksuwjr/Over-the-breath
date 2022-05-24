@@ -19,23 +19,25 @@ public class TrapDamage : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Player" || col.gameObject.tag == "Neutrality" || col.gameObject.tag == "Enemy")
-        {
-             if(traptype == "Bind")
-            {
-                GameObject Trap = Instantiate(bindTrap, col.transform.position, Quaternion.identity);
-                Trap.transform.SetParent(col.transform);
-                StartCoroutine(BindTrap(col.gameObject, Trap));
-            }
-        }
-
         if(col.gameObject.name == "Deleter")
         {
             if (mySpawner != null)
                 mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
             Destroy(gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Neutrality" || col.gameObject.tag == "Enemy")
+        {
+            if (traptype == "Bind")
+            {
+                GameObject Trap = Instantiate(bindTrap, col.transform.position, Quaternion.identity);
+                Trap.transform.SetParent(col.transform);
+                StartCoroutine(BindTrap(col.gameObject, Trap));
+            }
         }
     }
 
