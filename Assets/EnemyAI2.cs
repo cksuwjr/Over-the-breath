@@ -307,13 +307,14 @@ public class EnemyAI2 : MonoBehaviour
         }
     }
 
-    void Die(GameObject Fromwho)
+    public void Die(GameObject Fromwho)
     {
         //if(Fromwho != null){
         //      Fromwho.GetComponent<Status>().
         //}
         if (mySpawner != null)
             mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
+
         Destroy(gameObject);
     }
 

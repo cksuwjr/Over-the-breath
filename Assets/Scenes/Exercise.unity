@@ -311,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &116814352
 Transform:
   m_ObjectHideFlags: 0
@@ -343,17 +343,35 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 116814355}
+    m_ColliderPaths:
+    - - X: 830000000
+        Y: -40000000
+      - X: 820000000
+        Y: -40000000
+      - X: 820000000
+        Y: -60000000
+      - X: 830000000
+        Y: -60000000
+    - - X: 920000000
+        Y: -40000000
+      - X: 910000000
+        Y: -40000000
+      - X: 910000000
+        Y: -60000000
+      - X: 920000000
+        Y: -60000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 82.99998, y: -6.00001}
-      - {x: 82.99998, y: -3.99999}
-      - {x: 81.999985, y: -4.0000253}
-      - {x: 82.00002, y: -6.00001}
-    - - {x: 91.99998, y: -6.00001}
-      - {x: 91.99998, y: -3.99999}
-      - {x: 90.999985, y: -4.0000253}
-      - {x: 91.00002, y: -6.00001}
+    - - {x: 91.99997, y: -6}
+      - {x: 91.99997, y: -4}
+      - {x: 91, y: -4.000029}
+      - {x: 91.00003, y: -6}
+    - - {x: 82.99997, y: -6}
+      - {x: 82.99997, y: -4}
+      - {x: 82, y: -4.000029}
+      - {x: 82.00003, y: -6}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &116814354
@@ -667,6 +685,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328667354465458729, guid: f9ae6f55564ea464e85ee5d0d42deea9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1163150592062466374, guid: f9ae6f55564ea464e85ee5d0d42deea9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -839,6 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254ebd6311b47944195956e5f1f182bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  King: {fileID: 0}
 --- !u!1 &345662336
 GameObject:
   m_ObjectHideFlags: 0
@@ -9738,6 +9761,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328667354465458729, guid: f9ae6f55564ea464e85ee5d0d42deea9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1163150592062466374, guid: f9ae6f55564ea464e85ee5d0d42deea9, type: 3}
       propertyPath: m_RootOrder
       value: 2

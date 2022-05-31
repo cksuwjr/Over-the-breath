@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Swamp : MonoBehaviour
-{
+public class Swamp : MonoBehaviour            
+{                                                      
     private List<GameObject> Slimes;
+
+    public GameObject King;
+    
 
     private void Start()
     {
@@ -15,9 +18,11 @@ public class Swamp : MonoBehaviour
     {
         if(col.tag == "Neutrality" && col.name == "Slime")
         {
+            ChangeKing();
+
             Slimes.Add(col.gameObject);
-            Debug.Log("슬라임추가됨");
-            Debug.Log("현재 " + Slimes.Count + "마리");
+            col.transform.GetChild(2).GetComponent<Slime>().MySwamp = gameObject;
+
         }
     }
 
@@ -26,8 +31,19 @@ public class Swamp : MonoBehaviour
         if(col.tag == "Neutrality" && col.name == "Slime")
         {
             Slimes.Remove(col.gameObject);
-            Debug.Log("슬라임나감");
-            Debug.Log("현재 " + Slimes.Count + "마리");
+
+            ChangeKing();
         }
+    }
+
+    void ChangeKing()
+    {
+        if (Slimes.Count > 0)
+            King = Slimes[0].gameObject;
+    }
+
+    public void KillOther(GameObject otherSlime)
+    {
+        Slimes.Remove(otherSlime);
     }
 }
