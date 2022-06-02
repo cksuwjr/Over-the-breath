@@ -73,18 +73,18 @@ public class EnemyAI2 : MonoBehaviour
         RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck, rayFloorGroundCheck;
         while (true)
         {
-            /*
+
             //레이저 시각효과 활성화
 
             //앞에 땅있나(빨강)    rayFrontGroundCheck
-            Debug.DrawRay(transform.position + new Vector3((transform.localScale.x * (7f / 10f) + 0.35f) * Direction , transform.localScale.y * -(3f / 7f), 0), new Vector3(0, 1, 0), Color.red);
+            Debug.DrawRay(transform.position + new Vector3((transform.localScale.x * (7f / 10f) + 0.35f) * Direction, transform.localScale.y * -(3f / 7f), 0), new Vector3(0, 1, 0), Color.red);
             //앞에 벽있나(파랑)    rayFrontWallCheck
             Debug.DrawRay(transform.position, new Vector3(Direction * 0.5f * (transform.localScale.x * (10f / 7f)), 0, 0), Color.blue);
             // 바닥(검정)  rayUnderGroundCheck 
             Debug.DrawRay(transform.position + new Vector3(transform.localScale.x * (1f / 2f) * -Direction, 0, 0), new Vector3(0, transform.localScale.y * -(59f / 70f), 0), Color.black);
             // 바닥에 닿아있나(하얀) rayFloorGroundCheck
             Debug.DrawRay(transform.position, new Vector3(0, transform.localScale.y * -(59f / 70f), 0), Color.white);
-            */
+
 
 
             // 레이저 설정
