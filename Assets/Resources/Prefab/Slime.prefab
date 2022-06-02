@@ -554,7 +554,7 @@ MonoBehaviour:
   _hp: 500
   _attackpower: 20
   _maxhp: 500
-  _movespeed: 0.01
+  _movespeed: 2
   _basicspeed: 2
   _jumppower: 7
   _basicjumppower: 7

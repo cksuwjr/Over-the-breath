@@ -16,7 +16,7 @@ public class Swamp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Neutrality" && col.name == "Slime")
+        if(col.tag == "Neutrality" && (col.name == "Slime(Clone)" || col.name == "Slime"))
         {
             ChangeKing();
 
@@ -34,7 +34,7 @@ public class Swamp : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if(col.tag == "Neutrality" && col.name == "Slime")
+        if(col.tag == "Neutrality" && (col.name == "Slime(Clone)" || col.name == "Slime"))
         {
             Slimes.Remove(col.gameObject);
 
