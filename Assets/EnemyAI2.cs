@@ -63,26 +63,33 @@ public class EnemyAI2 : MonoBehaviour
         // 실행
         ActCoroutine = StartCoroutine("Act");
         //StartCoroutine("CheckingTopography");
+        //Debug.Log(((cc.size.y / 2) + 0.15f));
     }
 
-    
+
     IEnumerator CheckingTopography()
     {
         // 본인기준 주변 지형파악 위한 레이저 체크
         RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck, rayFloorGroundCheck;
         while (true)
         {
-
             //레이저 시각효과 활성화
-            //앞
-            Debug.DrawRay(transform.position + new Vector3(Direction, 0, 0), new Vector3(0, 1, 0), new Color(0, 1, 0));
-            //바닥
-            Debug.DrawRay(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0) * ((cc.size.y / 2) + 0.15f), new Color(0, 1, 0));
 
-            rayFrontGroundCheck = Physics2D.Raycast(transform.position + new Vector3(Direction, 0, 0), Vector2.up, 1f, 1 << LayerMask.NameToLayer("Ground"));
-            rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f, 1 << LayerMask.NameToLayer("UnPassableWall"));
-            rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(0.35f * -Direction, 0, 0), new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
-            rayFloorGroundCheck = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), (cc.size.y / 2) + 0.15f, 1 << LayerMask.NameToLayer("Ground"));
+            //앞에 땅있나(빨강)    rayFrontGroundCheck
+            Debug.DrawRay(transform.position + new Vector3((transform.localScale.x * (7f / 10f) + 0.35f) * Direction , transform.localScale.y * -(3f / 7f), 0), new Vector3(0, 1, 0), Color.red);
+            //앞에 벽있나(파랑)    rayFrontWallCheck
+            Debug.DrawRay(transform.position, new Vector3(Direction * 0.5f * (transform.localScale.x * (10f / 7f)), 0, 0), Color.blue);
+            // 바닥(검정)  rayUnderGroundCheck 
+            Debug.DrawRay(transform.position + new Vector3(transform.localScale.x * (1f / 2f) * -Direction, 0, 0), new Vector3(0, transform.localScale.y * -(59f / 70f), 0), Color.black);
+            // 바닥에 닿아있나(하얀) rayFloorGroundCheck
+            Debug.DrawRay(transform.position, new Vector3(0, transform.localScale.y * -(59f / 70f), 0), Color.white);
+
+
+            // 레이저 설정
+            rayFrontGroundCheck = Physics2D.Raycast(transform.position + new Vector3((transform.localScale.x * (7f / 10f) + 0.35f) * Direction, transform.localScale.y * -(3f / 7f), 0), Vector2.up, 1f, 1 << LayerMask.NameToLayer("Ground"));
+            rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f * (transform.localScale.x * (10f / 7f)), 1 << LayerMask.NameToLayer("UnPassableWall"));
+            rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(transform.localScale.x * (1f / 2f) * -Direction, 0, 0), new Vector3(0, -1, 0), transform.localScale.y * (59f / 70f), 1 << LayerMask.NameToLayer("Ground"));
+            rayFloorGroundCheck = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), transform.localScale.y * (59f / 70f), 1 << LayerMask.NameToLayer("Ground"));
             // 앞에 땅이 있다면 점프로 도약
             if (isGround && rayFrontGroundCheck.collider != null || (rayFloorGroundCheck.collider == null && isGround))
                 rb.velocity = new Vector2(stat.MoveSpeed * Direction, stat.JumpPower);
@@ -92,7 +99,7 @@ public class EnemyAI2 : MonoBehaviour
             {
                 sr.flipX = !sr.flipX;
                 Direction *= -1;
-                rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
+                rb.velocity = new Vector2(Direction * stat.MoveSpeed, rb.velocity.y);
             }
 
             // 바닥 체크후 isGround 전환

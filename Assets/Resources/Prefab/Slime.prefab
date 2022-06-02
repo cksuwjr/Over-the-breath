@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7008875569610892364}
   - component: {fileID: 5777544757254295910}
   - component: {fileID: 6280385135248443372}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048cce71f9e96f847b82b4eb79671216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MySwamp: {fileID: 0}
 --- !u!61 &6280385135248443372
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -553,7 +554,7 @@ MonoBehaviour:
   _hp: 500
   _attackpower: 20
   _maxhp: 500
-  _movespeed: 2
+  _movespeed: 0.01
   _basicspeed: 2
   _jumppower: 7
   _basicjumppower: 7

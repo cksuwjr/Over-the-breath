@@ -7,7 +7,7 @@ public class Slime : MonoBehaviour
     public GameObject MySwamp;
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.name == "Slime" && col.gameObject != transform.parent.gameObject)
+        if(col.name == "Slime" && col.gameObject != transform.parent.gameObject && MySwamp != null)
         {
             if (MySwamp.GetComponent<Swamp>().King == transform.parent.gameObject)
             {
