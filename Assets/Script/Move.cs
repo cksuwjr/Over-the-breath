@@ -17,6 +17,9 @@ public class Move : MonoBehaviour
     public bool isWall;
     float direction;
 
+
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,6 +66,7 @@ public class Move : MonoBehaviour
             else if (direction == 1)
                 sr.flipX = false;
 
+            anim.speed = stat.MoveSpeed / stat.BasicSpeed;
             anim.SetBool("Idle", false);
             anim.SetBool("Walk", true);
         }
@@ -165,4 +169,30 @@ public class Move : MonoBehaviour
         else
             return false;
     }
+
+    public void ApplyDebuff(string what, float amount)
+    {
+        switch (what)
+        {
+            case "Speed":
+                stat.MoveSpeed = stat.BasicSpeed - amount;
+                break;
+            case "Jump":
+                stat.JumpPower = stat.BasicJumpPower - amount;
+                break;
+        }
+    }
+    public void RemoveDebuff(string what)
+    {
+        switch (what)
+        {
+            case "Speed":
+                stat.MoveSpeed = stat.BasicSpeed;
+                break;
+            case "Jump":
+                stat.JumpPower = stat.BasicJumpPower;
+                break;
+        }
+    }
+
 }

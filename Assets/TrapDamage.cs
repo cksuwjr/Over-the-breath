@@ -50,12 +50,16 @@ public class TrapDamage : MonoBehaviour
         Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
         targetRb.velocity = new Vector2(0, targetRb.velocity.y);
 
-
-
-
-        targetStat.MoveSpeed = 0;
-        targetStat.JumpPower = 1f;
-
+        if (target.tag == "Player")
+        {
+            target.GetComponent<Move>().ApplyDebuff("Speed", 5);
+            target.GetComponent<Move>().ApplyDebuff("Jump", 4.2f);
+        }
+        else
+        {
+            targetStat.MoveSpeed = 0;
+            targetStat.JumpPower = 1f;
+        }
         for (int i = 0; i < 4; i++)
         {
             if (target.tag == "Player")
@@ -78,9 +82,16 @@ public class TrapDamage : MonoBehaviour
                 yield break;
             }
         }
-
-        targetStat.MoveSpeed = targetStat.BasicSpeed;
-        targetStat.JumpPower = targetStat.BasicJumpPower;
+        if (target.tag == "Player")
+        {
+            target.GetComponent<Move>().RemoveDebuff("Speed");
+            target.GetComponent<Move>().RemoveDebuff("Jump");
+        }
+        else
+        {
+            targetStat.MoveSpeed = targetStat.BasicSpeed;
+            targetStat.JumpPower = targetStat.BasicJumpPower;
+        }
         if (mySpawner != null)
             mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
         Destroy(SpawnedTrap);
