@@ -73,6 +73,7 @@ public class EnemyAI2 : MonoBehaviour
         RaycastHit2D rayFrontGroundCheck, rayFrontWallCheck, rayUnderGroundCheck, rayFloorGroundCheck;
         while (true)
         {
+            /*
             //레이저 시각효과 활성화
 
             //앞에 땅있나(빨강)    rayFrontGroundCheck
@@ -83,6 +84,7 @@ public class EnemyAI2 : MonoBehaviour
             Debug.DrawRay(transform.position + new Vector3(transform.localScale.x * (1f / 2f) * -Direction, 0, 0), new Vector3(0, transform.localScale.y * -(59f / 70f), 0), Color.black);
             // 바닥에 닿아있나(하얀) rayFloorGroundCheck
             Debug.DrawRay(transform.position, new Vector3(0, transform.localScale.y * -(59f / 70f), 0), Color.white);
+            */
 
 
             // 레이저 설정
@@ -90,9 +92,13 @@ public class EnemyAI2 : MonoBehaviour
             rayFrontWallCheck = Physics2D.Raycast(transform.position, new Vector3(Direction, 0, 0), 0.5f * (transform.localScale.x * (10f / 7f)), 1 << LayerMask.NameToLayer("UnPassableWall"));
             rayUnderGroundCheck = Physics2D.Raycast(transform.position + new Vector3(transform.localScale.x * (1f / 2f) * -Direction, 0, 0), new Vector3(0, -1, 0), transform.localScale.y * (59f / 70f), 1 << LayerMask.NameToLayer("Ground"));
             rayFloorGroundCheck = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), transform.localScale.y * (59f / 70f), 1 << LayerMask.NameToLayer("Ground"));
-            // 앞에 땅이 있다면 점프로 도약
+            // 앞쪽에 땅(점프지형)이 있다면 점프로 도약, 앞쪽에 땅이 없다면(땅이 끝나면) 도약 
             if (isGround && rayFrontGroundCheck.collider != null || (rayFloorGroundCheck.collider == null && isGround))
-                rb.velocity = new Vector2(stat.MoveSpeed * Direction, stat.JumpPower);
+            {
+                anim.SetBool("Idle", false);
+                anim.SetBool("Walk", true);
+                rb.velocity = new Vector2((stat.MoveSpeed - 1f + 0.6f * (transform.localScale.y / 0.7f)) * Direction, stat.JumpPower + ((transform.localScale.y * 1f) / 7f));
+            }
 
             // 앞에 벽이 있다면 방향전환
             if (isGround && rayFrontWallCheck.collider != null)
