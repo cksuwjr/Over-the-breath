@@ -41,6 +41,8 @@ public class EnemyAI2 : MonoBehaviour
     GameObject AttackTarget;
     GameObject mySpawner;
 
+    public bool FixAttackTarget = false;
+
     void Start()
     {
         // 기본 초기화
@@ -297,13 +299,18 @@ public class EnemyAI2 : MonoBehaviour
 
             ChaseCoroutine = StartCoroutine("ChaseEnemy"); // 쫒기 시작
 
-            yield return new WaitForSeconds(10f); // 10초 후 어그로 풀림
-            StopCoroutine(ChaseCoroutine);
+            if (FixAttackTarget && AttackTarget != null) // 공격타겟이 고정이고 null이 아니면
+            {
+            }
+            else {
+                yield return new WaitForSeconds(10f); // 10초 후 어그로 풀림
+                StopCoroutine(ChaseCoroutine);
 
-            // 기본 활동 재개
-            if (ActCoroutine != null)
-                StopCoroutine(ActCoroutine);
-            ActCoroutine = StartCoroutine("Act");
+                // 기본 활동 재개
+                if (ActCoroutine != null)
+                    StopCoroutine(ActCoroutine);
+                ActCoroutine = StartCoroutine("Act");
+            }
         }
         else
         {

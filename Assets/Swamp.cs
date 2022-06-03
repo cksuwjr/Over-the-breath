@@ -5,9 +5,7 @@ using UnityEngine;
 public class Swamp : MonoBehaviour            
 {                                                      
     private List<GameObject> Slimes;
-
-    public GameObject King;
-    
+    public List<string> AbsorbableTarget;
 
     private void Start()
     {
@@ -16,13 +14,16 @@ public class Swamp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Neutrality" && (col.name == "Slime(Clone)" || col.name == "Slime"))
+        bool Absorbable = false;
+        foreach (string target in AbsorbableTarget)
         {
-            ChangeKing();
-
+            if (col.name == target)
+                Absorbable = true;
+        }
+        if (col.tag == "Neutrality" && Absorbable)
+        {
             Slimes.Add(col.gameObject);
             col.transform.GetChild(2).GetComponent<Slime>().MySwamp = gameObject;
-
         }
 
         if(col.tag == "Player")
@@ -34,11 +35,17 @@ public class Swamp : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if(col.tag == "Neutrality" && (col.name == "Slime(Clone)" || col.name == "Slime"))
+        bool Absorbable = false;
+        foreach (string target in AbsorbableTarget)
         {
+            if (col.name == target)
+                Absorbable = true;
+        }
+        if (col.tag == "Neutrality" && Absorbable)
+        {
+            col.transform.GetChild(2).GetComponent<Slime>().MySwamp = null;
             Slimes.Remove(col.gameObject);
 
-            ChangeKing();
         }
 
         if (col.tag == "Player")
@@ -47,13 +54,6 @@ public class Swamp : MonoBehaviour
             col.GetComponent<Move>().RemoveDebuff("Jump");
         }
     }
-
-    void ChangeKing()
-    {
-        if (Slimes.Count > 0)
-            King = Slimes[0].gameObject;
-    }
-
     public void KillOther(GameObject otherSlime)
     {
         Slimes.Remove(otherSlime);
