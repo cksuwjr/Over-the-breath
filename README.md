@@ -7,9 +7,11 @@
 Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
 그림소스는 모두 직접 제작하였습니다.<br>
 
- 아래 링크를 클릭하면 파일을 다운로드하여 직접 플레이 해볼 수 있습니다.<br>
- 현재 파일 버그로 인하여 보스 씬만 플레이 가능합니다.<br>
-https://drive.google.com/drive/folders/1YBjhcL-chmx9le5CZlGs0Xc9HcINCGS8?usp=share_link
+ 아래 링크를 클릭하면 파일을 다운로드하여 직접 플레이 해볼 수 있습니다.<br><br>
+ 전체 플레이하기 ↓ <br>
+ https://drive.google.com/file/d/1W9FQRvLYu3epdTElPNimg7XcB6Sp8KBL/view?usp=share_link<br>
+ 보스씬만 플레이하기 ↓ <br>
+https://drive.google.com/drive/folders/1YBjhcL-chmx9le5CZlGs0Xc9HcINCGS8?usp=share_link<br>
 <br><br><br>
  아래 링크을 클릭하면 유튜브 링크로 이동해 플레이 동영상을 시청할 수 있습니다. <br> 
  현재 파일 버그로 인하여 동영상은 보스 플레이 씬만 업로드 해 두었으며 나머지는 아래 GIF들을 참조해 주시기 바랍니다.<br>
@@ -176,7 +178,7 @@ Desire Of Tree           <br>
   지진발생 주변의 대상이 땅에 맞닿아 있는 상태라면 매우 큰 피해를 입습니다.
   
   또한 나무줄기는 바닥에 남으며 지면판정을 갖습니다.
-
+```
 
 
 
