@@ -47,6 +47,7 @@ MonoBehaviour:
   AbsorbableTarget:
   - Slime
   - Slime(Clone)
+  NeedSwamp: 1
   MySwamp: {fileID: 0}
 --- !u!61 &6280385135248443372
 BoxCollider2D:
@@ -410,6 +411,7 @@ GameObject:
   - component: {fileID: 7020062274740241207}
   - component: {fileID: 7020062274740241205}
   - component: {fileID: 1695337277}
+  - component: {fileID: 6877993893674847482}
   m_Layer: 6
   m_Name: Slime
   m_TagString: Neutrality
@@ -573,3 +575,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageText: {fileID: 3390887777086309186, guid: 2f7cf56da97c16245a7a9d969c86658d, type: 3}
+  FixAttackTarget: 0
+--- !u!114 &6877993893674847482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020062274740241201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20bb0f2631ecee4cae61e802341c90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageText: {fileID: 0}
+  MyEnemyType: 
+  isBoss: 0
+  Bossstance: 0.5
+  plus_stat: []
+  plus_value: []
+  HittedAndStartStory: 
+  DieAndStartStory: 
+  CheckCondition: []
+  IfIDieCheckAcheivePlease: 

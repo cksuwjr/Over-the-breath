@@ -11,6 +11,8 @@ public class TrapDamage : MonoBehaviour
 
     GameObject mySpawner;
 
+    GameObject RecentTarget;
+    GameObject SpawTrap;
     void Start()
     {
         if(traptype != "Fixed")
@@ -21,12 +23,13 @@ public class TrapDamage : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.name == "Deleter")
-        {
-            if (mySpawner != null)
-                mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
-            Destroy(gameObject);
-        }
+        if(traptype != "Fixed")
+            if (col.gameObject.name == "Deleter")
+            {
+                if (mySpawner != null)
+                    mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
+                Destroy(gameObject);
+            }
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -40,9 +43,31 @@ public class TrapDamage : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+
+        if (RecentTarget)
+        {
+            if (RecentTarget.tag == "Player")
+            {
+                RecentTarget.GetComponent<Move>().RemoveDebuff("Speed", 0.1f);
+                RecentTarget.GetComponent<Move>().RemoveDebuff("Jump", 0.1f);
+            }
+            else
+            {
+                Status targetStat = RecentTarget.GetComponent<Status>();
+                targetStat.MoveSpeed = targetStat.BasicSpeed;
+                targetStat.JumpPower = targetStat.BasicJumpPower;
+            }
+            if(SpawTrap)
+                Destroy(SpawTrap);
+        }
+    }
 
     IEnumerator BindTrap(GameObject target, GameObject SpawnedTrap)
     {
+        RecentTarget = target;
+        SpawTrap = SpawnedTrap;
         GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
         GetComponent<CircleCollider2D>().isTrigger = true;
 

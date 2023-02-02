@@ -182,8 +182,15 @@ public class Move : MonoBehaviour
                 break;
         }
     }
-    public void RemoveDebuff(string what)
+    public void RemoveDebuff(string what, float time = 0)
     {
+        StartCoroutine(RemoveDebuff22(what, time));
+    }
+    IEnumerator RemoveDebuff22(string what, float time)
+    {
+        if (gameObject.activeSelf == false)
+            yield break;
+        yield return new WaitForSeconds(time);
         switch (what)
         {
             case "Speed":
@@ -193,6 +200,6 @@ public class Move : MonoBehaviour
                 stat.JumpPower = stat.BasicJumpPower;
                 break;
         }
-    }
 
+    }
 }
