@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: FireArrows
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 7c8c65f61527f3d4b83d0b6914a251f0, type: 3}
+  skillName: "\uBD88\uD654\uC0B4\uC138\uB840"
+  skillDescription: "\uC804\uBC29\uC5D0 \uBD88\uD654\uC0B4\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+  values:
+  - basicValue: 50
+    ratio: 30
+    count: 2
+    cooldownTime: 4
+  - basicValue: 60
+    ratio: 35
+    count: 2
+    cooldownTime: 4
+  - basicValue: 70
+    ratio: 40
+    count: 2
+    cooldownTime: 4
+  - basicValue: 80
+    ratio: 45
+    count: 2
+    cooldownTime: 4
+  - basicValue: 90
+    ratio: 50
+    count: 2
+    cooldownTime: 4
+  - basicValue: 70
+    ratio: 40
+    count: 3
+    cooldownTime: 3.5
+  - basicValue: 80
+    ratio: 45
+    count: 3
+    cooldownTime: 3.5
+  - basicValue: 90
+    ratio: 50
+    count: 3
+    cooldownTime: 3.5
+  - basicValue: 100
+    ratio: 55
+    count: 3
+    cooldownTime: 3.5
+  - basicValue: 110
+    ratio: 60
+    count: 3
+    cooldownTime: 3.5
+  - basicValue: 90
+    ratio: 50
+    count: 4
+    cooldownTime: 3
+  - basicValue: 100
+    ratio: 55
+    count: 4
+    cooldownTime: 3
+  - basicValue: 110
+    ratio: 60
+    count: 4
+    cooldownTime: 3
+  - basicValue: 120
+    ratio: 65
+    count: 4
+    cooldownTime: 3
+  - basicValue: 130
+    ratio: 70
+    count: 4
+    cooldownTime: 3
+  - basicValue: 110
+    ratio: 60
+    count: 5
+    cooldownTime: 2.5
+  - basicValue: 120
+    ratio: 65
+    count: 5
+    cooldownTime: 2.5
+  - basicValue: 130
+    ratio: 70
+    count: 5
+    cooldownTime: 2.5
+  - basicValue: 140
+    ratio: 75
+    count: 5
+    cooldownTime: 2.5
+  - basicValue: 150
+    ratio: 80
+    count: 5
+    cooldownTime: 2.5

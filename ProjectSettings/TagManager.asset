@@ -13,6 +13,7 @@ TagManager:
   - SpawnerGroup
   - AcheiveList
   - trap
+  - PlayerHitbox
   layers:
   - Default
   - TransparentFX
@@ -23,9 +24,9 @@ TagManager:
   - Enemy
   - Player
   - Wall
-  - TeleportCalculator
-  - UnPassableWall
   - 
+  - UnPassableWall
+  - EnemyAttack
   - 
   - 
   - 
@@ -47,8 +48,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1362759113
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 656927013
     locked: 0
   - name: Ground
     uniqueID: 3459999927

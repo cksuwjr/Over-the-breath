@@ -1,63 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class StoryScenarioStarter : MonoBehaviour
 {
-    UIManager officialUI;
     [SerializeField]
-    public List<GameObject> SpawnSomeThing;
-    public float SpawnPlusX;
-    public float SpawnPlusY;
-    public float SpawnLandomPlusAll;
-    public string SpawnedDieAndStartStory;
+    public List<GameObject> SpawnedThing;
 
+    [SerializeField] private PlayableDirector dir;
 
-    public float StartDelay = 0;
-    public bool MonsterFreeze = true;
-    public string CutScene;
-
-    public List<string> CheckCondition;
-    public string IfSpawnedDieCheckAcheivePlease;
-
-    void Start()
+    private void Awake()
     {
-        officialUI = GameObject.Find("UI").GetComponent<UIManager>();
+        foreach (GameObject n in SpawnedThing)
+        {
+            n.GetComponent<Monster>().binded = true;
+        }
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player") {
-            bool Checking = true;
-            AcheiveList acheiveList = GameObject.Find("CheckList").GetComponent<AcheiveList>();
-            foreach (string condition in CheckCondition)
-            {
-                if (!acheiveList.CheckPlease(condition))
-                    Checking = false;
-            }
+        if (GameManager.Instance.StoryManager.nowStoryReading) return;
+        if (DataManager.Instance.data != null)
+            if(DataManager.Instance.data.isReadStory(name)) return;
 
-            if (Checking)
+        if (collision.tag == "Player")
+        {
+            if (dir) dir.Play();
+
+            foreach (GameObject n in SpawnedThing)
             {
-                if (SpawnSomeThing.Count > 0)
-                {
-                    foreach (GameObject n in SpawnSomeThing)
-                    {
-                        GameObject Spawned = Instantiate(n, transform.position + new Vector3(SpawnPlusX + Random.Range(-SpawnLandomPlusAll, SpawnLandomPlusAll), SpawnPlusY + Random.Range(0, SpawnLandomPlusAll), 0), Quaternion.identity);
-                        if (n != null && (n.tag == "Enemy" || n.tag == "Neutrality"))
-                        {
-                            if (Spawned.tag == "Enemy" || Spawned.tag == "Neutrality")
-                            {
-                                Spawned.GetComponent<EnemyAI>().SetAttackTarget(GameObject.FindGameObjectWithTag("Player"));
-                                Spawned.GetComponent<EnemyAI>().DieAndStartStory = SpawnedDieAndStartStory;
-                                Spawned.GetComponent<EnemyAI>().IfIDieCheckAcheivePlease = IfSpawnedDieCheckAcheivePlease;
-                            }
-                        }
-                    }
-                }
-                officialUI.StartCoroutine(officialUI.StartScenario(name, StartDelay, MonsterFreeze, CutScene));
-                Destroy(gameObject);
+                n.GetComponent<Monster>().binded = false;
+                n.GetComponent<Rigidbody2D>().velocity = new Vector2(0, n.GetComponent<Rigidbody2D>().velocity.y);
+                n.GetComponent<Monster>().SetAttackTarget(GameManager.Instance.Player.gameObject);
             }
-        }
-            
+            GameManager.Instance.StoryManager.StartScenario(name);
+            GameManager.Instance.SaveGame();
+
+            gameObject.SetActive(false);
+        }  
     }
 
 

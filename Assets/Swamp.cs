@@ -25,12 +25,6 @@ public class Swamp : MonoBehaviour
             Slimes.Add(col.gameObject);
             col.transform.GetChild(2).GetComponent<Slime>().MySwamp = gameObject;
         }
-
-        if(col.tag == "Player")
-        {
-            col.GetComponent<Move>().ApplyDebuff("Speed", 2.5f);
-            col.GetComponent<Move>().ApplyDebuff("Jump", 1.5f);
-        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -48,11 +42,6 @@ public class Swamp : MonoBehaviour
 
         }
 
-        if (col.tag == "Player")
-        {
-            col.GetComponent<Move>().RemoveDebuff("Speed");
-            col.GetComponent<Move>().RemoveDebuff("Jump");
-        }
     }
     public void KillOther(GameObject otherSlime)
     {

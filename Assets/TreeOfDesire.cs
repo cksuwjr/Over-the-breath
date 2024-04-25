@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TreeOfDesire : MonoBehaviour
+public class TreeOfDesire : Monster
 {
-    Animator anim;
-    Status stat;
     enum Faze
     {
         Faze1,
@@ -17,74 +15,46 @@ public class TreeOfDesire : MonoBehaviour
 
     int EyePosition = 2;
 
-    GameObject HPUI;
-    Image HPbar;
-    public GameObject DamageText;
-
-
-
-    Coroutine AppearHPUICoroutine;
-
-
     public GameObject Seed;
     public GameObject Weed;
     public GameObject EarthquakeWeed;
 
-
-    Coroutine ActCoroutine;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void LevelUp()
     {
-        anim = GetComponent<Animator>();
-
-        // UI 관련
-        HPUI = transform.GetChild(0).gameObject;
-        HPbar = HPUI.transform.GetChild(1).gameObject.GetComponent<Image>();
-
-        if (DamageText == null)
-            DamageText = Resources.Load("Prefab/DamageUim") as GameObject;
-
-        stat = GetComponent<Status>();
-
-
-
-
-
-
-
-        ActCoroutine = StartCoroutine("Act");
+        float nowHp = stat.HP;
+        base.LevelUp();
+        stat.HP = nowHp;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    IEnumerator Act()
+    protected override IEnumerator Act()
     {
         // 랜덤 룰렛
         int Actnum = 0;
         if (MyFaze == Faze.Faze1)
         {
-            Actnum = Random.Range(0, 2);
+            if (GameObject.Find("TreeOfDesire_Weed(Clone)") == null)
+                Actnum = Random.Range(0, 2);
+            else
+                Actnum = 0;
         }
         else if (MyFaze == Faze.Faze2)
         {
             Actnum = Random.Range(0, 4);
         }
         // 행동
-
         switch (Actnum)
         {
             case 0: // 수많은 씨앗소환
                 SummonSeeds(Random.Range(8,20));
                 break;
             case 1: // 줄기 소환
-                if(GameObject.Find("TreeOfDesire_Weed(Clone)") == null)
-                    SummonWeed(new Vector2(88.5f + 232.82f, -4.820125f - 20.84f), new Vector2(1,1));
-                
+                if (GameObject.Find("TreeOfDesire_Weed(Clone)") == null)
+                {
+                    if (MyFaze == Faze.Faze1)
+                        SummonWeed(new Vector2(88.5f + 232.82f, -4.820125f - 20.84f), new Vector2(1, 1));
+                    else if (MyFaze == Faze.Faze2)
+                        StartCoroutine(GrowingWeeds());
+                }
                 break;
             case 2: // 눈 위치 변환
                 ChangeEye();
@@ -93,10 +63,10 @@ public class TreeOfDesire : MonoBehaviour
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 if (player != null)
                 {
-                    if (player.transform.position.y < -0.8f)
+                    if (player.transform.position.y < -21.9f)
                     {
                         SummonEarthquake(player.transform.position.x);
-                        yield return new WaitForSeconds(2f);
+                        yield return new WaitForSeconds(4.5f);
                     }
                 }
 
@@ -107,10 +77,16 @@ public class TreeOfDesire : MonoBehaviour
         switch (Actnum)
         {
             case 0:
-                yield return new WaitForSeconds(5f);
+                if(MyFaze == Faze.Faze1)
+                    yield return new WaitForSeconds(5f);
+                else if(MyFaze == Faze.Faze2)
+                    yield return new WaitForSeconds(2f);
                 break;
             case 1:
-                yield return new WaitForSeconds(10f);
+                if (MyFaze == Faze.Faze1)
+                    yield return new WaitForSeconds(10f);
+                else if (MyFaze == Faze.Faze2)
+                    yield return new WaitForSeconds(3f);
                 break;
             case 2:
                 yield return new WaitForSeconds(1f);
@@ -119,7 +95,7 @@ public class TreeOfDesire : MonoBehaviour
                 yield return new WaitForSeconds(0f);
                 break;
             default:
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(0f);
                 break;
         }
         ActCoroutine = StartCoroutine("Act");
@@ -137,44 +113,73 @@ public class TreeOfDesire : MonoBehaviour
         switch (EyePosition)
         {
             case 0:
-                spawnpos = new Vector2(transform.position.x, 3.3f);
+                spawnpos = new Vector2(transform.position.x, -23.3f + 1.55f + 1.6f);
                 break;
             case 1:
-                spawnpos = new Vector2(transform.position.x, 1.7f);
+                spawnpos = new Vector2(transform.position.x, -23.3f + 1.55f);
                 break;
             case 2:
-                spawnpos = new Vector2(transform.position.x, 0.15f);
+                spawnpos = new Vector2(transform.position.x, -23.3f);
                 break;
             default:
-                spawnpos = transform.position;
+                spawnpos = new Vector2(transform.position.x, 0.15f);
                 break;
         }
-        GameObject Spawned = Instantiate(Seed, spawnpos, Quaternion.identity);
+        GameObject Spawned = PoolManager.Instance.Get(4);
+        Spawned.GetComponent<Status>().AttackPower = stat.AttackPower / 3;
+        Spawned.transform.position = spawnpos;
         Spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(0.02f, 0.04f)));
         yield return new WaitForSeconds(3f);
-        Spawned.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-        Spawned.GetComponent<CircleCollider2D>().isTrigger = true;
-        yield return new WaitForSeconds(3f);
-        Destroy(Spawned);
+        Spawned.SetActive(false);
     }
     void SummonWeed(Vector2 SummonPosition, Vector2 SummonScale)
     {
-        GameObject SpawnedWeed = Instantiate(Weed, SummonPosition, Quaternion.identity);
+        GameObject SpawnedWeed = PoolManager.Instance.Get(6);
+        SpawnedWeed.GetComponent<Status>().AttackPower = stat.AttackPower;
+        SpawnedWeed.GetComponent<Monster>().Body = gameObject;
+        SpawnedWeed.transform.position = SummonPosition;
         SpawnedWeed.transform.localScale = SummonScale;
     }
     void SummonEarthquake(float x)
-    {        
-        Instantiate(EarthquakeWeed, new Vector2(x, -3.538542f - 20.84f), Quaternion.identity);
-        
-    }
-    void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "PlayerAttack")
+        var weed = PoolManager.Instance.Get(8);
+        weed.transform.position = new Vector2(x, -3.538542f - 20.84f);
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(weed.transform.position + new Vector3(-2.13f, -2.36f), weed.transform.position + new Vector3(2.47f, 2.24f));
+        Collider2D[] myCollider = GetComponentsInChildren<Collider2D>();
+
+        List<GameObject> myEnemys = new List<GameObject>();
+
+        foreach (Collider2D collider in colliders)
         {
-            GetDamaged(GetRandomDamageValue(col.GetComponent<Fire>().Damage, 0.8f, 1.2f), GameObject.FindGameObjectWithTag("Player"));
-            Destroy(col.gameObject);
+            bool isMeinclude = false;
+            foreach (Collider2D mine in myCollider) if (collider == mine) isMeinclude = true;
+            if (isMeinclude) continue;
+
+            if (!myEnemys.Contains(collider.gameObject))
+                myEnemys.Add(collider.gameObject);
+        }
+        foreach (GameObject enemy in myEnemys)
+        {
+            var monster = enemy.GetComponent<Monster>();
+            var player = enemy.GetComponent<Player>();
+            if (monster)
+            {
+                if (!monster.die)
+                {
+                    monster.GetDamaged(stat.AttackPower, gameObject);
+                    monster.GetAirborne(new Vector3(0, 12));
+                }
+            }
+
+            if (player)
+            {
+                player.GetDamage(stat.AttackPower, gameObject);
+                player.GetAirborne(new Vector3(0, 12));
+            }
         }
     }
+
+
     // 랜덤 숫자 발급, Ontrigger의 GetDamage에 쓰임
     int GetRandomDamageValue(float OriginDamage, float minX, float maxX)
     {
@@ -183,62 +188,16 @@ public class TreeOfDesire : MonoBehaviour
         return Damage;
     }
 
-    // 데미지 입음
-    public void GetDamaged(float damage, GameObject Fromwho)
+    public override void DieEvent()
     {
-        stat.HP -= damage;                          // 체력감소
-        HPbar.fillAmount = stat.HP / stat.MaxHp;    // UI 업데이트
-
-        if (AppearHPUICoroutine != null)
-            StopCoroutine(AppearHPUICoroutine);
-        AppearHPUICoroutine = StartCoroutine("AppearHPUI");     // HP UI 보이기
-
-        PopUpDamageText(damage);
-
-        FazeCheck();
-
-        if (stat.HP <= 0)                           // 체력 다달면
-        {
-            Die(Fromwho);
-        }
-    }
-    void Die(GameObject Fromwho)
-    {
-        //if(Fromwho != null){
-        //      Fromwho.GetComponent<Status>().
-        //}
-        for(int i = 0; i < 5; i++)
-            if (GameObject.Find("TreeOfDesire_Weed(Clone)") != null)
-                Destroy(GameObject.Find("TreeOfDesire_Weed(Clone)"));
-        if (GameObject.Find("Trap") != null)
-            Destroy(GameObject.Find("Trap"));
-
-        GameObject nextstage = Instantiate(Resources.Load("Prefab/NextStage") as GameObject, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity);
-        SceneTransport nt = nextstage.GetComponent<SceneTransport>();
-        nt.NextScene = "new1-6";
-        nt.StartStory = "1-5DieTree";
-
-
-
-
-        Destroy(gameObject);
+        if (DieAndStartStory != "" && DieAndStartStory != null)
+            GameManager.Instance.StoryManager.StartScenario(DieAndStartStory);
+        //GameObject nextstage = Instantiate(Resources.Load("Prefab/NextStage") as GameObject, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity);
+        //SceneTransport nt = nextstage.GetComponent<SceneTransport>();
+        //nt.NextScene = "new1-6";
     }
 
-    // 체력바 UI 6초간 보이기
-    IEnumerator AppearHPUI()
-    {
-        HPUI.SetActive(true);
-        yield return new WaitForSeconds(6f);
-        HPUI.SetActive(false);
-    }
-
-    void PopUpDamageText(float damage)
-    {
-        GameObject DamageUI = Instantiate(DamageText, transform.localPosition, Quaternion.identity);
-        DamageUI.GetComponentInChildren<DamageUI>().Spawn((int)damage, gameObject);
-    }
-
-    void FazeCheck()
+    public override void HitEvent()
     {
 
         if (MyFaze == Faze.Faze1 && stat.HP < stat.MaxHp * 0.5f)
@@ -258,9 +217,17 @@ public class TreeOfDesire : MonoBehaviour
         Transform tr = transform;
         for (int i = 0; i < 10; i++)
         {
+            stat.HP += (stat.MaxHp * 0.05f);
+            stat.AttackPower += 10;
+            GetDamaged(1, gameObject);
+            DamageReceivePercent -= 0.05f;
+
             tr.position += new Vector3(0, 0.396f);
             yield return new WaitForSeconds(0.1f);
         }
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(GetComponent<CapsuleCollider2D>().offset.x, 1.7f);
+        stat.HP = stat.MaxHp;
+        GetDamaged(1, gameObject);
     }
     IEnumerator GrowingWeeds()
     {

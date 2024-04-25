@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: FireBall
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: c28d0cd2ac2958b408ec18297b3abb7e, type: 3}
+  skillName: "\uBD88\uB369\uC774 \uBC1C\uC0AC"
+  skillDescription: "\uC804\uBC29\uC5D0 \uBD88\uB369\uC774\uB97C \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+  values:
+  - basicValue: 0
+    ratio: 100
+    count: 0
+    cooldownTime: 0.3

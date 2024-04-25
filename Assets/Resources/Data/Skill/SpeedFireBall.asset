@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: SpeedFireBall
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 9a1c0cc31d867a44e84730482f161a79, type: 3}
+  skillName: "\uB354\uC6B1 \uB354 \uBE60\uB974\uAC8C"
+  skillDescription: "\uC9C0\uC18D\uC2DC\uAC04\uB3D9\uC548 \uC804\uBC29\uC5D0 \uBD88\uB369\uC774\uB97C
+    \uBE60\uB974\uAC8C \uBC1C\uC0AC\uD569\uB2C8\uB2E4"
+  values:
+  - basicValue: 0
+    ratio: 11
+    count: 11
+    cooldownTime: 0.165
+  - basicValue: 0
+    ratio: 12
+    count: 12
+    cooldownTime: 0.16
+  - basicValue: 0
+    ratio: 13
+    count: 13
+    cooldownTime: 0.155
+  - basicValue: 0
+    ratio: 14
+    count: 14
+    cooldownTime: 0.15
+  - basicValue: 0
+    ratio: 15
+    count: 15
+    cooldownTime: 0.145
+  - basicValue: 0
+    ratio: 16
+    count: 16
+    cooldownTime: 0.14
+  - basicValue: 0
+    ratio: 17
+    count: 17
+    cooldownTime: 0.135
+  - basicValue: 0
+    ratio: 18
+    count: 18
+    cooldownTime: 0.13
+  - basicValue: 0
+    ratio: 19
+    count: 19
+    cooldownTime: 0.125
+  - basicValue: 0
+    ratio: 20
+    count: 20
+    cooldownTime: 0.12
+  - basicValue: 0
+    ratio: 21
+    count: 21
+    cooldownTime: 0.115
+  - basicValue: 0
+    ratio: 22
+    count: 22
+    cooldownTime: 0.11
+  - basicValue: 0
+    ratio: 23
+    count: 23
+    cooldownTime: 0.105
+  - basicValue: 0
+    ratio: 24
+    count: 24
+    cooldownTime: 0.1
+  - basicValue: 0
+    ratio: 25
+    count: 25
+    cooldownTime: 0.095
+  - basicValue: 0
+    ratio: 26
+    count: 26
+    cooldownTime: 0.09
+  - basicValue: 0
+    ratio: 27
+    count: 27
+    cooldownTime: 0.085
+  - basicValue: 0
+    ratio: 28
+    count: 28
+    cooldownTime: 0.08
+  - basicValue: 0
+    ratio: 29
+    count: 29
+    cooldownTime: 0.075
+  - basicValue: 0
+    ratio: 30
+    count: 30
+    cooldownTime: 0.07

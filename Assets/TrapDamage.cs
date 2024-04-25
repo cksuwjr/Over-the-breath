@@ -2,125 +2,50 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.UIElements;
 
-public class TrapDamage : MonoBehaviour
+public class TrapDamage : Monster
 {
-    public float trapDamage = 10;
-    public string traptype = "Fixed";
     public GameObject bindTrap;
-
-    GameObject mySpawner;
-
-    GameObject RecentTarget;
-    GameObject SpawTrap;
-    void Start()
-    {
-        if(traptype != "Fixed")
-        {
-            StartCoroutine(CheckingGravity());
-        }
-    }
+    float sustainTime = 0.6f;
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(traptype != "Fixed")
-            if (col.gameObject.name == "Deleter")
-            {
-                if (mySpawner != null)
-                    mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
-                Destroy(gameObject);
-            }
+        if(col.gameObject.name == "Deleter")
+        {
+            gameObject.SetActive(false);
+        }
+        if (col.tag == "PlayerHitbox")
+        {
+            if (col.GetComponentInParent<Player>())
+                col.GetComponentInParent<Player>().CC(bindTrap, GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), sustainTime);
+            else if (col.GetComponentInParent<Monster>())
+                col.GetComponentInParent<Monster>().CC(bindTrap, GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), sustainTime);
+            col.GetComponent<CrashHitbox>().ContactHitByTrap(GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f));
+            GameManager.Instance.UIManager.SetDieMessage(playerKillMessage);
+            gameObject.SetActive(false);
+        }
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Neutrality" || col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Neutrality")
         {
-            if (traptype == "Bind")
-            {
-                GameObject Trap = Instantiate(bindTrap, col.transform.position, Quaternion.identity);
-                Trap.transform.SetParent(col.transform);
-                StartCoroutine(BindTrap(col.gameObject, Trap));
-            }
+            col.gameObject.GetComponent<Monster>().CC(bindTrap, GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), sustainTime);
+            col.gameObject.GetComponent<Monster>().GetDamaged(GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), null);
+            gameObject.SetActive(false);
         }
+        
     }
-    private void OnDestroy()
+    void Start()
     {
-
-        if (RecentTarget)
-        {
-            if (RecentTarget.tag == "Player")
-            {
-                RecentTarget.GetComponent<Move>().RemoveDebuff("Speed", 0.1f);
-                RecentTarget.GetComponent<Move>().RemoveDebuff("Jump", 0.1f);
-            }
-            else
-            {
-                Status targetStat = RecentTarget.GetComponent<Status>();
-                targetStat.MoveSpeed = targetStat.BasicSpeed;
-                targetStat.JumpPower = targetStat.BasicJumpPower;
-            }
-            if(SpawTrap)
-                Destroy(SpawTrap);
-        }
+        StartCoroutine(CheckingGravity());
     }
 
-    IEnumerator BindTrap(GameObject target, GameObject SpawnedTrap)
+    private void OnEnable()
     {
-        RecentTarget = target;
-        SpawTrap = SpawnedTrap;
-        GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
-        GetComponent<CircleCollider2D>().isTrigger = true;
-
-        Status targetStat = target.GetComponent<Status>();
-        Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
-        targetRb.velocity = new Vector2(0, targetRb.velocity.y);
-
-        if (target.tag == "Player")
-        {
-            target.GetComponent<Move>().ApplyDebuff("Speed", 5);
-            target.GetComponent<Move>().ApplyDebuff("Jump", 4.2f);
-        }
-        else
-        {
-            targetStat.MoveSpeed = 0;
-            targetStat.JumpPower = 1f;
-        }
-        for (int i = 0; i < 4; i++)
-        {
-            if (target.tag == "Player")
-                target.GetComponent<Player>().GetDamage((int)trapDamage);
-            else
-                target.GetComponent<EnemyAI2>().GetDamaged(trapDamage, gameObject);
-
-            if (GameObject.Find("TreeOfDesire") != null) // ¿å¸ÁÀÇ³ª¹«°¡ ÀÖ´Ù¸é 
-            {
-                GameObject.Find("TreeOfDesire").GetComponent<Status>().MaxHp += trapDamage;
-                GameObject.Find("TreeOfDesire").GetComponent<Status>().HP += trapDamage;
-            }
-            yield return new WaitForSeconds(0.65f);
-            if (target == null)
-            {
-                if (mySpawner != null)
-                    mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
-                Destroy(SpawnedTrap);
-                Destroy(gameObject);
-                yield break;
-            }
-        }
-        if (target.tag == "Player")
-        {
-            target.GetComponent<Move>().RemoveDebuff("Speed");
-            target.GetComponent<Move>().RemoveDebuff("Jump");
-        }
-        else
-        {
-            targetStat.MoveSpeed = targetStat.BasicSpeed;
-            targetStat.JumpPower = targetStat.BasicJumpPower;
-        }
-        if (mySpawner != null)
-            mySpawner.GetComponent<EnemySpawnManager>().AdjustEnemyCount(-1);
-        Destroy(SpawnedTrap);
-        Destroy(gameObject);
+        StopAllCoroutines();
+        StartCoroutine(CheckingGravity());
     }
 
     IEnumerator CheckingGravity()
@@ -128,14 +53,16 @@ public class TrapDamage : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         while (true)
         {
-            if (rb.velocity.y < -13)
-                rb.velocity = new Vector2(rb.velocity.x, -13);
+            if (rb.velocity.y < -10)
+                rb.velocity = new Vector2(rb.velocity.x, -10);
             yield return null;
         }
     }
 
-    public void MySpawner(GameObject spawner)
+    int GetRandomDamageValue(int OriginDamage, float minX, float maxX)
     {
-        mySpawner = spawner;
+        int Damage;
+        Damage = (int)(OriginDamage * UnityEngine.Random.Range(minX, maxX));
+        return Damage;
     }
 }

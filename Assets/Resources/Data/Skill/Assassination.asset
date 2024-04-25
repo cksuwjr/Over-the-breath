@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: Assassination
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 069af5ae24c0e8641ac01a555d724cb0, type: 3}
+  skillName: "\uC554\uC0B4"
+  skillDescription: "\uACBD\uB85C\uB85C \uB3CC\uC9C4\uD558\uBA70 \uC811\uCD09\uD55C
+    \uCCAB \uB300\uC0C1\uC5D0\uAC8C \uD070  \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  values:
+  - basicValue: 0
+    ratio: 325
+    count: 0
+    cooldownTime: 24.5
+  - basicValue: 0
+    ratio: 350
+    count: 0
+    cooldownTime: 24
+  - basicValue: 0
+    ratio: 375
+    count: 0
+    cooldownTime: 23.5
+  - basicValue: 0
+    ratio: 400
+    count: 0
+    cooldownTime: 23
+  - basicValue: 0
+    ratio: 425
+    count: 0
+    cooldownTime: 22.5
+  - basicValue: 0
+    ratio: 450
+    count: 0
+    cooldownTime: 22
+  - basicValue: 0
+    ratio: 475
+    count: 0
+    cooldownTime: 21.5
+  - basicValue: 0
+    ratio: 500
+    count: 0
+    cooldownTime: 21
+  - basicValue: 0
+    ratio: 525
+    count: 0
+    cooldownTime: 20.5
+  - basicValue: 0
+    ratio: 550
+    count: 0
+    cooldownTime: 20
+  - basicValue: 0
+    ratio: 575
+    count: 0
+    cooldownTime: 19.5
+  - basicValue: 0
+    ratio: 600
+    count: 0
+    cooldownTime: 19
+  - basicValue: 0
+    ratio: 625
+    count: 0
+    cooldownTime: 18.5
+  - basicValue: 0
+    ratio: 650
+    count: 0
+    cooldownTime: 18
+  - basicValue: 0
+    ratio: 675
+    count: 0
+    cooldownTime: 17.5
+  - basicValue: 0
+    ratio: 700
+    count: 0
+    cooldownTime: 17
+  - basicValue: 0
+    ratio: 725
+    count: 0
+    cooldownTime: 16.5
+  - basicValue: 0
+    ratio: 750
+    count: 0
+    cooldownTime: 16
+  - basicValue: 0
+    ratio: 775
+    count: 0
+    cooldownTime: 15.5
+  - basicValue: 0
+    ratio: 800
+    count: 0
+    cooldownTime: 15
+  - basicValue: 0
+    ratio: 825
+    count: 0
+    cooldownTime: 14.5
+  - basicValue: 0
+    ratio: 850
+    count: 0
+    cooldownTime: 14
+  - basicValue: 0
+    ratio: 875
+    count: 0
+    cooldownTime: 13.5
+  - basicValue: 0
+    ratio: 900
+    count: 0
+    cooldownTime: 13
+  - basicValue: 0
+    ratio: 925
+    count: 0
+    cooldownTime: 12.5
+  - basicValue: 0
+    ratio: 950
+    count: 0
+    cooldownTime: 12
+  - basicValue: 0
+    ratio: 975
+    count: 0
+    cooldownTime: 11.5
+  - basicValue: 0
+    ratio: 1000
+    count: 0
+    cooldownTime: 11
+  - basicValue: 0
+    ratio: 1000
+    count: 0
+    cooldownTime: 10.5
+  - basicValue: 0
+    ratio: 1000
+    count: 0
+    cooldownTime: 10

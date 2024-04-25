@@ -69,7 +69,7 @@ TextureImporter:
       213: 4870639806077949396
     second: Archer_Idle_21
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -86,10 +86,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -128,6 +130,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -139,6 +143,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -151,6 +156,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -628,9 +647,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Archer_Idle_0: 7257567913506708742
+      Archer_Idle_1: -7989796299022447421
+      Archer_Idle_10: 2895777377453213168
+      Archer_Idle_11: -6645188465268769871
+      Archer_Idle_12: -4327610988330461233
+      Archer_Idle_13: 7235323171992937227
+      Archer_Idle_14: 3862754210149673876
+      Archer_Idle_15: -295891447801749253
+      Archer_Idle_16: -6818882915230905997
+      Archer_Idle_17: 6132821573554866606
+      Archer_Idle_18: 1449332396672730121
+      Archer_Idle_19: 1320147708228771720
+      Archer_Idle_2: 7725435616784934678
+      Archer_Idle_20: 8830202872948999002
+      Archer_Idle_21: 4870639806077949396
+      Archer_Idle_3: -1293103732667120055
+      Archer_Idle_4: 427913027731640163
+      Archer_Idle_5: -9045297040117572726
+      Archer_Idle_6: -5331585823398874594
+      Archer_Idle_7: -2577346898311414780
+      Archer_Idle_8: -2748943254937013634
+      Archer_Idle_9: 1651091794036586734
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

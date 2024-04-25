@@ -38,7 +38,7 @@ public class Slime : MonoBehaviour
 
                             parentTransform.localScale = new Vector2(parentTransform.localScale.x + colTransform.localScale.x * (2f / 7f), parentTransform.localScale.y + colTransform.localScale.y * (2f / 7f));
 
-                            col.GetComponent<EnemyAI2>().Die(transform.parent.gameObject);
+                            //col.GetComponent<EnemyAI2>().Die(transform.parent.gameObject);
                         }
                     }
                 }
@@ -58,7 +58,7 @@ public class Slime : MonoBehaviour
 
                     parentTransform.localScale = new Vector2(parentTransform.localScale.x + colTransform.localScale.x * (1f / 10f), parentTransform.localScale.y + colTransform.localScale.y * (1f / 10f));
 
-                    col.GetComponent<EnemyAI2>().Die(transform.parent.gameObject);
+                    //col.GetComponent<EnemyAI2>().Die(transform.parent.gameObject);
                 }
             }
         }
