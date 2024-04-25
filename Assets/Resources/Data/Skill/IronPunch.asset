@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: IronPunch
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: abdde658915b73e459d56577ea5ed6be, type: 3}
+  skillName: "\uAC15\uCCA0 \uC8FC\uBA39"
+  skillDescription: "\uC804\uBC29\uC744 \uD5A5\uD574 \uC8FC\uBA39\uC744 \uD718\uB450\uB974\uBA70
+    \uB3CC\uC9C4\uD569\uB2C8\uB2E4"
+  values:
+  - basicValue: 0
+    ratio: 124
+    count: 0
+    cooldownTime: 0.295
+  - basicValue: 0
+    ratio: 128
+    count: 0
+    cooldownTime: 0.29
+  - basicValue: 0
+    ratio: 132
+    count: 0
+    cooldownTime: 0.285
+  - basicValue: 0
+    ratio: 136
+    count: 0
+    cooldownTime: 0.28
+  - basicValue: 0
+    ratio: 140
+    count: 0
+    cooldownTime: 0.275
+  - basicValue: 0
+    ratio: 144
+    count: 0
+    cooldownTime: 0.27
+  - basicValue: 0
+    ratio: 148
+    count: 0
+    cooldownTime: 0.265
+  - basicValue: 0
+    ratio: 152
+    count: 0
+    cooldownTime: 0.26
+  - basicValue: 0
+    ratio: 156
+    count: 0
+    cooldownTime: 0.255
+  - basicValue: 0
+    ratio: 160
+    count: 0
+    cooldownTime: 0.25
+  - basicValue: 0
+    ratio: 164
+    count: 0
+    cooldownTime: 0.245
+  - basicValue: 0
+    ratio: 168
+    count: 0
+    cooldownTime: 0.24
+  - basicValue: 0
+    ratio: 172
+    count: 0
+    cooldownTime: 0.235
+  - basicValue: 0
+    ratio: 176
+    count: 0
+    cooldownTime: 0.23
+  - basicValue: 0
+    ratio: 180
+    count: 0
+    cooldownTime: 0.225
+  - basicValue: 0
+    ratio: 184
+    count: 0
+    cooldownTime: 0.22
+  - basicValue: 0
+    ratio: 188
+    count: 0
+    cooldownTime: 0.215
+  - basicValue: 0
+    ratio: 192
+    count: 0
+    cooldownTime: 0.21
+  - basicValue: 0
+    ratio: 196
+    count: 0
+    cooldownTime: 0.205
+  - basicValue: 0
+    ratio: 200
+    count: 0
+    cooldownTime: 0.2

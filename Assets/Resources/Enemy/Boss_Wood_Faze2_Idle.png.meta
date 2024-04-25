@@ -57,7 +57,7 @@ TextureImporter:
       213: 7661037888530442639
     second: Boss_Wood_Faze2_Idle_17
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -74,10 +74,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -116,6 +118,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -127,6 +131,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -139,6 +144,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -532,9 +551,27 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Boss_Wood_Faze2_Idle_0: 6122600359272609957
+      Boss_Wood_Faze2_Idle_1: 3853019343644607635
+      Boss_Wood_Faze2_Idle_10: 1992157554046108218
+      Boss_Wood_Faze2_Idle_11: 3808610397577462913
+      Boss_Wood_Faze2_Idle_12: -2787285379953080007
+      Boss_Wood_Faze2_Idle_13: 6781339035790882815
+      Boss_Wood_Faze2_Idle_14: -4810421252784223390
+      Boss_Wood_Faze2_Idle_15: -4564633764971266447
+      Boss_Wood_Faze2_Idle_16: 507399399904945030
+      Boss_Wood_Faze2_Idle_17: 7661037888530442639
+      Boss_Wood_Faze2_Idle_2: -713411977720899519
+      Boss_Wood_Faze2_Idle_3: -8383923766129030354
+      Boss_Wood_Faze2_Idle_4: -4524625920651441265
+      Boss_Wood_Faze2_Idle_5: 7699213485165545650
+      Boss_Wood_Faze2_Idle_6: -4273936720231867602
+      Boss_Wood_Faze2_Idle_7: 5331234410864339696
+      Boss_Wood_Faze2_Idle_8: -5028571325827225651
+      Boss_Wood_Faze2_Idle_9: 3355444518926652808
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

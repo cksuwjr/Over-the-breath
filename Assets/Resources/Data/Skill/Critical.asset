@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: Critical
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 548431a8491d95841b7fccbb4270e34a, type: 3}
+  skillName: "\uCE58\uBA85\uD0C0"
+  skillDescription: "\uD574\uB2F9\uBE44\uC728\uC758 \uCE58\uBA85\uD0C0 \uD655\uB960\uC744
+    \uC5BB\uC2B5\uB2C8\uB2E4."
+  values:
+  - basicValue: 0
+    ratio: 5
+    count: 0
+    cooldownTime: 0
+  - basicValue: 0
+    ratio: 10
+    count: 0
+    cooldownTime: 0
+  - basicValue: 0
+    ratio: 15
+    count: 0
+    cooldownTime: 0
+  - basicValue: 0
+    ratio: 20
+    count: 0
+    cooldownTime: 0
+  - basicValue: 0
+    ratio: 25
+    count: 0
+    cooldownTime: 0

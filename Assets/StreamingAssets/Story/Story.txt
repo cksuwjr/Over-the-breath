@@ -10,96 +10,123 @@ End                                          ( 스토리 끝낼 시 End 반드�
 ============= 1-1 ==============
 
 1-1start
-용용이:PlayerIdle,뭐야. 여긴 어디야.
-용용이:PlayerIdle,일단 여길 둘러봐야겠군
+용용이:PlayerIdle,윽.. 여긴.. 어디...?
+용용이:PlayerIdle,주변을 살펴봐야겠군
 용용이:PlayerIdle, (← → 방향키를 사용해 움직여보자)
 End
 
 1-1icanjump
-용용이:PlayerIdle,나 벌써 점프할 줄 알아?
+용용이:PlayerIdle,뭐야. 나 벌써 두 번 뛸 줄 알잖아?
 End
 
 1-1ishouldjump
-용용이:PlayerIdle,이 절벽은 점프해야 오를 수 있겠는걸
+용용이:PlayerIdle, 이 언덕은 점프해야 오를 수 있겠는걸
 용용이:PlayerIdle, (↑ 방향키를 사용해 점프해보자)
 End
 
 1-1icantgothere
-용용이:PlayerIdle,막다른 길이네. 아무래도 두 번 연달아 점프를 해야할 것 같아.
+용용이:PlayerIdle,막다른 길.. 아무래도 위로 올라가야 할 것 같네.
 용용이:PlayerIdle, (↑ 방향키를 연속으로 사용해 점프해보자)
 End
 
 1-1icantjumpover
-용용이:PlayerIdle,여기선 두 번 점프해도 안닿네..           아!
+용용이:PlayerIdle, 아야 머리 박았네.
+End
+
+1-1findbush
+용용이:PlayerIdle, 아차..! 앞에 가시덤불이 있잖아!?
+용용이:PlayerIdle, 그냥 지나가다간 찔리겠어!
+용용이:PlayerIdle, 일단 제거하고 지나가야겠다.
+용용이:PlayerIdle, Tab 키로 스킬창을 열면 배울 수 있는 두 가지 스킬이 있어.
+용용이:PlayerIdle, 둘 중 하나만 배울수 있으니 신중히 읽어보고 배워야겠다.
+용용이:PlayerIdle, 좌클릭으로 스킬을 누르면 배울 수 있나?
+End
+
+SkillDutorial
+용용이:PlayerIdle, 좋아. 이제 스킬을 배웠으니 단축키 등록만 하면 되겠어.
+용용이:PlayerIdle, 우클릭하고 QWER을 누르거나 클릭하면 될 것 같네.
+End
+
+
+1-1removebush
+용용이:PlayerIdle, 좋아! 이제 내려갈 수 있겠어!
+용용이:PlayerIdle, 경험치도 좀 오른 것 같고?
 End
 
 1-1findslime
 용용이:PlayerIdle, ...?
 슬라임:SlimeIdle, 끼익..!!
 용용이:PlayerIdle, 왠지 공격해올 것 같은데..
-용용이:PlayerIdle, (Q를 눌러 공격해보자)
 End
 
 1-1dieslime
-용용이:PlayerIdle, 어... 뭐지 체력이 좀 오른 것 같은걸?
+용용이:PlayerIdle, 어! 레벨이 오른 것 같아! 스킬을 좀 더 강화해볼까?
 End
 
 1-1noway
 용용이:PlayerIdle,음...! 막다른길이네...?
 용용이:PlayerIdle,왔던 길로 되돌아가기는 어려울 것 같아.
-용용이:PlayerIdle,벽을 좀 살펴볼까?
+용용이:PlayerIdle,어딘가에 틈이 없나 좀 살펴볼까?
 End
 
 1-1findway
-용용이:PlayerIdle,어? 여기 틈이 있는 것 같아
-용용이:PlayerIdle,지나갈 수 있겠는걸?
+용용이:PlayerIdle,어라? 여기서 바람이 느껴지는데?
+용용이:PlayerIdle, 흙이 좀 부드러운 것 같기도?
 End
 
 
 ================ 1-2 ===================
 
 start1-2
-용용이:PlayerIdle,어? 어어..?
+용용이:PlayerIdle,어? 어어..? 어어어!!
+용용이:PlayerIdle,으아아ㅏ!!
 End
 
 1-2gethurt
 용용이:PlayerIdle,으으... 다리를 다친 것 같아..
-용용이:PlayerIdle,한동안 두 번 연속 점프는 힘들겠는걸..
+용용이:PlayerIdle,한동안 연속 점프는 힘들겠는걸..
+End
+
+1-2DieWarrior
+기사:WarriorHitted, 으윽.. 내가 고작 여기서 죽게되다니..
+기사:WarriorHitted, 이상하다... 여긴 분명 초보사냥터 아닌가..?
+기사:WarriorHitted, 이상한 나뭇가지에.. 이상한 몬스터까지...
 End
 
 ================ 1-3 ===================
 
 1-3windblow
-용용이:PlayerIdle,으윽.. 여긴 바람이 거세네
+용용이:PlayerIdle, 이게 뭐야!?
+용용이:PlayerIdle, 여기까지 오는동안 뻗어나오던 촉수들이 설마..
+용용이:PlayerIdle, 이 나무 줄기 때문인건가??
 End
 
 1-3traptrap
-용용이:PlayerIdle,준내 악독하네 개발자쉨들
+용용이:PlayerIdle,으... 여기서 꼼짝없이 죽어야 하다니..
 End
 
 ================ 1-4 ===================
 
 start1-4
-용용이:PlayerIdle, 다리가 이제 안아픈것 같아
-용용이:PlayerIdle, 두 번 연속 점프할 수 있을 것 같아
-용용이:PlayerIdle, 여기부터는 좀 어둡네..
+용용이:PlayerIdle, 다리가 이제 안 아프다! 회복된건가?
+용용이:PlayerIdle, 여기는 좀 어둡고 음산하네..
 End
 
 1-4FoundSlime
-용용이:PlayerIdle, 슬라임이 무지 많네
-용용이:PlayerIdle, 몇몇은.. 나무뿌리에 흡수되고 있다..?
-욕망의 나무:TreeOfDesireIdle,크큭.. 새로운 거름이 들어왔구나
-용용이:PlayerIdle, 나무가 말을...!?  어디서 하는거지?
-욕망의 나무:TreeOfDesireIdle,찾지 않아도 된다. 허허. 그곳에서 소화될터이니
-욕망의 나무:TreeOfDesireIdle,너희를 먹을수록 내 체력과 공격력은 오를테지
-욕망의 나무:TreeOfDesireIdle,잎을 틔울 날이 머지 않았어
+용용이:PlayerIdle, 슬라임이 많네
+용용이:PlayerIdle, 근데... 아까 본 열매의 나무뿌리에 흡수되고 있어..?
+욕망의 나무:TreeOfDesireIdle,새로운 거름이 들어왔구나.
+용용이:PlayerIdle, 뭐야 누구야...!?
+욕망의 나무:TreeOfDesireIdle,나는 이 일대의 지배자. 너는 내 뿌리에 의해 소화될지니
+욕망의 나무:TreeOfDesireIdle,너희를 먹을수록 난 점점 멀리 뿌리 내릴 수 있을테지
+탈모의 나무:TreeOfDesireIdle,이제 잎을 틔울 날이 머지 않았어
 욕망의 나무:TreeOfDesireIdle,크하하하하하!!
 End
 
 1-4EscapeFrom
-욕망의 나무:TreeOfDesireIdle,말도 안돼.. 이렇게 쉽게 벗어나다니
-욕망의 나무:TreeOfDesireIdle, .. 네녀석을 흡수하면 더욱 큰 양분이 될테지
-욕망의 나무:TreeOfDesireIdle, 더 가까이 오거라.. 직접 흡수해주마
+욕망의 나무:TreeOfDesireIdle,말도 안돼.. 이렇게 쉽게 벗어난다고?
+욕망의 나무:TreeOfDesireIdle, .. 네녀석은 꽤 강하군. 직접 흡수하면 더욱 큰 양분이 될게야
+욕망의 나무:TreeOfDesireIdle, 더 가까이 오거라.. 내 직접 먹어치워주마!
 End
 
 1-4Safezone
@@ -109,39 +136,46 @@ End
 End
 
 1-4beforeTree
-용용이:PlayerIdle, (이 너머에 그 나무가 있는건가..)
+용용이:PlayerIdle, (이 절벽 너머에 그 나무가 있는건가..?)
 용용이:PlayerIdle, (다른길은 없는건가..? 너무 위험하다)
-용용이:PlayerIdle, (이대로 넘어가서 무찌를까. 아니면 돌아가서 슬라임을 통해 힘을 키우고 올까? 신중하게 선택하자.)
+용용이:PlayerIdle, (내가 지금 무찌를 수 있을까? 아니면 돌아가서 더 힘을 키워야할까? 신중하게 선택하자.)
 End
 
-================ 1 - 6 ===================
+================ 1 - 5 ===================
+
+1-5MeetTree
+욕망의 나무:TreeOfDesireIdle, 결국 이곳까지 당도하였는가..
+욕망의 나무:TreeOfDesireIdle, .. 좋다. 거름으로 만들어주지. 오너라!
+End
+
 
 1-5DieTree
-욕망의 나무:TreeOfDesireIdle, !!!!!!!!!!!!!!!! 어떻게 너 따위가..!!! 나를...!!
+욕망의 나무:TreeOfDesireIdle, !!!!!!!!!!!!!!!! 이럴수가...!!
 욕망의 나무:TreeOfDesireIdle, 조금만 더 모았더라면... 더 모았더라면...!!
-욕망의 나무:TreeOfDesireIdle, 양지바른 곳을 찾아 새로운 새싹을 틔워냈 을.. 터인데....
+욕망의 나무:TreeOfDesireIdle, 양지바른 곳에서 새로운 새싹을 틔워냈 을.. 터인데....
 욕망의 나무:TreeOfDesireIdle, 분... 하구나....
 용용이:PlayerIdle, 어떻게 여길 탈출하지?
 용용이:PlayerIdle, 주변을 좀 살펴봐야겠어
+:, Wait for next Update.
 End
 
 1-6FindEnter
-용용이:PlayerIdle, 나무가 있던 부분 지면이 약한것 같다..
+용용이:PlayerIdle, 나무가 있던 부분 지면이 ..  약해져버린 것 같다아아아악..!!
 End
 
+=============== 성장 =====================
 
-=============== Exercise =====================
-ExerciseTreeOfDesire
-욕망의 나무:TreeOfDesireIdle,크아아악!!!! 자라지 않아 자라지 않아!!!
-욕망의 나무:TreeOfDesireIdle,부족하다..... 부족해!!!
-용용이:PlayerIdle, 뭐가 부족하다는거지..?
-욕망의 나무:TreeOfDesireIdle,피...... 피가 필요해!!!!!
-욕망의 나무:TreeOfDesireIdle,머리가 자라지 않아... 머리... 피가 필요해!! 피!!!!!
-용용이:PlayerIdle, 아ㅋㅋㅎ 탈모였구낰ㅋㅋ 탈모쉨ㅋㅋㅎㅎㅎㅋㅋ
-욕망의 나무:TreeOfDesireIdle,이런 ㅅ
+ChangeIronDragon
+용용이:PlayerIdle, 윽 갑자기 날개가 돋아나버렸어!
+용용이:PlayerIdle, 힘도 넘쳐나고.. 뭔가 더 많은 것을 할 수 있을 것 같아!
+용용이:PlayerIdle, 아. 스킬 마저 단축키 등록해야지!
+용용이:PlayerIdle, 스킬을 우클릭하고 QWER을 누르거나 클릭하면 될 것 같네.
 End
 
-
+ChangeFireDragon
+용용이:PlayerIdle, 으흐흐..! 몸이 달아오르는데?
+용용이:PlayerIdle, 뭐라도 불태워야 기분이 좋아질 것 같은걸?
+End
 
 
 

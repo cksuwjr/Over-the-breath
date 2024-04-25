@@ -45,7 +45,7 @@ TextureImporter:
       213: 6846582777310166665
     second: Boss_Wood_Earthquake_13
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -62,10 +62,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -104,6 +106,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -115,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -127,6 +132,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -436,9 +455,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Boss_Wood_Earthquake_0: 2571412212764576783
+      Boss_Wood_Earthquake_1: -3419396460026610514
+      Boss_Wood_Earthquake_10: -390945738061451274
+      Boss_Wood_Earthquake_11: -2173077042541420112
+      Boss_Wood_Earthquake_12: 5115638892612757382
+      Boss_Wood_Earthquake_13: 6846582777310166665
+      Boss_Wood_Earthquake_2: 712548408085824444
+      Boss_Wood_Earthquake_3: -3191951027380155417
+      Boss_Wood_Earthquake_4: -6516560483204573667
+      Boss_Wood_Earthquake_5: 6831152437384523229
+      Boss_Wood_Earthquake_6: 7862626947470376104
+      Boss_Wood_Earthquake_7: -7210392602684698447
+      Boss_Wood_Earthquake_8: 5018769722807856416
+      Boss_Wood_Earthquake_9: -8765923655625934067
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

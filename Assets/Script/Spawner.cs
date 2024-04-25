@@ -6,30 +6,24 @@ using Cinemachine;
 
 public class Spawner : MonoBehaviour
 {
-
-    GameObject player;
-
-
-    void Start()
+    [SerializeField] GameObject playerPrefab;
+    private void Start()
     {
-        // Player ==============================================
-        player = GameObject.FindGameObjectWithTag("Player");
-
+        if(GameManager.Instance.Player == null)
+            PlayerSpawn();
+    }
+    public void PlayerSpawn()
+    {
+        if (playerPrefab != null)
+        {
+            Instantiate(playerPrefab, transform.position, Quaternion.identity);
+            GameObject.Find("CAM").GetComponent<CinemachineVirtualCamera>().Follow = GameManager.Instance.Player.transform;
+        }
     }
     public void PlayerReSpawn()
     {
-        GameObject newPlayer = Instantiate(Resources.Load("Prefab/Player"), new Vector2(transform.localPosition.x, transform.localPosition.y), Quaternion.identity) as GameObject;
-
-        newPlayer.GetComponent<Status>().StatInit(player.GetComponent<Status>());
-        newPlayer.GetComponent<Player>().ChangeDragon(player.GetComponent<Player>().ChangeMode);
-        Destroy(player);
-        player = newPlayer;
-        if (GameObject.Find("Constraints").GetComponent<PlayerConstraints>().JumpTwice)
-            player.GetComponent<Move>().JumpMaxCount = 2;
-        else
-            player.GetComponent<Move>().JumpMaxCount = 1;
-        GameObject.Find("CAM").GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
+        var player = GameManager.Instance.Player;
+        player.transform.position = transform.position;
+        player.gameObject.SetActive(true);
     }
-
-
 }

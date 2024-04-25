@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[System.Serializable]
 public class Status : MonoBehaviour
 {
     [SerializeField]
+    protected float _maxhp;
+    [SerializeField]
     protected float _hp;
     [SerializeField]
-    protected int _attackpower;
+    protected float _exp;
     [SerializeField]
-    protected float _maxhp;
+    protected float _maxExp;
+    [SerializeField]
+    protected int _level;
+
+    [SerializeField]
+    protected int _attackpower;
     [SerializeField]
     protected float _movespeed;
     [SerializeField]
@@ -20,6 +29,10 @@ public class Status : MonoBehaviour
 
     public float MaxHp { get { return _maxhp; } set { _maxhp = value; } }
     public float HP { get { return _hp; } set { _hp = value; } }
+    public float MaxExp { get { return _maxExp; } set { _maxExp = value; } }
+    public float Exp { get { return _exp; } set { _exp = value; } }
+    public int Level { get { return _level; } set { _level = value; } }
+
     public int AttackPower { get { return _attackpower; } set { _attackpower = value; } }
     public float MoveSpeed { get { return _movespeed; } set { _movespeed = value; } }
     public float BasicSpeed { get { return _basicspeed; } set { _basicspeed = value; } }
@@ -28,41 +41,26 @@ public class Status : MonoBehaviour
 
     private void Awake()
     {
-        if(_hp == 0)
-            _hp = 500f;
-        if (_attackpower == 0)
-            _attackpower = 50;
         if (_maxhp == 0)
-            _maxhp = 500f;
+            _maxhp = 50f;
+        if(_hp == 0)
+            _hp = 50f;
+        if (_maxExp == 0)
+            _maxExp = 15f;
+        if (_exp == 0)
+            _exp = 0f;
+        if (_level == 0)
+            _level = 1;
+        if (_attackpower == 0)
+            _attackpower = 12;
         if(_basicspeed == 0)
-            _basicspeed = 5f;
+            _basicspeed = 3.5f;
         if (_movespeed == 0)
-            _movespeed = 5f;
+            _movespeed = 3.5f;
         if (_jumppower == 0)
             _jumppower = 5f;
         if (_basicjumppower == 0)
             _basicjumppower = 5f;
 
-    }
-    public void StatInit(float hp, int power, float Maxhp, float Basicspeed, float Movespeed, float BasicJumppower, float Jumppower)
-    {
-        _maxhp = Maxhp;
-        _hp = hp;
-        _attackpower = power;
-        _basicspeed = Basicspeed;
-        _movespeed = Movespeed;
-        _basicjumppower = BasicJumppower;
-        _jumppower = Jumppower;
-    }
-    public void StatInit(Status stat)
-    {
-        _maxhp = stat.MaxHp;
-        _hp = stat.HP;
-        _attackpower = stat.AttackPower;
-        _basicspeed = stat.BasicSpeed;
-        _movespeed = stat.BasicSpeed;
-        //_movespeed = stat.MoveSpeed;
-        _basicjumppower = stat.BasicJumpPower;
-        _jumppower = stat.BasicJumpPower;
     }
 }

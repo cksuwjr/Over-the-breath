@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: FireRain
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 32a2fa5a894f10c47927fc7afbc891a4, type: 3}
+  skillName: "\uBD88 \uBE44"
+  skillDescription: "\uD558\uB298\uC5D0\uC11C \uBA54\uD14C\uC624\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4"
+  values:
+  - basicValue: 110
+    ratio: 24
+    count: 43
+    cooldownTime: 100
+  - basicValue: 120
+    ratio: 28
+    count: 46
+    cooldownTime: 97
+  - basicValue: 130
+    ratio: 32
+    count: 49
+    cooldownTime: 94
+  - basicValue: 140
+    ratio: 36
+    count: 52
+    cooldownTime: 91
+  - basicValue: 150
+    ratio: 40
+    count: 55
+    cooldownTime: 88
+  - basicValue: 160
+    ratio: 44
+    count: 58
+    cooldownTime: 85
+  - basicValue: 170
+    ratio: 48
+    count: 61
+    cooldownTime: 82
+  - basicValue: 180
+    ratio: 52
+    count: 64
+    cooldownTime: 79
+  - basicValue: 190
+    ratio: 56
+    count: 67
+    cooldownTime: 76
+  - basicValue: 200
+    ratio: 60
+    count: 70
+    cooldownTime: 73
+  - basicValue: 210
+    ratio: 64
+    count: 73
+    cooldownTime: 70
+  - basicValue: 220
+    ratio: 68
+    count: 76
+    cooldownTime: 67
+  - basicValue: 230
+    ratio: 72
+    count: 79
+    cooldownTime: 64
+  - basicValue: 240
+    ratio: 76
+    count: 82
+    cooldownTime: 61
+  - basicValue: 250
+    ratio: 80
+    count: 85
+    cooldownTime: 58
+  - basicValue: 260
+    ratio: 84
+    count: 88
+    cooldownTime: 55
+  - basicValue: 270
+    ratio: 88
+    count: 91
+    cooldownTime: 52
+  - basicValue: 280
+    ratio: 92
+    count: 94
+    cooldownTime: 49
+  - basicValue: 290
+    ratio: 96
+    count: 97
+    cooldownTime: 46
+  - basicValue: 300
+    ratio: 100
+    count: 100
+    cooldownTime: 43
