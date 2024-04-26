@@ -99,4 +99,10 @@ public class UIManager : MonoBehaviour
     {
         transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = say;
     }
+
+    public void SetPlayerMovable(bool tf)
+    {
+        GameManager.Instance.Player.GetComponent<Move>().Movable = tf;
+        GameManager.Instance.Player.GetComponent<PlayerSkill>().isMumchit = !tf;
+    }
 }

@@ -314,7 +314,8 @@ public class Monster : MonoBehaviour
         AttackTarget = target;
         if (ProceedingCoroutine != null)
             StopCoroutine(ProceedingCoroutine);
-        ProceedingCoroutine = StartCoroutine("SetActingTrue", 300f);
+        if(gameObject.activeSelf)
+            ProceedingCoroutine = StartCoroutine("SetActingTrue", 300f);
     }
     // Damage
     protected virtual void LevelUp()
