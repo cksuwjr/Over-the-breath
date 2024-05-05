@@ -11,8 +11,7 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
  https://github.com/cksuwjr/Over-the-breath/releases/tag/over_the_breath<br>
 <br><br><br>
  아래 링크을 클릭하면 유튜브 링크로 이동해 플레이 동영상을 시청할 수 있습니다. <br> 
- 현재 파일 버그로 인하여 동영상은 보스 플레이 씬만 업로드 해 두었으며 나머지는 아래 GIF들을 참조해 주시기 바랍니다.<br>
-https://youtu.be/U7NTqVgAsjM
+[https://youtu.be/U7NTqVgAsjM](https://youtu.be/lIJYplw54OI?si=vngYnEJqRhIpZKVg)
 
 <br><br><br>
 <h1>2022 / 05 / 17 이전</h1>
