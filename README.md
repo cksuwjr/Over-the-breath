@@ -8,10 +8,7 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
 그림소스는 모두 직접 제작하였습니다.<br>
 
  아래 링크를 클릭하면 파일을 다운로드하여 직접 플레이 해볼 수 있습니다.<br><br>
- 전체 플레이하기 ↓ <br>
- https://drive.google.com/file/d/1W9FQRvLYu3epdTElPNimg7XcB6Sp8KBL/view?usp=share_link<br>
- 보스씬만 플레이하기 ↓ <br>
-https://drive.google.com/drive/folders/1YBjhcL-chmx9le5CZlGs0Xc9HcINCGS8?usp=share_link<br>
+ https://github.com/cksuwjr/Over-the-breath/releases/tag/over_the_breath<br>
 <br><br><br>
  아래 링크을 클릭하면 유튜브 링크로 이동해 플레이 동영상을 시청할 수 있습니다. <br> 
  현재 파일 버그로 인하여 동영상은 보스 플레이 씬만 업로드 해 두었으며 나머지는 아래 GIF들을 참조해 주시기 바랍니다.<br>
