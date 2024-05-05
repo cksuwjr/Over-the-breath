@@ -28,6 +28,7 @@ public class IronPunch : CastableSkill
         isCasting = true;
 
         var anim = attacker.GetComponent<Animator>();
+        var stat = attacker.GetComponent<Status>();
 
         anim.SetInteger("Iron_BasicSequence", basicAttackSequence);
         anim.SetTrigger("BasicAttack");
@@ -55,14 +56,14 @@ public class IronPunch : CastableSkill
 
         float damage = 0;
         if (basicAttackSequence == 0)
-            damage = info.values[SkillLevel - 1].basicValue + attacker.GetComponent<Status>().AttackPower * info.values[SkillLevel - 1].ratio / 100f;
+            damage = info.values[SkillLevel - 1].basicValue + stat.AttackPower * info.values[SkillLevel - 1].ratio / 100f;
         else if (basicAttackSequence == 1)
         {
-            damage = info.values[SkillLevel - 1].basicValue + attacker.GetComponent<Status>().AttackPower * info.values[SkillLevel - 1].ratio / 100f;
+            damage = info.values[SkillLevel - 1].basicValue + stat.AttackPower * info.values[SkillLevel - 1].ratio / 100f;
             damage *= 1.5f;
         }
         else if (basicAttackSequence == 2)
-            damage = strongAttack.info.values[strongAttack.SkillLevel - 1].basicValue + attacker.GetComponent<Status>().AttackPower * strongAttack.info.values[strongAttack.SkillLevel - 1].ratio / 100f;
+            damage = strongAttack.info.values[strongAttack.SkillLevel - 1].basicValue + stat.AttackPower * strongAttack.info.values[strongAttack.SkillLevel - 1].ratio / 100f;
 
 
         bool isCritical = false;
@@ -92,12 +93,15 @@ public class IronPunch : CastableSkill
             basicAttackSequence++;
             if (strongAttack.SkillLevel < 1 && basicAttackSequence > 1)
                 basicAttackSequence = 0;
-            yield return new WaitForSeconds(0.28f);
+            if(basicAttackSequence == 0)
+                yield return new WaitForSeconds(0.28f * (1 / anim.speed));
+            else if(basicAttackSequence == 1)
+                yield return new WaitForSeconds(0.305f * (1 / anim.speed));
         }
         else if (basicAttackSequence == 2)
         {
             basicAttackSequence = 0;
-            yield return new WaitForSeconds(0.39f);
+            yield return new WaitForSeconds(0.39f * (1 / anim.speed));
         }
         SoundManager.Instance.Sound("Magic Spell_Simple Swoosh_6", 3f, 0.43f);
         attacker.GetComponent<PlayerSkill>().isMumchit = false;

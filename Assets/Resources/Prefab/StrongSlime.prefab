@@ -264,9 +264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dc5b31511d39d4fa1df5416dcce03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxhp: 1200
-  _hp: 1200
-  _exp: 25
+  _maxhp: 700
+  _hp: 700
+  _exp: 128
   _maxExp: 0
   _level: 15
   _attackpower: 65
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lv. 15 \uC218\uC561\uC2AC\uB77C\uC784"
+  m_text: "Lv. 15 \uB098\uBB34\uD638\uBC15"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a8a03ede79ca214d99f44b0aa2e3f4c, type: 2}
   m_sharedMaterial: {fileID: -8492857570748766832, guid: 8a8a03ede79ca214d99f44b0aa2e3f4c, type: 2}

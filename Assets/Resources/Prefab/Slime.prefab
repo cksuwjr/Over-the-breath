@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lv. 6 \uC2AC\uB77C\uC784"
+  m_text: "Lv. 1 \uB098\uBB34\uC218\uC561"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a8a03ede79ca214d99f44b0aa2e3f4c, type: 2}
   m_sharedMaterial: {fileID: -8492857570748766832, guid: 8a8a03ede79ca214d99f44b0aa2e3f4c, type: 2}
@@ -553,7 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxhp: 100
   _hp: 100
-  _exp: 10
+  _exp: 40
   _maxExp: 0
   _level: 1
   _attackpower: 20

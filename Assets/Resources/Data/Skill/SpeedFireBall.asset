@@ -95,5 +95,5 @@ MonoBehaviour:
     cooldownTime: 0.075
   - basicValue: 0
     ratio: 30
-    count: 30
-    cooldownTime: 0.07
+    count: 999
+    cooldownTime: 0.06

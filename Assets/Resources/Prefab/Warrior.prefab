@@ -636,11 +636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dc5b31511d39d4fa1df5416dcce03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxhp: 550
-  _hp: 550
-  _exp: 33
-  _maxExp: 34
-  _level: 2
+  _maxhp: 2500
+  _hp: 2500
+  _exp: 280
+  _maxExp: 95700
+  _level: 30
   _attackpower: 72
   _movespeed: 2
   _basicspeed: 2
