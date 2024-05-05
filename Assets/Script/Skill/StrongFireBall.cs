@@ -18,12 +18,15 @@ public class StrongFireBall : Skill
         string description = "";
         description += "<color=\"yellow\">";
         description += info.skillName;
-        description += " [패시브:강화]" + "\n";
+        description += " [패시브:불덩이 강화]" + "\n";
         description += "</color>";
         Values values;
         values = SkillLevel > 0 ? info.values[SkillLevel - 1] : info.values[0];
 
-        description += $"기본공격이 강화됩니다. 차징하여 최소 출력과 최대 출력이 생기고 최소 출력이 줄어든 대신 쿨타임이 대폭 감소하였습니다. 기본공격의 설명을 참고하세요.\n";
+        description += $"불덩이가 강화되었습니다!\n";
+        description += $"전방에 불덩이를 발사하여 적중시 최소, 공격력의 {10}%의 피해에서 차징게이지에 따라 최대, 공격력의 {values.ratio}% 피해를 입힙니다.\n";
+        description += $"최대치까지 차징시 크리티컬이 발생하여 그 두 배인 {values.ratio * 2}% 피해를 입힙니다.\n";
+        description += $"쿨타임 : {values.cooldownTime}초\n";
 
         if (SkillLevel < 1)
         {

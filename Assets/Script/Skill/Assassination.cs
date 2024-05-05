@@ -18,7 +18,7 @@ public class Assassination : CastableSkill
 
     public override void Casting(GameObject attacker, Vector3 position, Vector3 direction)
     {
-        attacker.GetComponent<PlayerSkill>().StartCoroutine(Cast(attacker, position, direction));
+        GameManager.Instance.StartCoroutine(Cast(attacker, position, direction));
     }
 
     public virtual IEnumerator Cast(GameObject attacker, Vector3 position, Vector3 direction)
@@ -32,7 +32,7 @@ public class Assassination : CastableSkill
         var anim = attacker.GetComponent<Animator>();
 
 
-        float time = 0.15f;
+        float time = 0.2f;
 
         attacker.GetComponent<PlayerSkill>().isMumchit = true;
         anim.SetTrigger("Skill1");
@@ -41,7 +41,7 @@ public class Assassination : CastableSkill
         {
             //attacker.GetComponent<Rigidbody2D>().velocity = new Vector2(0, attacker.GetComponent<Rigidbody2D>().velocity.y);
             if (!attacker.GetComponent<Move>().isWall)
-                attacker.GetComponent<Rigidbody2D>().MovePosition(attacker.transform.position + direction * 25 * Time.fixedDeltaTime);
+                attacker.GetComponent<Rigidbody2D>().MovePosition(attacker.transform.position + direction * 16 * Time.fixedDeltaTime);
             time -= Time.fixedDeltaTime;
             if (!attack)
             {

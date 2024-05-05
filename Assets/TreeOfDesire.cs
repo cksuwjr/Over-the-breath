@@ -232,13 +232,13 @@ public class TreeOfDesire : Monster
     IEnumerator GrowingWeeds()
     {
         yield return new WaitForSeconds(1f);
-        SummonWeed(new Vector2(88.53f + 232.82f, -2.8f - 20.84f), new Vector2(1,0.6f));
+        SummonWeed(new Vector2(88.53f + 232.82f, -2.8f - 20.84f), new Vector2(1,1f));
         yield return new WaitForSeconds(0.75f);
-        SummonWeed(new Vector2(88.67f + 232.82f, -0.27f - 20.84f), new Vector2(1.178f, 0.48f));
+        SummonWeed(new Vector2(88.67f + 232.82f, -0.27f - 20.84f), new Vector2(1f, 1f));
         yield return new WaitForSeconds(0.75f);
-        SummonWeed(new Vector2(91.65f + 232.82f, 1.25f - 20.84f), new Vector2(-1.4f, -0.6f));
+        SummonWeed(new Vector2(324.28f, -18.45f), new Vector2(1f, 1f));
         yield return new WaitForSeconds(0.75f);
-        SummonWeed(new Vector2(91.8f + 232.82f, -0.32f - 20.84f), new Vector2(-0.87f, -0.53f));
+        SummonWeed(new Vector2(323.82f, -22.03f), new Vector2(1f, 1f));
     }
     void ChangeEye()
     {

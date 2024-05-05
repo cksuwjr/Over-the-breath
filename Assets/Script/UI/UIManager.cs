@@ -105,4 +105,5 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.Player.GetComponent<Move>().Movable = tf;
         GameManager.Instance.Player.GetComponent<PlayerSkill>().isMumchit = !tf;
     }
+
 }

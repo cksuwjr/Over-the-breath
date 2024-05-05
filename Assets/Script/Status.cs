@@ -19,6 +19,8 @@ public class Status : MonoBehaviour
     [SerializeField]
     protected int _attackpower;
     [SerializeField]
+    protected int _basicattackpower;
+    [SerializeField]
     protected float _movespeed;
     [SerializeField]
     protected float _basicspeed;
@@ -34,6 +36,8 @@ public class Status : MonoBehaviour
     public int Level { get { return _level; } set { _level = value; } }
 
     public int AttackPower { get { return _attackpower; } set { _attackpower = value; } }
+    public int BasicAttackPower { get { return _basicattackpower; } set { _basicattackpower = value; } }
+
     public float MoveSpeed { get { return _movespeed; } set { _movespeed = value; } }
     public float BasicSpeed { get { return _basicspeed; } set { _basicspeed = value; } }
     public float JumpPower { get { return _jumppower; } set { _jumppower = value; } }
@@ -53,6 +57,8 @@ public class Status : MonoBehaviour
             _level = 1;
         if (_attackpower == 0)
             _attackpower = 12;
+        if (_basicattackpower == 0)
+            _basicattackpower = 12;
         if(_basicspeed == 0)
             _basicspeed = 3.5f;
         if (_movespeed == 0)

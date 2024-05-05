@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO.Pipes;
 using UnityEngine;
-using UnityEngine.UI;
 public class FireArrow : FireBall, ISpawnableSkill
 {
     protected FireArrow() : base()
@@ -25,11 +21,14 @@ public class FireArrow : FireBall, ISpawnableSkill
         isCasting = true;
 
         int fireCount = info.values[SkillLevel - 1].count;
-        Vector3 castingPos = position + new Vector3(0, 1f - 0.2f * fireCount);
+
+        if(attacker.GetComponent<Move>().isGround)
+            attacker.GetComponent<PlayerSkill>().isMumchit = true;
+
         while (fireCount > 0)
         {
             GameObject fire = PoolManager.Instance.Get(prefab_Id);
-            fire.transform.position = castingPos + new Vector3(direction.x, -1f + 0.2f * fireCount);
+            fire.transform.position = position + new Vector3(direction.x, Random.Range(0f, -0.2f));
             fire.GetComponent<SpriteRenderer>().flipX = direction.x == -1 ? true : false;
 
             float damage = info.values[SkillLevel - 1].basicValue + attacker.GetComponent<Status>().AttackPower * info.values[SkillLevel - 1].ratio / 100f;
@@ -47,6 +46,8 @@ public class FireArrow : FireBall, ISpawnableSkill
             fireCount--;
             yield return new WaitForSeconds(0.06f);
         }
+        attacker.GetComponent<PlayerSkill>().isMumchit = false;
+
         isCasting = false;
 
     }

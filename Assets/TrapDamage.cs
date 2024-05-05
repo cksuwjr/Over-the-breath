@@ -32,7 +32,7 @@ public class TrapDamage : Monster
         if (col.gameObject.tag == "Neutrality")
         {
             col.gameObject.GetComponent<Monster>().CC(bindTrap, GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), sustainTime);
-            col.gameObject.GetComponent<Monster>().GetDamaged(GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), null);
+            col.gameObject.GetComponent<Monster>().GetDamaged(GetRandomDamageValue(stat.AttackPower, 0.8f, 1.2f), col.gameObject);
             gameObject.SetActive(false);
         }
         

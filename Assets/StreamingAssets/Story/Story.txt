@@ -53,12 +53,6 @@ End
 용용이:PlayerIdle, 경험치도 좀 오른 것 같고?
 End
 
-1-1findslime
-용용이:PlayerIdle, ...?
-슬라임:SlimeIdle, 끼익..!!
-용용이:PlayerIdle, 왠지 공격해올 것 같은데..
-End
-
 1-1dieslime
 용용이:PlayerIdle, 어! 레벨이 오른 것 같아! 스킬을 좀 더 강화해볼까?
 End
@@ -72,6 +66,10 @@ End
 1-1findway
 용용이:PlayerIdle,어라? 여기서 바람이 느껴지는데?
 용용이:PlayerIdle, 흙이 좀 부드러운 것 같기도?
+End
+
+1-1falling
+용용이:PlayerIdle,어?
 End
 
 

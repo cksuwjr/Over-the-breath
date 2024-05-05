@@ -145,13 +145,18 @@ public class Monster : MonoBehaviour
         if (Fromwho != null)
         {
             AttackTarget = Fromwho;
-            if (!FixedType)
+            if (!FixedType && damage > (stat.MaxHp * 0.1f))
                 Knockback();
         }
-        stat.HP -= (damage * DamageReceivePercent);                          // 체력감소
+        float trueDamage = 0;
+        int levelGap = stat.Level <= Fromwho.GetComponent<Status>().Level ? 0 : stat.Level - Fromwho.GetComponent<Status>().Level;
+
+        trueDamage = (damage * (DamageReceivePercent - (0.01f * levelGap)));
+
+        stat.HP -= trueDamage;                          // 체력감소
         HPbar.fillAmount = stat.HP / stat.MaxHp;    // UI 업데이트
         
-        PopUpDamageText(damage * DamageReceivePercent, stackable, isCritical);
+        PopUpDamageText(trueDamage, stackable, isCritical);
 
         try
         {
@@ -176,10 +181,12 @@ public class Monster : MonoBehaviour
 
     public virtual void GetDamaged(float damage)
     {
-        stat.HP -= (damage * DamageReceivePercent);                          // 체력감소
+        float trueDamage = 0;
+        trueDamage = (damage * (DamageReceivePercent));
+        stat.HP -= trueDamage;                          // 체력감소
         HPbar.fillAmount = stat.HP / stat.MaxHp;    // UI 업데이트
 
-        PopUpDamageText(damage * DamageReceivePercent, false, false);
+        PopUpDamageText(trueDamage, false, false);
 
         try
         {
@@ -323,8 +330,9 @@ public class Monster : MonoBehaviour
         stat.Level += 1;
         stat.MaxHp += 60;
         stat.HP = stat.MaxHp;
+        stat.BasicAttackPower += 6;
         stat.AttackPower += 6;
-        if(levelUpExpData)
+        if (levelUpExpData)
             stat.MaxExp = levelUpExpData.expValues[stat.Level - 1];
         else
             stat.MaxExp = stat.Exp * 10;
@@ -348,7 +356,6 @@ public class Monster : MonoBehaviour
 
     IEnumerator BeTransparent(int n = 1)
     {
-        originColor = sr.color;
         Color color = sr.color;
         sr.color = color;
         if (n == -1)
@@ -478,7 +485,9 @@ public class Monster : MonoBehaviour
         sr.color = originColor;
         foreach(var n in ccObjects)
         {
-            n.SetActive(false);
+            if(n == null) continue;
+            if(n.activeSelf)
+                n.SetActive(false);
         }
         binded = false;
         HPUI.SetActive(false);

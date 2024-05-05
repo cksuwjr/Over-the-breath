@@ -97,8 +97,12 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(player == null)
+            if (player == null)
+            {
                 player = FindObjectOfType<Player>();
+                if(player != null)
+                    DontDestroyOnLoad (player.gameObject);
+            }
             return player;
         }
         set { player = value; }
@@ -204,11 +208,12 @@ public class GameManager : MonoBehaviour
         stat.Level = data.status._level;
         stat.MaxExp = data.status._maxExp;
         stat.Exp = data.status._exp;
+        stat.BasicAttackPower = data.status._attackpower;
         stat.AttackPower = data.status._attackpower;
-        stat.BasicJumpPower = data.status._basicjumppower;
         stat.BasicSpeed = data.status._basicspeed;
-        stat.MoveSpeed = data.status._movespeed;
-        stat.JumpPower = data.status._jumppower;
+        stat.MoveSpeed = data.status._basicspeed;
+        stat.BasicJumpPower = data.status._basicjumppower;
+        stat.JumpPower = data.status._basicjumppower;
 
         Player.ChangeDragon(data.status.dragonMode);
     }

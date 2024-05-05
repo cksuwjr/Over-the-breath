@@ -26,7 +26,7 @@ public class FireBall : CastableSkill, ISpawnableSkill
 
     public override void Casting(GameObject attacker, Vector3 position, Vector3 direction)
     {
-        attacker.GetComponent<PlayerSkill>().StartCoroutine(Cast(attacker, position, direction));
+        GameManager.Instance.StartCoroutine(Cast(attacker, position, direction));
     }
 
     public virtual IEnumerator Cast(GameObject attacker, Vector3 position, Vector3 direction)
@@ -34,10 +34,15 @@ public class FireBall : CastableSkill, ISpawnableSkill
         var skillBook = GameManager.Instance.Player.skill.skillBook;
         var strongFireBall = skillBook.GetComponentInChildren<StrongFireBall>();
         var speedFireBall = skillBook.GetComponentInChildren<SpeedFireBall>();
+        var backStep = skillBook.GetComponentInChildren<BackStep>();
         isCasting = true;
+        
+
         if (strongFireBall.SkillLevel < 1 && speedFireBall.SkillLevel < 1)
         {
-            attacker.GetComponent<PlayerSkill>().isMumchit = true;
+            if (attacker.GetComponent<Move>().isGround)
+                attacker.GetComponent<PlayerSkill>().isMumchit = true;
+
             attacker.GetComponent<Animator>().SetTrigger("BasicAttack");
 
             GameObject fire = PoolManager.Instance.Get(prefab_Id);
@@ -54,13 +59,15 @@ public class FireBall : CastableSkill, ISpawnableSkill
             if (drawFire.SkillLevel > 0) plusSpeed += (speed * drawFire.info.values[drawFire.SkillLevel - 1].ratio / 100f);
 
             fire.GetComponent<Fire>().Init(attacker, direction, damage + plusDamage, 0, speed + plusSpeed, duration, stackable);
+
+            yield return new WaitForSeconds(0.16f);
             attacker.GetComponent<PlayerSkill>().isMumchit = false;
             isCasting = false;
         }
         else if(strongFireBall.SkillLevel > 0)
         {
             float gage = 0;
-            float maxTime = 1f;
+            float maxTime = 1.25f;
 
             var playerUI = GameManager.Instance.Player.GetComponentInChildren<PlayerUI>();
 
@@ -71,6 +78,9 @@ public class FireBall : CastableSkill, ISpawnableSkill
                 else
                     gage = 1;
                 playerUI.SetGage(gage);
+
+                if(backStep.SkillLevel > 0 && gage < 1)
+                    backStep.coolTimer += (2 * (Time.fixedDeltaTime / maxTime));
 
                 yield return new WaitForFixedUpdate();
             }
@@ -130,8 +140,14 @@ public class FireBall : CastableSkill, ISpawnableSkill
                 gage = 1 - (count / (float)maxCount);
                 playerUI.SetGage(gage);
 
-                float attackDamage = (attacker.GetComponent<Status>().AttackPower * 1) * ((speedFireBall.info.values[speedFireBall.SkillLevel - 1].ratio + count) / 100f);
-                if (fireForce.SkillLevel > 0) plusDamage += (attackDamage * fireForce.info.values[fireForce.SkillLevel - 1].ratio / 100f);
+                int countDamage = count < 70 ? count : 70;
+
+                
+
+                float attackDamage = (attacker.GetComponent<Status>().AttackPower * 1) * ((speedFireBall.info.values[speedFireBall.SkillLevel - 1].ratio + countDamage) / 100f);
+
+                if (fireForce.SkillLevel > 0) plusDamage = (attackDamage * fireForce.info.values[fireForce.SkillLevel - 1].ratio / 100f);
+                Debug.Log(attackDamage + "/" + ((speedFireBall.info.values[speedFireBall.SkillLevel - 1].ratio + countDamage) / 100f) + "/" + plusDamage);
 
                 GameObject fire = PoolManager.Instance.Get(prefab_Id);
                 int dir = attacker.GetComponent<SpriteRenderer>().flipX ? -1 : 1;
@@ -168,20 +184,11 @@ public class FireBall : CastableSkill, ISpawnableSkill
 
         if (strongFireBall.SkillLevel > 0)
         {
-            values = strongFireBall.info.values[strongFireBall.SkillLevel - 1];
-
-            description += $"전방에 불덩이를 발사하여 적중시 최소, 공격력의 {10}%의 피해에서 차징게이지에 따라 최대, 공격력의 {values.ratio}% 피해를 입힙니다.\n";
-            description += $"최대치까지 차징시 크리티컬이 발생하여 그 두 배인 {values.ratio * 2}% 피해를 입힙니다.\n";
-            description += $"쿨타임 : {values.cooldownTime}초\n";
+            description += $"이 스킬이 강력하게 차징할 수 있도록 강화되었습니다!!\n";
         }
         else if(speedFireBall.SkillLevel > 0)
         {
-            values = speedFireBall.info.values[speedFireBall.SkillLevel - 1];
-
-            description += $"전방에 불덩이를 연속 발사하여 적중시마다 공격력의 {values.ratio}%의 피해를 입힙니다.\n";
-            description += $"{values.count}개 만큼 발사하며 발사시마다 불덩이의 데미지가 공격력의 1%만큼 증가합니다.\n";
-            description += $"개당 최소데미지 {values.ratio}% ~ 최대데미지 {values.ratio + values.count}%\n";
-            description += $"쿨타임 : {values.cooldownTime}초\n";
+            description += $"이 스킬이 빠르게 연사할 수 있도록 강화되었습니다!!\n";
         }
         else 
         {

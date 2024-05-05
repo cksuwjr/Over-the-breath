@@ -9,6 +9,9 @@ public class SceneTransport : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Player")
+        {
+            GameManager.Instance.UIManager.SetPlayerUIActive(false);
             GameManager.Instance.LoadScene(NextScene);
+        }
     }
 }

@@ -18,7 +18,7 @@ public class FireRain : FireArrow, ISpawnableSkill
     {
         var skillBook = GameManager.Instance.Player.skill.skillBook;
         if (skillBook.GetComponentInChildren<FireBall>().SkillLevel < 1) return false;
-        if (skillBook.GetComponentInChildren<DrawFire>().SkillLevel < skillBook.GetComponentInChildren<DrawFire>().info.values.Length) return false;
+        if (skillBook.GetComponentInChildren<SpeedFireBall>().SkillLevel < 1) return false;
         if (skillBook.GetComponentInChildren<FireArrow>().SkillLevel < 6) return false;
 
         return true;
@@ -69,6 +69,7 @@ public class FireRain : FireArrow, ISpawnableSkill
         if (SkillLevel < 1)
         {
             description += "\n\n<color=\"red\">습득 조건\n";
+            description += "[더욱 더 빠르게] 1레벨 이상\n";
             description += "[불화살 세례] 5레벨 이상\n";
             description += "</color>";
         }

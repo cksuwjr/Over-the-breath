@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d936b0e15d9d09b468fb78223aed6a74, type: 3}
+  m_Name: FinalDragon
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: a25c9de72c50f0940bd78d0a7cd3dca2, type: 3}
+  skillName: "\uCD5C\uD6C4\uC758 \uB4DC\uB798\uACE4"
+  skillDescription: "\uC9C0\uC18D\uC2DC\uAC04 \uB3D9\uC548 \uACF5\uACA9\uB825\uACFC
+    \uC774\uB3D9\uC18D\uB3C4\uAC00 \uC0C1\uC2B9\uD569\uB2C8\uB2E4"
+  values:
+  - basicValue: 5.5
+    ratio: 22
+    count: 60
+    cooldownTime: 296
+  - basicValue: 6
+    ratio: 24
+    count: 60
+    cooldownTime: 292
+  - basicValue: 6.5
+    ratio: 26
+    count: 60
+    cooldownTime: 288
+  - basicValue: 7
+    ratio: 28
+    count: 60
+    cooldownTime: 284
+  - basicValue: 7.5
+    ratio: 30
+    count: 60
+    cooldownTime: 280
+  - basicValue: 8
+    ratio: 32
+    count: 60
+    cooldownTime: 276
+  - basicValue: 8.5
+    ratio: 34
+    count: 60
+    cooldownTime: 272
+  - basicValue: 9
+    ratio: 36
+    count: 60
+    cooldownTime: 268
+  - basicValue: 9.5
+    ratio: 38
+    count: 60
+    cooldownTime: 264
+  - basicValue: 10
+    ratio: 40
+    count: 60
+    cooldownTime: 260
+  - basicValue: 10.5
+    ratio: 42
+    count: 60
+    cooldownTime: 256
+  - basicValue: 11
+    ratio: 44
+    count: 60
+    cooldownTime: 252
+  - basicValue: 11.5
+    ratio: 46
+    count: 60
+    cooldownTime: 248
+  - basicValue: 12
+    ratio: 48
+    count: 60
+    cooldownTime: 244
+  - basicValue: 12.5
+    ratio: 50
+    count: 60
+    cooldownTime: 240
+  - basicValue: 13
+    ratio: 52
+    count: 60
+    cooldownTime: 236
+  - basicValue: 13.5
+    ratio: 54
+    count: 60
+    cooldownTime: 232
+  - basicValue: 14
+    ratio: 56
+    count: 60
+    cooldownTime: 228
+  - basicValue: 14.5
+    ratio: 58
+    count: 60
+    cooldownTime: 224
+  - basicValue: 15
+    ratio: 60
+    count: 60
+    cooldownTime: 220
+  - basicValue: 15.5
+    ratio: 62
+    count: 60
+    cooldownTime: 216
+  - basicValue: 16
+    ratio: 64
+    count: 60
+    cooldownTime: 212
+  - basicValue: 16.5
+    ratio: 66
+    count: 60
+    cooldownTime: 208
+  - basicValue: 17
+    ratio: 68
+    count: 60
+    cooldownTime: 204
+  - basicValue: 17.5
+    ratio: 70
+    count: 60
+    cooldownTime: 200
+  - basicValue: 18
+    ratio: 72
+    count: 60
+    cooldownTime: 196
+  - basicValue: 18.5
+    ratio: 74
+    count: 60
+    cooldownTime: 192
+  - basicValue: 19
+    ratio: 76
+    count: 60
+    cooldownTime: 188
+  - basicValue: 19.5
+    ratio: 78
+    count: 60
+    cooldownTime: 184
+  - basicValue: 20
+    ratio: 80
+    count: 60
+    cooldownTime: 180
