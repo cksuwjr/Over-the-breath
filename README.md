@@ -13,7 +13,101 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
  아래 링크을 클릭하면 유튜브 링크로 이동해 플레이 동영상을 시청할 수 있습니다. <br> 
 [https://youtu.be/U7NTqVgAsjM](https://youtu.be/lIJYplw54OI?si=vngYnEJqRhIpZKVg)
 
-<br><br><br>
+
+<br><br>
+<h1> 플레이어 디자인 </h1>
+<br><br>
+
+<br><br>
+<h2> 기본 디자인 </h2>
+<br><br>
+개인적으로 개와 공룡을 좋아해서 둘을 합친 모습으로 디자인하였습니다. 
+<br><br>
+
+<h3> 정지 모션 [Idle] </h3>
+<br>
+
+![player_idle](https://github.com/cksuwjr/Over-the-breath/assets/63836325/6aa3e6d6-4418-438a-a8e0-856cd1b347ee)
+
+<br>
+
+<h3> 걷기 모션 [Idle] </h3>
+<br>
+
+![player_walking](https://github.com/cksuwjr/Over-the-breath/assets/63836325/a7b5d3d2-c24d-422e-a95e-009096796ba3)
+
+<br>
+
+<h3> 점프 모션 [Idle] </h3>
+<br>
+
+![player_jump](https://github.com/cksuwjr/Over-the-breath/assets/63836325/2749e0a1-d159-4217-b6b5-ddbf74b146b0)
+
+<br>
+
+<h3> 공격 모션 [Idle] </h3>
+<br>
+
+![Player_Attack](https://github.com/cksuwjr/Over-the-breath/assets/63836325/937180a7-e497-418c-9da2-bf6a6ada8efe)
+
+<br>
+
+<br><br>
+<h2> 불 버전 디자인 </h2>
+<br><br>
+불태우는 것을 좋아하는 미치광이 느낌을 내며 기본 느낌을 벗어나지 않으려 디자인하였습니다.
+<br><br>
+
+<h3> 정지 모션 [Idle] </h3>
+<br>
+
+![fire_Idle](https://github.com/cksuwjr/Over-the-breath/assets/63836325/3c3efb75-114a-416d-8a2c-835a1bfc0d2c)
+
+<br>
+
+<h3> 걷기 모션 [Idle] </h3>
+<br>
+
+![fire_Move](https://github.com/cksuwjr/Over-the-breath/assets/63836325/5c873356-67b1-4432-a510-08cdc287c5ca)
+
+<br>
+
+<h3> 점프 모션 [Idle] </h3>
+<br>
+
+![fire_Jump](https://github.com/cksuwjr/Over-the-breath/assets/63836325/f7dc4531-b9cb-4e2f-9891-db80ef7bdbf4)
+
+<br>
+
+<h3> 공격 모션 [Idle] </h3>
+<br>
+
+![fire_Attack](https://github.com/cksuwjr/Over-the-breath/assets/63836325/9da9cdc6-7b13-4263-ab94-b4ee2bcc43b9)
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <h1>2022 / 05 / 17 이전</h1>
 <br><br><br>
 
