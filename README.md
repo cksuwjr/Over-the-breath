@@ -11,7 +11,9 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
  https://github.com/cksuwjr/Over-the-breath/releases/tag/over_the_breath<br>
 <br><br><br>
  아래 링크을 클릭하면 유튜브 링크로 이동해 플레이 동영상을 시청할 수 있습니다. <br> 
-[https://youtu.be/U7NTqVgAsjM](https://youtu.be/lIJYplw54OI?si=vngYnEJqRhIpZKVg)
+
+[![Video Label](http://img.youtube.com/vi/lIJYplw54OI/0.jpg)](https://youtu.be/lIJYplw54OI?si=vngYnEJqRhIpZKVg)
+
 
 
 <br><br>
