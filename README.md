@@ -21,7 +21,9 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
 <br><br>
 <h2> 기본 디자인 </h2>
 <br><br>
-개인적으로 개와 공룡을 좋아해서 둘을 합친 모습으로 디자인하였습니다. 
+개인적으로 개와 공룡을 좋아해서 둘을 합친 모습으로 디자인하였습니다. <br>
+스킬 미습득의 가장 기본적인 모습으로 스토리 진행시 나오는 대부분의 애니메이션입니다. <br>
+                                      
 <br><br>
 
 <h3> 정지 모션 [Idle] </h3>
@@ -53,9 +55,29 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
 <br>
 
 <br><br>
+<h3> 습득 가능한 스킬 </h2>
+<br><br>
+
+![FireBall](https://github.com/cksuwjr/Over-the-breath/assets/63836325/b0cfde45-5619-46f5-ab48-a924513f2197)
+
+이름: 불덩이 발사 <br>
+설명: 전방에 불덩이를 발사합니다. <br>
+
+![IronPunch](https://github.com/cksuwjr/Over-the-breath/assets/63836325/cf1536e8-92d6-4043-9886-585f9263968c)
+
+이름: 강철 주먹 <br>
+설명: 전방을 향해 주먹을 휘두르며 돌진합니다. <br>
+      스킬 습득 시 강철 버전 디자인으로 모습이 변화합니다. <br>
+
+
+
+
+<br><br>
 <h2> 불 버전 디자인 </h2>
 <br><br>
-불태우는 것을 좋아하는 미치광이 느낌을 내며 기본 느낌을 벗어나지 않으려 디자인하였습니다.
+불태우는 것을 좋아하는 미치광이 느낌을 내며 기본 느낌을 벗어나지 않으려 디자인하였습니다.<br>
+디자인 변화 조건: 스킬 중 화염위력강화[Passive]나 스피드증가[Passive] 중 하나 마스터 <br>
+
 <br><br>
 
 <h3> 정지 모션 [Idle] </h3>
@@ -86,11 +108,75 @@ Unity 2020.3.22f1 버전에서 작업되었습니다.<br>
 
 <br>
 
+<br><br>
+<h3> 습득 가능한 스킬 </h2>
+<br><br>
+
+전체 스킬 트리 모습 <br><br>
+
+![image](https://github.com/cksuwjr/Over-the-breath/assets/63836325/cf9081c9-b2e0-4a2f-9595-416b0c82843e)
 
 
 
 
 
+
+
+
+
+
+
+
+
+<br><br>
+<h2> 강철 버전 디자인 </h2>
+<br><br>
+도적같은 느낌의 스피디함과 전사? 같은 근접 암살자 느낌을 섞었습니다.
+<br><br>
+
+<h3> 정지 모션 [Idle] </h3>
+<br>
+
+![Player_iron_idle](https://github.com/cksuwjr/Over-the-breath/assets/63836325/41d18901-ab05-4181-8a83-fefcdaa35205)
+
+<br>
+
+<h3> 걷기 모션 [Idle] </h3>
+<br>
+
+![Player_iron_walking](https://github.com/cksuwjr/Over-the-breath/assets/63836325/9ab843cc-8c2f-4044-9930-22eac5eb9c9e)
+
+<br>
+
+<h3> 점프 모션 [Idle] </h3>
+<br>
+
+![Player_iron_jump](https://github.com/cksuwjr/Over-the-breath/assets/63836325/f399a00c-3638-40c1-b82a-37f2a13f984b)
+
+<br>
+
+<h3> 공격 모션 [Idle] </h3>
+<br>
+
+![Player_iron_attack](https://github.com/cksuwjr/Over-the-breath/assets/63836325/076d23f6-7e7b-49ee-81d3-16a618f92c61)
+
+![Player_iron_basicAttack2](https://github.com/cksuwjr/Over-the-breath/assets/63836325/e1759157-a475-4081-8372-780436a16791)
+
+![Player_iron_basicAttack3](https://github.com/cksuwjr/Over-the-breath/assets/63836325/c0164c4a-adbf-4640-b70c-169c6c6c6cf5)
+
+![Player_iron_Skill1](https://github.com/cksuwjr/Over-the-breath/assets/63836325/07583189-b272-42b4-93d4-f9a8d5d84577)
+
+<br>
+
+
+
+<br><br>
+<h3> 습득 가능한 스킬 </h2>
+<br><br>
+
+전체 스킬 트리 모습 <br><br>
+
+![image](https://github.com/cksuwjr/Over-the-breath/assets/63836325/5630201c-0d53-43be-a473-28224b2db66b)
 
 
 
